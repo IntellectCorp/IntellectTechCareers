@@ -14,6 +14,7 @@
 
     <fieldset>
         <legend>Registration Form</legend>
+        <h2>Account details</h2>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -28,8 +29,45 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+
+        <h2>Personal details</h2>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.EmailID)
+                @Html.TextBoxFor(m => m.EmailID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ContactNo)
+                @Html.TextBoxFor(m => m.ContactNo)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.gender)
+                @Html.RadioButtonFor(m => m.gender,"m") Male
+                @Html.RadioButtonFor(m => m.gender,"f") Female
+            </li>
+            <li>
+                @Html.LabelFor(m => m.dob)
+                @Html.TextBoxFor(m => m.dob)
+                @* TODO : Add a date picker for date of birth*@
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+            </li>
+        </ol>
+        <input type="submit" value="Sign up" />
+
     </fieldset>
+    
+    <script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+           $('.datepicker').datepicker(); //Initialise any date pickers
+        });
+    </script>
 }
 
 @section Scripts {

@@ -86,6 +86,26 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Display(Name = "Email ID")]
+        public string EmailID { get; set; }
+
+        [Display(Name = "Contact Number")]
+        public string ContactNo { get; set; }
+
+        [Display(Name = "Gender")]
+        public string gender { get; set; }
+
+        [Display(Name = "Date of birth")]
+        [DataType(DataType.Date)]
+        public DateTime dob { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
     }
 
     public class ExternalLogin

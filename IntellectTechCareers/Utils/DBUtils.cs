@@ -44,5 +44,22 @@ namespace IntellectTechCareers.Utils
             else
                 return false;
         }
+
+        public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender)
+        {
+            SqlConnection con = getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("insert into Candidate values (@username, @contact_no, @address, @date_of_birth, @email_id, @gender)", con);
+            command.Parameters.AddWithValue("@username", uname);
+            command.Parameters.AddWithValue("@contact_no", contact);
+            command.Parameters.AddWithValue("@address", address);
+            command.Parameters.AddWithValue("@date_of_birth", dob);
+            command.Parameters.AddWithValue("@email_id", email);
+            command.Parameters.AddWithValue("@gender", gender);
+
+            command.ExecuteNonQuery();            
+            con.Close();
+        }
     }
 }

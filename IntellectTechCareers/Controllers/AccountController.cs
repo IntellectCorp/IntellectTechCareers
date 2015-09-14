@@ -31,5 +31,18 @@ namespace IntellectTechCareers.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterModel user, string returnUrl)
+        {
+            DBUtils.registerUser(user.UserName, user.Address, user.dob, user.ContactNo, user.EmailID, user.gender);
+            return View();
+        }
+
     }
 }
