@@ -1,5 +1,6 @@
 #Ignored Folder
 obj
+bin
 
 # Object files
 *.o
@@ -24,4 +25,3 @@ obj
 #Temp files
 *~
 
-bin
