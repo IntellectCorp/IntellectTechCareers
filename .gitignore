@@ -1,6 +1,6 @@
 #Ignored Folder
-App_Data
 obj
+bin
 
 # Object files
 *.o
