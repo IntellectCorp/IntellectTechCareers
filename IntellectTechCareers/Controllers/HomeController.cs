@@ -28,5 +28,6 @@ namespace IntellectTechCareers.Controllers
 
             return View();
         }
+
     }
 }

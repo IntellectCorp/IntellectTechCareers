@@ -29,7 +29,7 @@ namespace IntellectTechCareers.Utils
             SqlCommand command = new SqlCommand("select password, role from dbo.Users where username='" + username + "';", con);
             SqlDataReader reader = command.ExecuteReader();
 
-            if (reader == null || reader.Read() == null)
+            if (reader == null || !reader.Read())
             {
                 return false;
             }
@@ -38,6 +38,7 @@ namespace IntellectTechCareers.Utils
             string role = Convert.ToString(reader[1]);
 
             con.Close();
+
             if (passwd.Equals(pwd))
                 return true;
             else
