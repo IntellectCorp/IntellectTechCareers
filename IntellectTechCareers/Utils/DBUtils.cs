@@ -10,7 +10,8 @@ namespace IntellectTechCareers.Utils
     {
         public static string getDBConnectionString()
         {
-            return "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\akankari\\Source\\Repos\\IntellectTechCareers\\IntellectTechCareers\\App_Data\\Database1.mdf;Integrated Security=True";
+            return String.Format("Data Source=(LocalDB)\\v11.0; Integrated Security=True; AttachDbFilename={0};",LocalDBConfig.getDBAddress());
+            //return "Data Source=(LocalDB)\\v11.0;AttachDbFilename=\\App_Data\\Database2.mdf;Integrated Security=True";
         }
 
         public static SqlConnection getDBConnection()
