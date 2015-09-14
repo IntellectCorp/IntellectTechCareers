@@ -1,5 +1,5 @@
 ﻿html {
-    background-color: #e2e2e2;
+    /*background-color: #e2e2e2;*/
     margin: 0;
     padding: 0;
 }
@@ -96,22 +96,26 @@ h5, h6 {
 .content-wrapper {
     margin: 0 auto;
     max-width: 1200px;
+    padding-bottom: 75px;
 }
 
 #body {
-    background-color: #efeeef;
+    /*background-color: #efeeef;*/
     clear: both;
-    padding-bottom: 35px;
+    /*padding-bottom: 35px;*/
 }
 
     .main-content {
         background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 30px;
+        background-color:lavender;
+        padding-left: 15px;
+        padding-top: 70px;
+        min-height: 411px;
     }
 
     .featured + .main-content {
         background: url("../Images/heroRibbon2.png") no-repeat;
+        background-color:lavender;
     }
 
 header .content-wrapper {
@@ -119,8 +123,10 @@ header .content-wrapper {
 }
 
 footer {
+    max-width:1250px;
+    margin:auto;
     clear: both;
-    background-color: #e2e2e2;
+    background-color: steelblue;
     font-size: .8em;
     height: 100px;
 }
@@ -375,7 +381,7 @@ aside {
     }
 
 #homeFeaturedContent {
-    margin-left: 100px;
+    margin-left: 50px;
     float: left;
     width: 55%;
 }
@@ -475,7 +481,7 @@ textarea {
     input[type="submit"],
     input[type="button"],
     button {
-        background-color: #d3dce0;
+        background-color: #3785bd;
         border: 1px solid #787878;
         cursor: pointer;
         font-size: 1.2em;
@@ -483,6 +489,7 @@ textarea {
         padding: 7px;
         margin-right: 8px;
         width: auto;
+        color: lavender;
     }
 
     td input[type="submit"],
