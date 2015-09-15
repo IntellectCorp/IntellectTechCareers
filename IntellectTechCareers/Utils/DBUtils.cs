@@ -51,7 +51,7 @@ namespace IntellectTechCareers.Utils
             SqlConnection con = getDBConnection();
             con.Open();
 
-            SqlCommand command = new SqlCommand("insert into Users values ('" + uname + "', '" + passwd + "', 'Candidate')", con);
+            SqlCommand command = new SqlCommand("insert into Users values ('" + uname + "', '" + passwd + "', 'Candidate', 'active')", con);
             command.ExecuteNonQuery();
 
             command = new SqlCommand("insert into Candidate values ('" + uname  + "', '" + contact + "', '" + 

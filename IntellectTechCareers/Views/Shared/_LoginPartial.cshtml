@@ -1,5 +1,6 @@
 ﻿@if (Session["User"] != null) {
     <text>
+        <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
         Welcome, Mr. @Session["User"]
     </text>
 } else {

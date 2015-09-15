@@ -10,9 +10,16 @@ namespace IntellectTechCareers.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "HomePage.";
-
-            return RedirectToAction("Login", "Account"); //View();
+            if (Session["Role"].Equals("candidate"))
+                return View("CandidateHome");
+            else if (Session["Role"].Equals("manager"))
+                return View("ManagerHome");
+            else if (Session["Role"].Equals("staff"))
+                return View("StaffHome");
+            else if (Session["Role"].Equals("interviewer"))
+                return View("InterviewerHome");
+            else
+                return View();
         }
 
         public ActionResult About()

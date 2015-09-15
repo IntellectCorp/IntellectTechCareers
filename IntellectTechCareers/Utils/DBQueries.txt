@@ -1,0 +1,5 @@
+﻿create table Applicant
+(
+	username nvarchar(20) primary key references User(username),
+
+

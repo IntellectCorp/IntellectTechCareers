@@ -45,5 +45,13 @@ namespace IntellectTechCareers.Controllers
             return View("RegistrationSuccess");
         }
 
+        public ActionResult Logout()
+        {
+            Session.Remove("User");
+            Session.Remove("Role");
+
+            return RedirectToAction("Login", "Account");
+        }
+
     }
 }
