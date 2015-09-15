@@ -111,7 +111,7 @@ h5, h6 {
         background-color:lavender;
         padding-left: 15px;
         padding-top: 70px;
-        min-height: 411px;
+        min-height: 251px;
         max-width: 1234px;
     }
 
@@ -229,7 +229,7 @@ ul#menu {
         background-image: -webkit-linear-gradient(left, #3785bd 0%, #A00F83 100%);
         background-image: linear-gradient(left, #3785bd 0%, #A00F83 100%);
         color: #3e5667;
-        padding: 5px 10px 1px 40px;
+        padding: 8px 50px 1px 40px;
     }
 
         .featured hgroup.title h1, .featured hgroup.title h2 {
@@ -243,6 +243,7 @@ ul#menu {
 /* page titles */
 hgroup.title {
     margin-bottom: 10px;
+    /*text-align: right;*/
 }
 
 hgroup.title h1, hgroup.title h2 {
@@ -705,7 +706,7 @@ tr.pager td {
     }
 
     .featured .content-wrapper {
-        padding: 10px;
+        padding: 8px 50px 1px 40px;
     }
 
     /* page content */
@@ -792,4 +793,8 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+    hgroup.title {
+        margin-bottom: 10px;
+        text-align: center;
+    }
 }

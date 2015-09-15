@@ -23,21 +23,23 @@ namespace IntellectTechCareers.Utils
             return con;
         }
 
-        public static string validateUserAndGetRole(string username, string passwd)
+        public static string validateUserAndGetRole(out string name, string username, string passwd)
         {
             SqlConnection con = getDBConnection(); 
             con.Open();
 
-            SqlCommand command = new SqlCommand("select password, role from dbo.Users where username='" + username + "';", con);
+            SqlCommand command = new SqlCommand("select password, role, name from dbo.Users where username='" + username + "';", con);
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader == null || !reader.Read())
             {
+                name = "Invalid";
                 return "INVALID";
             }
 
             string pwd = Convert.ToString(reader[0]);
             string role = Convert.ToString(reader[1]);
+            name = Convert.ToString(reader[2]);
 
             con.Close();
 
