@@ -9,7 +9,7 @@ namespace IntellectTechCareers.Utils
     {
         public static string getDBAddress() 
         {
-            return "C:\\Users\\akankari\\Source\\Repos\\IntellectTechCareers\\IntellectTechCareers\\App_Data\\Database1.mdf";
+            return "C:\\Users\\kaumahat\\documents\\visual studio 2012\\Projects\\IntellectTechCareers\\IntellectTechCareers\\App_Data\\Database1.mdf";
         }
     }
 }

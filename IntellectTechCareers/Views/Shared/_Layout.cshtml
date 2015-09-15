@@ -6,9 +6,31 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/jquery")
+        <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
         @Scripts.Render("~/bundles/modernizr")
+        <script>
+            $(function () {
+                $("#dialog-message").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                $("#modal-opener").click(function () {
+                    $("#dialog-message").dialog("open");
+                });
+            });
+        </script>
     </head>
     <body>
+        <div id="dialog-message" title="Modal Dialog">
+            <p>This is a Test Modal.</p>
+        </div>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
@@ -27,6 +49,7 @@
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li><button id="modal-opener">Notification</button></li>
                         </ul>
                     </nav>
                 </div>
@@ -57,7 +80,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+        
         @RenderSection("scripts", required: false)
     </body>
 </html>
