@@ -185,6 +185,7 @@
     <Compile Include="Utils\LocalDBConfig.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utils\StringUtils.cs" />
     <None Include="Controllers\AccountController.cs.original" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
