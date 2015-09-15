@@ -17,33 +17,25 @@
    *@
 }
 <section id="homeFeaturedContent">
-<h2>We suggest the following:</h2>
+<h2>Join us and make amazing things happen</h2>
 <ol class="round">
     <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
+        I am proud of the great quality devices we build and the cutting edge hardware innovations we are making. 
+        It is amazing to see the products you worked on in the hands of millions of people. 
         <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
+        <h5 style="text-align:right">— Fenghua S.</h5>
+        
     </li>
-    <select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
     <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
+        I have both the possibility to work closely with a team, as well as the opportunity to work on, and have an input into the formulation of new policy.
         <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
+        <h5 style="text-align:right">— Sinead O'Hara</h5>
     </li>
 
 </ol>
     </section>
 <section id="homeLoginForm">
-<h2>Use a local account to log in.</h2>
+<h2>Log In. Get Hired.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -72,3 +64,4 @@
         @Html.ActionLink("Register", "Register") if you don't have an account.
     </p>
 }
+    </section>
