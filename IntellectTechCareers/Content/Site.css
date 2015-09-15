@@ -28,7 +28,7 @@ a {
     }
 
     a:hover {
-        background-color: #c7d1d6;
+        background-color: #80B2D6;
     }
 
 header, footer, hgroup,
@@ -44,6 +44,7 @@ mark {
 
 .float-left {
     float: left;
+    padding-left: 25px;
 }
 
 .float-right {
@@ -162,7 +163,7 @@ footer {
 }
 
     #login a {
-        background-color: #d3dce0;
+        background-color: #80B2D6;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -636,6 +637,7 @@ tr.pager td {
     header .float-right {
         float: none;
         padding-right: 0px;
+        text-align: center;
     }
 
     /* logo */
@@ -765,7 +767,7 @@ tr.pager td {
         width: auto;
     }
 
-        #loginForm .validation-error {
+    #loginForm .validation-error {
             display: block;
             margin-left: 15px;
         }
@@ -790,11 +792,60 @@ tr.pager td {
         padding: 10px 0;
     }
 
-        footer p {
+    footer p {
             margin: 0;
-        }
+    }
+
     hgroup.title {
         margin-bottom: 10px;
         text-align: center;
     }
+}
+.myMenu {
+	margin:0;
+	padding:0;
+}
+
+.myMenu li {
+	list-style:none;
+	float:left;
+	font:12px Arial, Helvetica, sans-serif #111;
+}
+
+.myMenu li a:link, .myMenu li a:visited {
+	display:block;
+	text-decoration:none;
+	/*background-color:#09F;*/
+	padding: 1em 2em;
+	margin-top:-3px;
+	border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+	color:#fff;
+}
+
+.myMenu li a:hover {
+	background-color:#A00F83;	
+}
+
+/*style the sub menu*/
+.myMenu li ul {
+	position:absolute;
+	visibility:hidden;
+	border-top:1px solid #fff;
+	margin:0;
+	padding:0;
+}
+
+.myMenu li ul li {
+	display:inline;
+	float:none;
+}
+
+.myMenu li ul li a:link, .myMenu li ul li a:visited {
+	background-color:#6D489F;
+	width:auto;
+}
+
+.myMenu li ul li a:hover {
+	background-color:#A00F83;	
 }
