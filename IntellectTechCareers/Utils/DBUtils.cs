@@ -22,7 +22,7 @@ namespace IntellectTechCareers.Utils
             return con;
         }
 
-        public static bool validateUser(string username, string passwd)
+        public static string validateUserAndGetRole(string username, string passwd)
         {
             SqlConnection con = getDBConnection(); 
             con.Open();
@@ -32,7 +32,7 @@ namespace IntellectTechCareers.Utils
 
             if (reader == null || !reader.Read())
             {
-                return false;
+                return "INVALID";
             }
 
             string pwd = Convert.ToString(reader[0]);
@@ -41,9 +41,9 @@ namespace IntellectTechCareers.Utils
             con.Close();
 
             if (passwd.Equals(pwd))
-                return true;
+                return role;
             else
-                return false;
+                return "INVALID";
         }
 
         public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender)
