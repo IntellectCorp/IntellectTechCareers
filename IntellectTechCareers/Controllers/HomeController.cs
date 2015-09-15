@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IntellectTechCareers.Models;
 
 namespace IntellectTechCareers.Controllers
 {
@@ -11,14 +12,17 @@ namespace IntellectTechCareers.Controllers
     {
         public ActionResult Index()
         {
-            if(Session["Role"] != null){
-                if (Session["Role"].Equals("candidate"))
+            if (Session["user"] != null)
+            {
+                String role = ((User)Session["user"]).role ;
+                
+                if (role.Equals("candidate"))
                     return View("CandidateHome");
-                else if (Session["Role"].Equals("manager"))
+                else if (role.Equals("manager"))
                     return View("ManagerHome", DBUtils.getManagerHome());
-                else if (Session["Role"].Equals("staff"))
+                else if (role.Equals("staff"))
                     return View("StaffHome");
-                else if (Session["Role"].Equals("interviewer"))
+                else if (role.Equals("interviewer"))
                     return View("InterviewerHome");
                 else
                     return View();

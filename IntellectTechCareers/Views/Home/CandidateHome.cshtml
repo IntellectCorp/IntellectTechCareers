@@ -4,22 +4,24 @@
 
 <h2>Candidate dashboard</h2>
 
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+@using (Html.BeginForm("ViewJobDetails", "Candidate", FormMethod.Get))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Log in Form</legend>
-        Update your profile : <input type="submit" value="Log in" />
+        Update your profile : <input type="submit" value="View Job applications" />
     </fieldset>
 }
 
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+@using (Html.BeginForm("UpdateProfile", "Candidate"))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Log in Form</legend>
-        Update your profile : <input type="submit" value="Log in" />
+        Update your profile : <input type="submit" value="Update Profile" />
     </fieldset>
 }

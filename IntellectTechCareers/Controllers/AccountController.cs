@@ -21,14 +21,14 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            string role = DBUtils.validateUserAndGetRole(model.UserName, model.Password);
+            User user = DBUtils.validateUserAndGetRole(model.UserName, model.Password);
+            string role = user.role;
             
             if (role.Equals("INVALID"))
                 return RedirectToAction("Login", "Account");
             else
             {
-                Session["Role"] = role;
-                Session["User"] = model.UserName;
+                Session["user"] = user;
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -47,9 +47,7 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Logout()
         {
-            Session.Remove("User");
-            Session.Remove("Role");
-
+            Session.Remove("user");
             return RedirectToAction("Login", "Account");
         }
 

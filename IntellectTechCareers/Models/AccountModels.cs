@@ -125,4 +125,12 @@ namespace IntellectTechCareers.Models
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
     }
+
+    public class User
+    {
+        public int user_id { get; set; }
+        public string username { get; set; }
+        public string name { get; set; }
+        public string role { get; set; }
+    }
 }

@@ -23,29 +23,33 @@ namespace IntellectTechCareers.Utils
             return con;
         }
 
-        public static string validateUserAndGetRole(string username, string passwd)
+        public static User validateUserAndGetRole(string username, string passwd)
         {
             SqlConnection con = getDBConnection(); 
             con.Open();
 
-            SqlCommand command = new SqlCommand("select password, role from dbo.Users where username='" + username + "';", con);
+            SqlCommand command = new SqlCommand("select user_id, password, role, name from dbo.Users where username='" + username + "';", con);
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader == null || !reader.Read())
             {
-                return "INVALID";
+                return null;
             }
 
-            string pwd = Convert.ToString(reader[0]);
-            string role = Convert.ToString(reader[1]);
+            //Creating a user object
+            User user = new User();
+            user.user_id = Convert.ToInt32(reader[0]);
+            string pwd = Convert.ToString(reader[1]);
+            user.role = Convert.ToString(reader[2]);
+            user.name = Convert.ToString(reader[3]);
+            user.username = username;
 
             con.Close();
-
             string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
-            if (passwdHash.Equals(pwd))
-                return role;
-            else
-                return "INVALID";
+            if (!passwdHash.Equals(pwd))
+                user.role = "INVALID";
+
+            return user;
         }
 
         public static string getCandidateId(SqlConnection con, string uname)

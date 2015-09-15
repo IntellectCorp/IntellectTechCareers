@@ -1,7 +1,11 @@
-﻿@if (Session["User"] != null) {
+﻿@{
+    IntellectTechCareers.Models.User user = ((IntellectTechCareers.Models.User)Session["user"]);
+}
+
+@if (Session["user"] != null) {
     <text>
         <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
-        Welcome, Mr. @Session["User"]
+        Welcome, Mr. @user.name
     </text>
 } else {
     <ul>

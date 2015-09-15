@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Welcome Mr. @Session["User"]</h2>
+@{
+    String name = ((IntellectTechCareers.Models.User)Session["user"]).name;
+}
+
+<h2>Welcome Mr. @name</h2>
 <br />
 
 <fieldset>
