@@ -58,9 +58,9 @@
                 @Html.RadioButtonFor(m => m.gender,"f") Female
             </li>
             <li>
-                @Html.LabelFor(m => m.dob)
-                @Html.TextBox("YourTextBox", "", new { @class = "date-picker" })
-                @* TODO : Add a date picker for date of birth*@
+
+                @Html.TextBoxFor(model => model.dob, new { type = "date" })
+
             </li>
             <li>
                 @Html.LabelFor(m => m.Address)
