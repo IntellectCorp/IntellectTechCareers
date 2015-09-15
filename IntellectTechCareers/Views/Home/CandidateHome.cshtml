@@ -1,25 +1,31 @@
 ﻿@{
     ViewBag.Title = "CandidateHome";
+    IntellectTechCareers.Models.User user = (IntellectTechCareers.Models.User)Session["user"];
 }
 
 <h2>Candidate dashboard</h2>
 
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+<h3>Welcome,  @user.name </h3>
+<br />
+<h3>Account status : <b>@user.state</b> </h3>
+@using (Html.BeginForm("ViewJobDetails", "Candidate", FormMethod.Get))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Log in Form</legend>
-        Update your profile : <input type="submit" value="Log in" />
+        <h3>View Job applications :  <input type="submit" value="View Job applications" /> </h3>
     </fieldset>
 }
 
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+@using (Html.BeginForm("UpdateProfile", "Candidate"))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Log in Form</legend>
-        Update your profile : <input type="submit" value="Log in" />
+        <h3> Update your profile : <input type="submit" value="Update Profile" /> </h3>
     </fieldset>
 }
