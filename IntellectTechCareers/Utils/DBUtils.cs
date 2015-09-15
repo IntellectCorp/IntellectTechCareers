@@ -40,7 +40,8 @@ namespace IntellectTechCareers.Utils
 
             con.Close();
 
-            if (passwd.Equals(pwd))
+            string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
+            if (passwdHash.Equals(pwd))
                 return role;
             else
                 return "INVALID";
@@ -51,7 +52,8 @@ namespace IntellectTechCareers.Utils
             SqlConnection con = getDBConnection();
             con.Open();
 
-            SqlCommand command = new SqlCommand("insert into Users values ('" + uname + "', '" + passwd + "', 'Candidate', 'active')", con);
+            string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
+            SqlCommand command = new SqlCommand("insert into Users values ('" + uname + "', '" + passwdHash + "', 'candidate')", con);
             command.ExecuteNonQuery();
 
             command = new SqlCommand("insert into Candidate values ('" + uname  + "', '" + contact + "', '" + 
