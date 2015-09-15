@@ -10,7 +10,6 @@ namespace IntellectTechCareers.Controllers
 {
     public class AccountController : Controller
     {
-        //
         // GET: /Login/
 
         public ActionResult Login()
@@ -22,9 +21,11 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            bool isValid = DBUtils.validateUser(model.UserName, model.Password);
+            string role = DBUtils.validateUserAndGetRole(model.UserName, model.Password);
+            Session["Role"] = role;
+            Session["User"] = model.UserName;
 
-            if (!isValid)
+            if (role.Equals("INVALID"))
                 return RedirectToAction("Login", "Account");
             else
             {
@@ -40,8 +41,8 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel user, string returnUrl)
         {
-            DBUtils.registerUser(user.UserName, user.Address, user.dob, user.ContactNo, user.EmailID, user.gender);
-            return View();
+            DBUtils.registerUser(user.UserName, user.Address, user.dob, user.ContactNo, user.EmailID, user.gender, user.Password);
+            return View("RegistrationSuccess");
         }
 
     }

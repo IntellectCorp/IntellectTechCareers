@@ -195,6 +195,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DBUtils.cs" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Account\RegistrationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />
