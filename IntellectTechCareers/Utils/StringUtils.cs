@@ -25,7 +25,11 @@ namespace IntellectTechCareers.Utils
             byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
 
             // string representation (similar to UNIX format)
-            string encoded = BitConverter.ToString(hash);
+            string encoded = BitConverter.ToString(hash)
+                // without dashes
+                .Replace("-", string.Empty)
+                // make lowercase
+                .ToLower();
 
             return encoded;
         }

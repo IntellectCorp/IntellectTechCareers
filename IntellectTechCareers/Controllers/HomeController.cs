@@ -12,7 +12,7 @@ namespace IntellectTechCareers.Controllers
         {
             if (Session["Role"].Equals("candidate"))
                 return View("CandidateHome");
-            else if (Session["Role"].Equals("manager"))
+            else if (Session["Role"].Equals("manager")) 
                 return View("ManagerHome");
             else if (Session["Role"].Equals("staff"))
                 return View("StaffHome");

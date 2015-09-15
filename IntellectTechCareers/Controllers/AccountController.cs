@@ -22,13 +22,13 @@ namespace IntellectTechCareers.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             string role = DBUtils.validateUserAndGetRole(model.UserName, model.Password);
-            Session["Role"] = role;
-            Session["User"] = model.UserName;
-
+            
             if (role.Equals("INVALID"))
                 return RedirectToAction("Login", "Account");
             else
             {
+                Session["Role"] = role;
+                Session["User"] = model.UserName;
                 return RedirectToAction("Index", "Home");
             }
         }
