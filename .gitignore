@@ -28,3 +28,4 @@ bin
 #DB Address
 LocalDBConfig.cs
 LocalDBConfig.cs
+/IntellectTechCareers/Utils/LocalDBConfig.cs
