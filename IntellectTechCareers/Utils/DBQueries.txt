@@ -1,5 +1,30 @@
-﻿create table Applicant
+﻿+user_id
++username
++password
++role
++acc_act_date
+
+create table User
 (
-	username nvarchar(20) primary key references User(username),
+	user_id int IDENTITY(100,1) primary key,
+	username 
+
+)
 
 
+create table Applicant
+(
+	candidate_id nvarchar(20) primary key references User(username),
+
+
+)
+
++candidate_id
++Name
++Email ID
++Contact Number
++Gender
++Date of Birth
++Address
++graduation
++post graduation
