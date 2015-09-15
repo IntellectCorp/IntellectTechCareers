@@ -10,16 +10,20 @@ namespace IntellectTechCareers.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["Role"].Equals("candidate"))
-                return View("CandidateHome");
-            else if (Session["Role"].Equals("manager")) 
-                return View("ManagerHome");
-            else if (Session["Role"].Equals("staff"))
-                return View("StaffHome");
-            else if (Session["Role"].Equals("interviewer"))
-                return View("InterviewerHome");
+            if(Session["Role"] != null){
+                if (Session["Role"].Equals("candidate"))
+                    return View("CandidateHome");
+                else if (Session["Role"].Equals("manager")) 
+                    return View("ManagerHome");
+                else if (Session["Role"].Equals("staff"))
+                    return View("StaffHome");
+                else if (Session["Role"].Equals("interviewer"))
+                    return View("InterviewerHome");
+                else
+                    return View();
+            }
             else
-                return View();
+                return RedirectToAction("Login", "Account");
         }
 
         public ActionResult About()

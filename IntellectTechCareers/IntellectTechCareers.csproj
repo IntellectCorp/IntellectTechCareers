@@ -182,6 +182,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\DashBoardsModels.cs" />
     <Compile Include="Utils\LocalDBConfig.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -200,6 +201,9 @@
     <Content Include="Utils\DBQueries.txt" />
     <Content Include="Views\Account\RegistrationSuccess.cshtml" />
     <Content Include="Views\Home\CandidateHome.cshtml" />
+    <Content Include="Views\Home\StaffHome.cshtml" />
+    <Content Include="Views\Home\InterviewerHome.cshtml" />
+    <Content Include="Views\Home\ManagerHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />
