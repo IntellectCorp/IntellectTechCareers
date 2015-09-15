@@ -1,57 +1,75 @@
-﻿@model IEnumerable<IntellectTechCareers.Models.ManagerDashBoardModels>
+﻿@model IntellectTechCareers.Models.ManagerDashBoardModels
 
 @{
-    ViewBag.Title = "ManagerHome";
+    ViewBag.Title = "Manager Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ManagerHome</h2>
+<h2>Welcome Mr. @Session["User"]</h2>
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalJobs)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalScheduledInterview)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalResults)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnscheduledInterviewJobs)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResultsNotReleased)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalJobs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalScheduledInterview)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalResults)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnscheduledInterviewJobs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResultsNotReleased)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+<fieldset>
+    <legend>ManagerDashBoardModels</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TotalJobs)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b>@Html.DisplayFor(model => model.TotalJobs) </b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TotalScheduledInterview)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b> @Html.DisplayFor(model => model.TotalScheduledInterview)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TotalResults)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b> @Html.DisplayFor(model => model.TotalResults)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.UnscheduledInterviewJobs)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b> @Html.DisplayFor(model => model.UnscheduledInterviewJobs)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.ResultsNotReleased)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                     <b>@Html.DisplayFor(model => model.ResultsNotReleased)</b>
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>

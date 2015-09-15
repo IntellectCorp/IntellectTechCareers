@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntellectTechCareers.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,8 +14,8 @@ namespace IntellectTechCareers.Controllers
             if(Session["Role"] != null){
                 if (Session["Role"].Equals("candidate"))
                     return View("CandidateHome");
-                else if (Session["Role"].Equals("manager")) 
-                    return View("ManagerHome");
+                else if (Session["Role"].Equals("manager"))
+                    return View("ManagerHome", DBUtils.getManagerHome());
                 else if (Session["Role"].Equals("staff"))
                     return View("StaffHome");
                 else if (Session["Role"].Equals("interviewer"))

@@ -15,12 +15,12 @@ namespace IntellectTechCareers.Models
         public string TotalScheduledInterview { get; set; }
 
         [Display(Name = "Job results released in total")]
-        public bool TotalResults { get; set; }
+        public string TotalResults { get; set; }
 
         [Display(Name = "Job yet to be scheduled for interview")]
-        public bool UnscheduledInterviewJobs { get; set; }
+        public string UnscheduledInterviewJobs { get; set; }
 
         [Display(Name = "Job results yet to be released")]
-        public bool ResultsNotReleased { get; set; }
+        public string ResultsNotReleased { get; set; }
     }
 }
