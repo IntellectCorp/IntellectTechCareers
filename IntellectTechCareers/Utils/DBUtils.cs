@@ -47,19 +47,31 @@ namespace IntellectTechCareers.Utils
                 return "INVALID";
         }
 
-        public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender, string passwd)
+        public static string getCandidateId(SqlConnection con, string uname)
+        {
+            SqlCommand command = new SqlCommand("select user_id from dbo.Users where username='" + uname + "';", con);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            string candidateId = Convert.ToString(reader[0]);
+            reader.Close();
+
+            return candidateId;
+        }
+
+        public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender, string passwd, string name)
         {
             SqlConnection con = getDBConnection();
             con.Open();
 
             string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
-            SqlCommand command = new SqlCommand("insert into Users values ('" + uname + "', '" + passwdHash + "', 'candidate')", con);
+            SqlCommand command = new SqlCommand("insert into Users (username, password, role, account_act_date, name) values ('" + uname + "', '" + passwdHash + "', 'candidate','" + DateTime.Today + "'" + name + "');", con);
             command.ExecuteNonQuery();
 
-            command = new SqlCommand("insert into Candidate values ('" + uname  + "', '" + contact + "', '" + 
-                address + "','" + email + "','" + gender + "','" + dob + "')", con);
+            command = new SqlCommand("insert into Applicant (candidate_id, name, email_id, contact_num, gender, dob, address)"
+            + " values (" + getCandidateId(con, uname) + ",'" + uname + "', '" + email + "', '" + contact + "','" + gender + "','" + dob + "','" + address + "')", con);
 
-            int rows = command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
             con.Close();
         }
     }
