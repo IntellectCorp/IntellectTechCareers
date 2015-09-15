@@ -3,6 +3,14 @@
     ViewBag.Title = "Register";
 }
 
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/themes/base/minified/jquery-ui.min.css")
+    @Scripts.Render("~/Scripts/jquery-1.7.1.min.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.4.min.js")
+}
+
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>Create a new account.</h2>
@@ -51,7 +59,7 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.dob)
-                @Html.TextBoxFor(m => m.dob)
+                @Html.TextBox("YourTextBox", "", new { @class = "date-picker" })
                 @* TODO : Add a date picker for date of birth*@
             </li>
             <li>
@@ -70,6 +78,3 @@
     </script>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

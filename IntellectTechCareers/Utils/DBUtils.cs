@@ -46,20 +46,18 @@ namespace IntellectTechCareers.Utils
                 return "INVALID";
         }
 
-        public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender)
+        public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender, string passwd)
         {
             SqlConnection con = getDBConnection();
             con.Open();
 
-            SqlCommand command = new SqlCommand("insert into Candidate values (@username, @contact_no, @address, @date_of_birth, @email_id, @gender)", con);
-            command.Parameters.AddWithValue("@username", uname);
-            command.Parameters.AddWithValue("@contact_no", contact);
-            command.Parameters.AddWithValue("@address", address);
-            command.Parameters.AddWithValue("@date_of_birth", dob);
-            command.Parameters.AddWithValue("@email_id", email);
-            command.Parameters.AddWithValue("@gender", gender);
+            SqlCommand command = new SqlCommand("insert into Users values ('" + uname + "', '" + passwd + "', 'Candidate')", con);
+            command.ExecuteNonQuery();
 
-            command.ExecuteNonQuery();            
+            command = new SqlCommand("insert into Candidate values ('" + uname  + "', '" + contact + "', '" + 
+                address + "','" + email + "','" + gender + "','" + dob + "')", con);
+
+            int rows = command.ExecuteNonQuery();
             con.Close();
         }
     }

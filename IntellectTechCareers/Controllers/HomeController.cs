@@ -10,7 +10,7 @@ namespace IntellectTechCareers.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Welcome Mr. " + Session["User"];
 
             return View();
         }
