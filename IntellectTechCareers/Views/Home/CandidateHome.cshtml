@@ -2,4 +2,24 @@
     ViewBag.Title = "CandidateHome";
 }
 
-<h2>CandidateHome</h2>
+<h2>Candidate dashboard</h2>
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        Update your profile : <input type="submit" value="Log in" />
+    </fieldset>
+}
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        Update your profile : <input type="submit" value="Log in" />
+    </fieldset>
+}
