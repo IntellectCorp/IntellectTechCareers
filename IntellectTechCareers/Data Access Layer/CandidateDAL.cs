@@ -72,5 +72,28 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
             return experienceList;
         }
+
+        public static List<QualificationModel> getQualificationDetails()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select qualification_id, qualification, type from dbo.Qualification;", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<QualificationModel> qualificationList = new List<QualificationModel>();
+            while (reader.Read())
+            {
+                QualificationModel qual = new QualificationModel();
+                qual.qualification_id = Convert.ToInt32(reader[0]);
+                qual.qualification = Convert.ToString(reader[1]);
+                qual.type = Convert.ToString(reader[2]);
+
+                qualificationList.Add(qual);
+            }
+
+            con.Close();
+            return qualificationList;
+        }
     }
 }

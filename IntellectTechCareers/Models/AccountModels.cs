@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace IntellectTechCareers.Models
@@ -51,7 +52,7 @@ namespace IntellectTechCareers.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -88,7 +89,7 @@ namespace IntellectTechCareers.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -143,6 +144,13 @@ namespace IntellectTechCareers.Models
         public int experience { get; set; }
     }
 
+    public class QualificationModel
+    {
+        public int qualification_id { get; set; }
+        public string qualification { get; set; }
+        public string type { get; set; }
+    }
+
     public class CandidateModel
     {
         public int user_id { get; set; }
@@ -169,6 +177,15 @@ namespace IntellectTechCareers.Models
 
         public List<ExperienceModel> experienceDetails;
 
+        public string newUgQualification;
+        public string newPgQualification;
+    }
+
+    public class CandidateViewModel
+    {
+        public CandidateModel candidate;
+        public List<SelectListItem> ugList;
+        public List<SelectListItem> pgList;
     }
 }
 

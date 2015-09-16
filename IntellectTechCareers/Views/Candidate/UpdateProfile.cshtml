@@ -1,8 +1,17 @@
-﻿@model IntellectTechCareers.Models.CandidateModel
+﻿@model IntellectTechCareers.Models.CandidateViewModel
 
 @{
     ViewBag.Title = "UpdateProfile";
 }
+
+<script type="text/javascript">
+    function add_detail() 
+    {
+        console.log("in add detail");
+        var elem = document.getElementById('add_edu_details');
+        elem.style.display = "block";
+    }
+</script>
 
 <h3>Personal details</h3>
 @using (Html.BeginForm("UpdateProfileToDB", "Candidate"))
@@ -16,29 +25,29 @@
         <table>
             <tr>
                 <td>Name</td>
-                <td>@Html.Label(Model.Name)</td>
+                <td>@Html.Label(Model.candidate.Name)</td>
             </tr>
             <tr>
                 <td>Date of birth</td>
-                <td>@Html.Label(Model.dob.ToShortDateString())</td>
+                <td>@Html.Label(Model.candidate.dob.ToShortDateString())</td>
             </tr>
             <tr>
                 <td>Gender</td>
-                <td>@Html.Label(Model.gender)</td>
+                <td>@Html.Label(Model.candidate.gender)</td>
             </tr>
              <tr>
                 <td>Email</td>
-                <td>@Html.TextBoxFor(m => m.EmailID, new { value = @Model.EmailID})</td>
+                <td>@Html.TextBoxFor(m => m.candidate.EmailID, new { value = @Model.candidate.EmailID})</td>
             </tr>
 
              <tr>
                 <td>Contact number</td>
-                <td>@Html.TextBoxFor(m => m.ContactNo, new { value = @Model.ContactNo})</td>
+                <td>@Html.TextBoxFor(m => m.candidate.ContactNo, new { value = @Model.candidate.ContactNo})</td>
             </tr>
 
              <tr>
                 <td>Address</td>
-                <td>@Html.TextBoxFor(m => m.Address, new { value = @Model.Address})</td>
+                <td>@Html.TextBoxFor(m => m.candidate.Address, new { value = @Model.candidate.Address})</td>
             </tr>
         </table>
 
@@ -57,15 +66,15 @@
     </thead>
 
 @{
-    foreach (var item in Model.ugQualifications)
+    foreach (var item in Model.candidate.ugQualifications)
     {
         <tr>
             <td>UG</td>
             <td>@item</td>
         </tr>        
     }
-    
-    foreach (var item in Model.pgQualifications)
+
+    foreach (var item in Model.candidate.pgQualifications)
     {
         <tr>
             <td>PG</td>
@@ -74,7 +83,15 @@
     }
 }
 </table>
-@*@Html.ActionLink("Add Education detail", "", "Account")*@
+<br />
+<a href="javascript:add_detail()" >Add education detail</a>
+<div id="add_edu_details" style="display:none;border:1px solid black;">
+
+    <h3> Select your qualification and click on save to submit. </h3>
+
+    @Html.DropDownList("ugListData");
+
+</div>
 <hr />
 <h3>Experience details</h3>
 
@@ -89,7 +106,7 @@
         </tr>
     </thead>
 
-    @foreach (var item in Model.experienceDetails)
+    @foreach (var item in Model.candidate.experienceDetails)
     {
         <tr>
             <td>@item.company</td>
