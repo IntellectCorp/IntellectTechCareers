@@ -34,7 +34,13 @@
             @Html.LabelFor(model => model.JobRole)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.JobRole)
+            @Html.DropDownListFor(model => model.JobRole, new SelectList(new List<Object>{
+                        new {value = "sd", text = "Cho"},
+                        new {value = "sdd", text = "Cho"},
+                        new {value = "sddd", text = "Cho"},
+                        new {value = "sdddd", text = "Cho"}
+                        }, "value", "text", 0))
+            @*Html.EditorFor(model => model.JobRole)*@
             @Html.ValidationMessageFor(model => model.JobRole)
         </div>
 

@@ -13,6 +13,7 @@ namespace IntellectTechCareers.Models
 
         [Display(Name = "Job Role")]
         public string JobRole { get; set; }
+        public List<string> JobRoles { get; set; }
 
         [Display(Name = "Skills")]
         public List<string> Skills { get; set; }
