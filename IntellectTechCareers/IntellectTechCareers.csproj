@@ -190,6 +190,7 @@
     <Compile Include="Data Access Layer\GeneralDAL.cs" />
     <Compile Include="Data Access Layer\StaffDAL.cs" />
     <Compile Include="Models\DashBoardsModels.cs" />
+    <Compile Include="Models\JobRole.cs" />
     <Compile Include="Models\StaffModels.cs" />
     <Compile Include="Utils\DBUtils.cs" />
     <Compile Include="Utils\LocalDBConfig.cs">

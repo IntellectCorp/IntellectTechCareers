@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace IntellectTechCareers.Models
 {
-    public class JobModel
+    public class JobRoleModel
     {
         [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
 
         [Display(Name = "Job Role")]
         public string JobRole { get; set; }
-        public List<string> JobRoles { get; set; }
+        public IEnumerable<JobRole> JobRoles { get; set; }
 
         [Display(Name = "Skills")]
         public List<string> Skills { get; set; }
