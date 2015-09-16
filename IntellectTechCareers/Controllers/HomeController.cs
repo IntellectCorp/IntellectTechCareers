@@ -19,7 +19,7 @@ namespace IntellectTechCareers.Controllers
                 if (role.Equals("candidate"))
                     return View("CandidateHome");
                 else if (role.Equals("manager"))
-                    return View("ManagerHome", DBUtils.getManagerHome());
+                    return View("ManagerHome", AccountDAL.getManagerHome());
                 else if (role.Equals("staff"))
                     return View("StaffHome");
                 else if (role.Equals("interviewer"))

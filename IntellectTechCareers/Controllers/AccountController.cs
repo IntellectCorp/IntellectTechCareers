@@ -21,7 +21,7 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            User user = DBUtils.validateUserAndGetRole(model.UserName, model.Password);
+            User user = AccountDAL.validateUserAndGetRole(model.UserName, model.Password);
             string role = user.role;
             
             if (role.Equals("INVALID"))
@@ -41,7 +41,7 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel user, string returnUrl)
         {
-            DBUtils.registerUser(user.UserName, user.Address, user.dob, user.ContactNo, user.EmailID, user.gender, user.Password, user.Name);
+            AccountDAL.registerUser(user.UserName, user.Address, user.dob, user.ContactNo, user.EmailID, user.gender, user.Password, user.Name);
             return View("RegistrationSuccess");
         }
 
