@@ -1,7 +1,103 @@
-﻿@model IntellectTechCareers.Models.User
+﻿@model IntellectTechCareers.Models.CandidateModel
 
 @{
     ViewBag.Title = "UpdateProfile";
 }
 
-<h2>Profile updation page</h2>
+<h3>Personal details</h3>
+@using (Html.BeginForm("UpdateProfileToDB", "Candidate"))
+{
+    
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset class="fieldset_profile">
+        <legend>Personal details</legend>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>@Html.Label(Model.Name)</td>
+            </tr>
+            <tr>
+                <td>Date of birth</td>
+                <td>@Html.Label(Model.dob.ToShortDateString())</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>@Html.Label(Model.gender)</td>
+            </tr>
+             <tr>
+                <td>Email</td>
+                <td>@Html.TextBoxFor(m => m.EmailID, new { value = @Model.EmailID})</td>
+            </tr>
+
+             <tr>
+                <td>Contact number</td>
+                <td>@Html.TextBoxFor(m => m.ContactNo, new { value = @Model.ContactNo})</td>
+            </tr>
+
+             <tr>
+                <td>Address</td>
+                <td>@Html.TextBoxFor(m => m.Address, new { value = @Model.Address})</td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Update details" />
+    </fieldset>
+}
+<hr />
+<h3>Education details</h3>
+
+<table>
+    <thead>
+        <tr>
+            <td><b>Graduation type</b></td>
+            <td><b>Qualification</b></td>
+        </tr>
+    </thead>
+
+@{
+    foreach (var item in Model.ugQualifications)
+    {
+        <tr>
+            <td>UG</td>
+            <td>@item</td>
+        </tr>        
+    }
+    
+    foreach (var item in Model.pgQualifications)
+    {
+        <tr>
+            <td>PG</td>
+            <td>@item</td>
+        </tr>        
+    }
+}
+</table>
+@*@Html.ActionLink("Add Education detail", "", "Account")*@
+<hr />
+<h3>Experience details</h3>
+
+@{
+    
+    <table>
+    <thead>
+        <tr>
+            <td><b>Company</b></td>
+            <td><b>Designation</b></td>
+            <td><b>Experience in months</b></td>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.experienceDetails)
+    {
+        <tr>
+            <td>@item.company</td>
+            <td>@item.designation</td>
+            <td>@item.experience</td>
+        </tr>        
+    }
+
+</table>
+    
+}

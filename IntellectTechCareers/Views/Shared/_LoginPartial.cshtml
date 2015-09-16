@@ -1,6 +1,9 @@
 ﻿@if (Session["User"] != null) {
+
+    String user = ((IntellectTechCareers.Models.User)@Session["User"]).name;
+    
     <text>
-        <li>Welcome, Mr. @Session["User"]</li>
+        <li>Welcome, Mr. @user</li>
         <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
     </text>
 } else {
