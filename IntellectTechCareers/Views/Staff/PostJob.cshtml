@@ -1,0 +1,81 @@
+﻿@model IntellectTechCareers.Models.JobModel
+
+@{
+    ViewBag.Title = "PostJob";
+    if (ViewBag.Layout != null)
+    {
+        Layout = ViewBag.Layout;//"~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<h2>Post Job</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>JobModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobDesc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JobDesc)
+            @Html.ValidationMessageFor(model => model.JobDesc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobRole)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JobRole)
+            @Html.ValidationMessageFor(model => model.JobRole)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MinExperience)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MinExperience)
+            @Html.ValidationMessageFor(model => model.MinExperience)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaxExperience)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MaxExperience)
+            @Html.ValidationMessageFor(model => model.MaxExperience)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsAgeLimit)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsAgeLimit)
+            @Html.ValidationMessageFor(model => model.IsAgeLimit)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgeLimit)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AgeLimit)
+            @Html.ValidationMessageFor(model => model.AgeLimit)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

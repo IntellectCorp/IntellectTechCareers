@@ -1,5 +1,9 @@
 ﻿@{
-    ViewBag.Title = "StaffHome";
+    ViewBag.Title = "Staff Home";
+    Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
 }
 
+@{
+    String name = ((IntellectTechCareers.Models.User)Session["user"]).name;
+}
 <h2>StaffHome</h2>
