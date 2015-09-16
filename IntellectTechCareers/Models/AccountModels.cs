@@ -134,4 +134,45 @@ namespace IntellectTechCareers.Models
         public string role { get; set; }
         public string state { get; set; }
     }
+
+    public class ExperienceModel
+    {
+        public int user_id { get; set; }
+        public string company { get; set; }
+        public string designation { get; set; }
+        public int experience { get; set; }
+    }
+
+    public class CandidateModel
+    {
+        public int user_id { get; set; }
+        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string gender { get; set; }
+        public DateTime dob { get; set; }
+
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        [Display(Name = "Email ID")]
+        public string EmailID { get; set; }
+
+        [StringLength(10, MinimumLength = 10)]
+        [RegularExpression("^[0-9]+$")]
+        [Display(Name = "Contact Number")]
+        public string ContactNo { get; set; }
+
+        [Display(Name = "Address")]
+        [StringLength(30)]
+        public string Address { get; set; }
+
+        public List<String> ugQualifications;
+        public List<String> pgQualifications;
+
+        public List<ExperienceModel> experienceDetails;
+
+    }
 }
+
+//Microsoft enterprice library version 5
+//Microsoft.Practices.Exception*.Data.dll
+//Logging,
+//aspnet_regiis encrypt config_file

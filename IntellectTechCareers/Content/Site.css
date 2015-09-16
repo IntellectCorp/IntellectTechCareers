@@ -849,3 +849,10 @@ tr.pager td {
 .myMenu li ul li a:hover {
 	background-color:#A00F83;	
 }
+
+/* Candidate styles*/
+
+.fieldset_profile
+{
+    padding : 10px 10px 10px 10px;
+}
