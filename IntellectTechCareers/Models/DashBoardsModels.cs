@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IntellectTechCareers.Models
 {
-    public class ManagerDashBoardModels
+    public class ManagerDashBoardModel
     {
         [Display(Name = "Job posted in total")]
         public string TotalJobs { get; set; }

@@ -182,12 +182,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Data Access Layer\AdminDAL.cs" />
     <Compile Include="Data Access Layer\CandidateDAL.cs" />
     <Compile Include="Data Access Layer\GeneralDAL.cs" />
     <Compile Include="Data Access Layer\StaffDAL.cs" />
     <Compile Include="Models\DashBoardsModels.cs" />
+    <Compile Include="Models\StaffModels.cs" />
     <Compile Include="Utils\DBUtils.cs" />
     <Compile Include="Utils\LocalDBConfig.cs">
       <SubType>Code</SubType>
@@ -211,6 +214,11 @@
     <Content Include="Views\Home\ManagerHome.cshtml" />
     <Content Include="Views\Candidate\UpdateProfile.cshtml" />
     <Content Include="Views\Candidate\ViewJobDetails.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageManager.cshtml" />
+    <Content Include="Views\Staff\PostJob.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageStaff.cshtml" />
+    <Content Include="Views\Shared\_PartialManagerNav.cshtml" />
+    <Content Include="Views\Shared\_PartialBlank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

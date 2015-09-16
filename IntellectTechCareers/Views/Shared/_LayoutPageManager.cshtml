@@ -76,6 +76,41 @@
                 <hgroup class="title">
                     <h1>@ViewBag.Title</h1>
                     @*<h2>@ViewBag.Message</h2>*@
+                    <nav style="float: right;">
+                        <ul class="myMenu">
+                            <li>@Html.ActionLink("My DashBoard", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Jobs", "About", "Home")
+                                <ul>
+                                    <li>@Html.ActionLink("Post Job", "PostJob", "Admin")</li>
+                                    <li><a href="#">Schedule Interview</a></li>
+                                    <li><a href="#">Release Results</a></li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Reports", "About", "Home")
+                                <ul>
+                                    <li><a href="#">Staff Responsiblities</a></li>
+                                    <li><a href="#">Job Application Status</a></li>
+                                    <li><a href="#">Applications By JobId</a></li>
+                                    <li><a href="#">Selected Applicant Details</a></li>
+                                    <li><a href="#">Blocked Applicant Details</a></li>
+                                    <li><a href="#">Jobs for Different Roles</a></li>
+                                    <li><a href="#">Jobs by Job Status</a></li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Admin Tasks", "Index", "Home")
+                                <ul>
+                                    <li><a href="#">Add Job Roles</a></li>
+                                    <li><a href="#">Add Qualifications</a></li>
+                                    <li><a href="#">Appoint Staff</a></li>
+                                    <li><a href="#">Activate / Deactivate Staff</a></li>
+                                    <li><a href="#">Staff Responsiblities</a></li>
+                                    <li><a href="#">Change Other's Password</a></li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Change My Password", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+                        </ul>
+                    </nav>
                 </hgroup>
             </div>
         </section>

@@ -10,9 +10,9 @@ namespace IntellectTechCareers.Data_Access_Layer
 {
     public class AdminDAL
     {
-        public static ManagerDashBoardModels getManagerHome()
+        public static ManagerDashBoardModel getManagerHome()
         {
-            ManagerDashBoardModels model = new ManagerDashBoardModels();
+            ManagerDashBoardModel model = new ManagerDashBoardModel();
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
