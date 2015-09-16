@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IntellectTechCareers.Models;
+using IntellectTechCareers.Data_Access_Layer;
 
 namespace IntellectTechCareers.Controllers
 {
@@ -19,7 +20,7 @@ namespace IntellectTechCareers.Controllers
                 if (role.Equals("candidate"))
                     return View("CandidateHome");
                 else if (role.Equals("manager"))
-                    return View("ManagerHome", AccountDAL.getManagerHome());
+                    return View("ManagerHome", AdminDAL.getManagerHome());
                 else if (role.Equals("staff"))
                     return View("StaffHome");
                 else if (role.Equals("interviewer"))

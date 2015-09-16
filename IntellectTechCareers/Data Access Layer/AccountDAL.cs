@@ -9,23 +9,9 @@ namespace IntellectTechCareers.Utils
 {
     public class AccountDAL
     {
-        public static string getDBConnectionString()
-        {
-            return String.Format("Data Source=(LocalDB)\\v11.0; Integrated Security=True; AttachDbFilename={0};",LocalDBConfig.getDBAddress());
-            //return "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\kaumahat\\documents\\visual studio 2012\\Projects\\IntellectTechCareers\\IntellectTechCareers\\App_Data\\Database1.mdf;Integrated Security=True";
-        }
-
-        public static SqlConnection getDBConnection()
-        {
-            string connectionString = AccountDAL.getDBConnectionString();
-            SqlConnection con = new SqlConnection(connectionString);
-
-            return con;
-        }
-
         public static User validateUserAndGetRole(string username, string passwd)
         {
-            SqlConnection con = getDBConnection(); 
+            SqlConnection con = DBUtils.getDBConnection(); 
             con.Open();
 
             SqlCommand command = new SqlCommand("select user_id, password, role, name, state from dbo.Users where username='" + username + "';", con);
@@ -67,7 +53,7 @@ namespace IntellectTechCareers.Utils
 
         public static void registerUser(string uname, string address, DateTime dob, string contact, string email, string gender, string passwd, string name)
         {
-            SqlConnection con = getDBConnection();
+            SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
             string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
@@ -79,29 +65,6 @@ namespace IntellectTechCareers.Utils
 
             command.ExecuteNonQuery();
             con.Close();
-        }
-
-        public static ManagerDashBoardModels getManagerHome()
-        {
-            ManagerDashBoardModels model = new ManagerDashBoardModels();
-            SqlConnection con = getDBConnection();
-            con.Open();
-
-            SqlCommand command = new SqlCommand("select COUNT(1) from dbo.Job ;", con);
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader == null || !reader.Read())
-            {
-                return null;
-            }
-            model.TotalJobs = Convert.ToString(reader[0]);
-            model.TotalResults = "5";
-            model.ResultsNotReleased = "15";
-            model.UnscheduledInterviewJobs = "2";
-            model.TotalScheduledInterview = "3";
-
-            con.Close();
-            return model;
         }
     }
 }
