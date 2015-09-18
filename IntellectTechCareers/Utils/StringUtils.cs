@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using IntellectTechCareers.Models;
 
 namespace IntellectTechCareers.Utils
 {
@@ -32,6 +33,17 @@ namespace IntellectTechCareers.Utils
                 .ToLower();
 
             return encoded;
+        }
+
+        public static string convertQualificationListToString(List<string> list)
+        {
+            string convString = "";
+
+            foreach (var item in list)
+            {
+                convString = item + ",";
+            }
+            return convString.Substring(0, convString.Length - 1);
         }
     }
 }

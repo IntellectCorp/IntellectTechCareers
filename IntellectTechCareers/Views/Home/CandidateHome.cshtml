@@ -33,7 +33,7 @@
     </fieldset>
 }
 
-@using (Html.BeginForm("UpdateProfile", "Candidate"))
+@using (Html.BeginForm("UpdateProfile", "Candidate", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

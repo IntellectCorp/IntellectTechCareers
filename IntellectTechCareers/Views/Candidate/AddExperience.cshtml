@@ -1,0 +1,43 @@
+﻿@model IntellectTechCareers.Models.ExperienceModel
+
+<script type="text/javascript">
+
+    function add_exp_details()
+    {
+        var company = document.getElementById('company').value;
+        var des = document.getElementById('designation').value;
+        var exp = document.getElementById('experience').value;
+
+        var model = {"user_id":'@Model.user_id', "company":company, "designation":des, "experience":exp};
+
+        var url = '@Url.Action("UpdateExperienceInfo", "Candidate")'
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: model,
+            success: function (retValue) {
+                document.getElementById('experience_details').style.display = "none";
+            }
+        });
+    }
+</script>
+
+<h3>Add relevant work experience and click save to submit</h3>
+<input type="hidden" id="user_id" value='@Model.user_id' />
+<table >
+<tr>
+    <td>Company Name</td>
+    <td>@Html.TextBoxFor(m => m.company)</td>
+</tr>
+<tr>
+    <td>Highest designation held</td>
+    <td>@Html.TextBoxFor(m => m.designation)</td>
+</tr>
+<tr>
+    <td>Experience in months</td>
+    <td>@Html.TextBoxFor(m => m.experience)</td>
+</tr>
+</table>
+
+<input type="button" onclick="add_exp_details()" value="Save" />

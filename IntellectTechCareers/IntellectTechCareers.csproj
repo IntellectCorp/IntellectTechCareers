@@ -220,6 +220,8 @@
     <Content Include="Views\Shared\_LayoutPageStaff.cshtml" />
     <Content Include="Views\Shared\_PartialManagerNav.cshtml" />
     <Content Include="Views\Shared\_PartialBlank.cshtml" />
+    <Content Include="Views\Candidate\AddExperience.cshtml" />
+    <Content Include="Views\Candidate\UpdateQualificationDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

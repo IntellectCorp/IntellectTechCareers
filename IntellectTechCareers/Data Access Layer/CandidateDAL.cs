@@ -39,7 +39,7 @@ namespace IntellectTechCareers.Data_Access_Layer
                 can.ugQualifications.Add(item);
             }
 
-            String[] pgList = Convert.ToString(reader[7]).Split(',');
+            String[] pgList = Convert.ToString(reader[8]).Split(',');
             can.pgQualifications = new List<string>();
             foreach (var item in pgList)
             {
@@ -94,6 +94,40 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             con.Close();
             return qualificationList;
+        }
+
+        public static void addEducationDetails(CandidateModel candidate)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("update dbo.Applicant set graduation = graduation + '," + candidate.newUgQualification +
+                "', post_graduation = post_graduation + '," + candidate.newPgQualification + "' where candidate_id = " + candidate.user_id, con);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public static void addExperienceDetails(ExperienceModel exp)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("insert into dbo.Experience (user_id, company, designation, period) values "
+                + "(" + exp.user_id + ",'" + exp.company + "', '" + exp.designation + "', " + exp.experience +")" , con);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public static void updatePersonalInfo(CandidateModel can)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("update dbo.Applicant set address = '" + can.Address + "', " +
+                "contact_num = '" + can.ContactNo + "', email_id = '" + can.EmailID + "' where candidate_id = " + can.user_id, con);
+
+            command.ExecuteNonQuery();
+            con.Close();
         }
     }
 }
