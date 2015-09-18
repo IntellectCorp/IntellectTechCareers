@@ -101,8 +101,24 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
-            SqlCommand command = new SqlCommand("update dbo.Applicant set graduation = graduation + '," + candidate.newUgQualification +
-                "', post_graduation = post_graduation + '," + candidate.newPgQualification + "' where candidate_id = " + candidate.user_id, con);
+            String query = "";
+            if (candidate.newUgQualification.Equals("0"))
+            {
+                query = "update dbo.Applicant set post_graduation = post_graduation + '," + 
+                    candidate.newPgQualification + "'" + "where candidate_id = " + candidate.user_id;
+            }
+            else if (candidate.newPgQualification.Equals("0"))
+            {
+                query = "update dbo.Applicant set graduation = graduation + '," + 
+                    candidate.newUgQualification + "'" + "where candidate_id = " + candidate.user_id;
+            }
+            else
+            {
+                query = "update dbo.Applicant set " + "graduation = graduation + '," + candidate.newUgQualification + "'" +
+                    ", " + "post_graduation = post_graduation + '," + candidate.newPgQualification + "'" + "where candidate_id = " + candidate.user_id;
+            }
+   
+            SqlCommand command = new SqlCommand(query, con);
             command.ExecuteNonQuery();
             con.Close();
         }

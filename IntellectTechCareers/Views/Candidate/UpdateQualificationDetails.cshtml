@@ -7,9 +7,13 @@
         var ug = document.getElementById('newUgQualification').value;
         var pg = document.getElementById('newPgQualification').value;
 
-        var model = { "user_id": '@Model.user_id', "newUgQualification": ug, "newPgQualification": pg };
+        if (ug == 0 && pg == 0)
+        {
+            document.getElementById('notification_message').style.display = "block";
+            return false;
+        }
 
-        console.log(model);
+        var model = { "user_id": '@Model.user_id', "newUgQualification": ug, "newPgQualification": pg };
 
         var url = '@Url.Action("UpdateQualificationDetails", "Candidate")'
 
@@ -21,6 +25,8 @@
                 document.getElementById('add_edu_details').style.display = "none";
             }
         });
+
+        document.getElementById('notification_message').style.display = "none";
     }
 </script>
 
@@ -34,6 +40,10 @@
     <td>@Html.DropDownListFor(model => model.newPgQualification, new SelectList(ViewBag.pgListData, "Value", "Text"))</td>
 </tr>
 </table>
+
+<div id="notification_message" style="display:none;">
+    <font color="red">Please select atleast one qualification or click cancel</font>
+</div>
 
 <input type="button" onclick="add_qualification()" value="Save" />
 

@@ -140,13 +140,16 @@ namespace IntellectTechCareers.Models
     {
         public int user_id { get; set; }
 
+        [StringLength(25, MinimumLength=1,ErrorMessage="Company name should be between 1 and 25 characters")]
         [Required]
         public string company { get; set; }
 
+        [StringLength(30, MinimumLength = 1, ErrorMessage = "Designation should be between 1 and 30 characters")]
         [Required]
         public string designation { get; set; }
 
         [Required]
+        [Range(1, 500)]
         public int experience { get; set; }
     }
 
