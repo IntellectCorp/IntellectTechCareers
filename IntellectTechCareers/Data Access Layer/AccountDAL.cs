@@ -57,7 +57,7 @@ namespace IntellectTechCareers.Utils
             con.Open();
 
             string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
-            SqlCommand command = new SqlCommand("insert into Users (username, password, role, account_act_date, name, state) values ('" + uname + "', '" + passwdHash + "', 'candidate','" + DateTime.Today + "'" + name + "', 'active');", con);
+            SqlCommand command = new SqlCommand("insert into Users (username, password, role, account_act_date, name, state) values ('" + uname + "', '" + passwdHash + "', 'candidate','" + DateTime.Today + "', '" + name + "', 'active');", con);
             command.ExecuteNonQuery();
 
             command = new SqlCommand("insert into Applicant (candidate_id, name, email_id, contact_num, gender, dob, address)"

@@ -20,15 +20,12 @@ namespace IntellectTechCareers.Models
         public List<string> Skills { get; set; }
 
         [Display(Name = "Min Experience")]
-        public string MinExperience { get; set; }
+        public int MinExperience { get; set; }
 
         [Display(Name = "Max Experience")]
-        public string MaxExperience { get; set; }
+        public int MaxExperience { get; set; }
 
         [Display(Name = "Age Limit")]
-        public bool IsAgeLimit { get; set; }
-
-        [Display(Name = "Enter the Age Limit")]
-        public string AgeLimit { get; set; }
+        public int AgeLimit { get; set; }
     }
 }

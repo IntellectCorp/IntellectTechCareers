@@ -1,4 +1,5 @@
 ﻿using IntellectTechCareers.Data_Access_Layer;
+using IntellectTechCareers.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,9 @@ namespace IntellectTechCareers.Controllers
         public ActionResult PostJob()
         {
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
-            return View("../Staff/PostJob");
+            JobRoleModel model = new JobRoleModel();
+            model.JobRoles = ASCommonDAL.getJobRoles();
+            return View("../Staff/PostJob",model);
         }
 
     }
