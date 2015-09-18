@@ -2,11 +2,45 @@
 
 <script type="text/javascript">
 
+    function validate(company, des, exp)
+    {
+        if (company.length < 1 || company.length > 25)
+        {
+            document.getElementById('notification_text').innerHTML = "Company name must be between 1 to 25 characters";
+            return false;
+        }
+
+        if (des.length < 1 || des.length > 30)
+        {
+            document.getElementById('notification_text').innerHTML = "Designation must be between 1 to 25 characters";
+            return false;
+        }
+
+        if (exp < 1 || exp > 500)
+        {
+            document.getElementById('notification_text').innerHTML = "Experience must be between 1 to 500";
+            return false;
+        }
+    
+        return true;
+    }
+
     function add_exp_details()
     {
         var company = document.getElementById('company').value;
         var des = document.getElementById('designation').value;
         var exp = document.getElementById('experience').value;
+
+        var isValid = validate(company, des, exp);
+
+        if (!isValid) {
+            document.getElementById('notification_experience').style.display = "block";
+            return false;
+        }
+        else
+        {
+            document.getElementById('notification_experience').style.display = "none";
+        }
 
         var model = {"user_id":'@Model.user_id', "company":company, "designation":des, "experience":exp};
 
@@ -40,4 +74,11 @@
 </tr>
 </table>
 
+<div id="notification_experience" style="display:none;">
+    <h3>
+    <font color="red">
+        <label id="notification_text"></label>
+    </font>
+    </h3>
+</div>
 <input type="button" onclick="add_exp_details()" value="Save" />
