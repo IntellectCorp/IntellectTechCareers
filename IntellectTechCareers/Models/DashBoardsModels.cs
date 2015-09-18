@@ -23,4 +23,25 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Job results yet to be released")]
         public string ResultsNotReleased { get; set; }
     }
+
+    public class StaffDashBoardModel
+    {
+        [Display(Name = "Right to Post Job ")]
+        public string RightToPost { get; set; }
+
+        [Display(Name = "Right to Schedule Interview ")]
+        public string RightToScheduleInterview { get; set; }
+
+        [Display(Name = "Right to Release Results ")]
+        public string RightToReleaseResults { get; set; }
+
+        [Display(Name = "Job Posted by You")]
+        public int JobPosted { get; set; }
+
+        [Display(Name = "Job Scheduled for Interview by You")]
+        public int InterviewsScheduled { get; set; }
+
+        [Display(Name = "Job Results Released by You")]
+        public int ResultsReleased { get; set; }
+    }
 }

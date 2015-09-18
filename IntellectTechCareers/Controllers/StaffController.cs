@@ -15,7 +15,8 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
-            return View("StaffHome");
+            //return View("StaffHome");
+            return View("Home/StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
         }
 
         public ActionResult PostJob()

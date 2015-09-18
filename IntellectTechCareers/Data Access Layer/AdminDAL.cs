@@ -24,10 +24,47 @@ namespace IntellectTechCareers.Data_Access_Layer
                 return null;
             }
             model.TotalJobs = Convert.ToString(reader[0]);
-            model.TotalResults = "5";
-            model.ResultsNotReleased = "15";
-            model.UnscheduledInterviewJobs = "2";
-            model.TotalScheduledInterview = "3";
+            reader.Close();
+
+            command = new SqlCommand("select COUNT(1) from dbo.Results ;", con);
+            reader = command.ExecuteReader();
+
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+            model.TotalResults = Convert.ToString(reader[0]);
+            reader.Close();
+
+            command = new SqlCommand("select COUNT(1) from dbo.Interview ;", con);
+            reader = command.ExecuteReader();
+
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+            model.TotalScheduledInterview = Convert.ToString(reader[0]);
+            reader.Close();
+
+            command = new SqlCommand("select COUNT(DISTINCT job_id) from dbo.Application WHERE status_code=3;", con);
+            reader = command.ExecuteReader();
+
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+            model.ResultsNotReleased = Convert.ToString(reader[0]);
+            reader.Close();
+
+            command = new SqlCommand("select COUNT(DISTINCT job_id) from dbo.Application WHERE status_code=1;", con);
+            reader = command.ExecuteReader();
+
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+            model.UnscheduledInterviewJobs = Convert.ToString(reader[0]);
+            reader.Close();
 
             con.Close();
             return model;

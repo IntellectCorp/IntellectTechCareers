@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IntellectTechCareers.Models.StaffDashBoardModel
+@{
     ViewBag.Title = "Staff Home";
     Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
 }
@@ -6,4 +7,84 @@
 @{
     String name = ((IntellectTechCareers.Models.User)Session["user"]).name;
 }
-<h2>StaffHome</h2>
+
+<h2>Welcome Mr. @name</h2>
+<br />
+
+<fieldset>
+    <legend>StaffDashBoardModel</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.RightToPost)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b>@Html.DisplayFor(model => model.RightToPost) </b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.RightToScheduleInterview)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b> @Html.DisplayFor(model => model.RightToScheduleInterview)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.RightToReleaseResults)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b> @Html.DisplayFor(model => model.RightToReleaseResults)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.JobPosted)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    <b> @Html.DisplayFor(model => model.JobPosted)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.InterviewsScheduled)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                     <b>@Html.DisplayFor(model => model.InterviewsScheduled)</b>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.ResultsReleased)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                     <b>@Html.DisplayFor(model => model.ResultsReleased)</b>
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
