@@ -139,8 +139,14 @@ namespace IntellectTechCareers.Models
     public class ExperienceModel
     {
         public int user_id { get; set; }
+
+        [Required]
         public string company { get; set; }
+
+        [Required]
         public string designation { get; set; }
+
+        [Required]
         public int experience { get; set; }
     }
 
@@ -172,18 +178,20 @@ namespace IntellectTechCareers.Models
         [StringLength(30)]
         public string Address { get; set; }
 
-        public List<String> ugQualifications;
-        public List<String> pgQualifications;
+        public List<String> ugQualifications { get; set; }
+        public List<String> pgQualifications { get; set; }
 
-        public List<ExperienceModel> experienceDetails;
+        public List<ExperienceModel> experienceDetails { get; set; }
 
-        public string newUgQualification;
-        public string newPgQualification;
+        public string newUgQualification {get; set;}
+        public string newPgQualification { get; set; }
     }
 
     public class CandidateViewModel
     {
         public CandidateModel candidate;
+
+        //Not required : TODO : REmove this view model and use only CandidateModel
         public List<SelectListItem> ugList;
         public List<SelectListItem> pgList;
     }

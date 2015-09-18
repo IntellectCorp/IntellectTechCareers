@@ -18,37 +18,45 @@ namespace IntellectTechCareers.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult UpdateProfile()
         {
-            CandidateViewModel candidateViewModel = new CandidateViewModel();
-
             CandidateModel candidate = new CandidateModel();
 
             int user_id = ((User)Session["user"]).user_id;
             candidate = CandidateDAL.getCandidateDetails(user_id);
             candidate.experienceDetails = CandidateDAL.getCandidateExperienceDetails(user_id);
 
-            candidateViewModel.candidate = candidate;
-
             List<QualificationModel> qualifications = CandidateDAL.getQualificationDetails();
             List<SelectListItem> ugQualifications = new List<SelectListItem>();
             List<SelectListItem> pgQualifications = new List<SelectListItem>();
 
-            ugQualifications.Add(new SelectListItem { Selected = true, Text = "<-Select->" });
-            pgQualifications.Add(new SelectListItem { Selected = true, Text = "<-Select->" });
+            ugQualifications.Add(new SelectListItem { Selected = true, Text = "<-Select->", Value = "0" });
+            pgQualifications.Add(new SelectListItem { Selected = true, Text = "<-Select->", Value = "0" });
 
             foreach (var item in qualifications)
             {
                 if (item.type.Equals("UG"))
-                    ugQualifications.Add(new SelectListItem { Text = item.qualification });
+                    ugQualifications.Add(new SelectListItem { Text = item.qualification, Value = item.qualification });
                 else
-                    pgQualifications.Add(new SelectListItem { Text = item.qualification });
+                    pgQualifications.Add(new SelectListItem { Text = item.qualification, Value = item.qualification });
             }
 
-            candidateViewModel.ugList = ugQualifications;
-            candidateViewModel.pgList = pgQualifications;
             ViewBag.ugListData = ugQualifications;
-            return View(candidateViewModel);
+            ViewBag.pgListData = pgQualifications;
+            return View(candidate);
+        }
+
+        public string UpdatePersonalInfo(CandidateModel candidate)
+        {
+            CandidateDAL.updatePersonalInfo(candidate);
+            return "";
+        }
+
+        public string UpdateQualificationDetails(CandidateModel candidate)
+        {
+            CandidateDAL.addEducationDetails(candidate);
+            return "";
         }
 
         public ActionResult ViewJobDetails()
@@ -56,10 +64,10 @@ namespace IntellectTechCareers.Controllers
             return View(Session["user"]);
         }
 
-        public ActionResult UpdateProfileToDB(CandidateViewModel candidate, string returnUrl)
+        public string UpdateExperienceInfo(ExperienceModel expModel)
         {
-            return View();
+            CandidateDAL.addExperienceDetails(expModel);
+            return "";
         }
-
     }
 }

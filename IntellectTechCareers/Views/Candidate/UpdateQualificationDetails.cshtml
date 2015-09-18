@@ -1,0 +1,39 @@
+﻿@model IntellectTechCareers.Models.CandidateModel
+
+<script type="text/javascript">
+
+    function add_qualification()
+    {
+        var ug = document.getElementById('newUgQualification').value;
+        var pg = document.getElementById('newPgQualification').value;
+
+        var model = { "user_id": '@Model.user_id', "newUgQualification": ug, "newPgQualification": pg };
+
+        console.log(model);
+
+        var url = '@Url.Action("UpdateQualificationDetails", "Candidate")'
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: model,
+            success: function (retValue) {
+                document.getElementById('add_edu_details').style.display = "none";
+            }
+        });
+    }
+</script>
+
+<table >
+<tr>
+    <td>Select your qualification and click on save to submit</td>
+    <td>@Html.DropDownListFor(model => model.newUgQualification, new SelectList(ViewBag.ugListData, "Value", "Text"))</td>
+</tr>
+<tr>
+    <td>Select your qualification and click on save to submit</td>
+    <td>@Html.DropDownListFor(model => model.newPgQualification, new SelectList(ViewBag.pgListData, "Value", "Text"))</td>
+</tr>
+</table>
+
+<input type="button" onclick="add_qualification()" value="Save" />
+
