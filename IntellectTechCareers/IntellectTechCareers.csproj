@@ -186,11 +186,14 @@
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Data Access Layer\AdminDAL.cs" />
+    <Compile Include="Data Access Layer\ASCommonDAL.cs" />
     <Compile Include="Data Access Layer\CandidateDAL.cs" />
     <Compile Include="Data Access Layer\GeneralDAL.cs" />
     <Compile Include="Data Access Layer\StaffDAL.cs" />
     <Compile Include="Models\DashBoardsModels.cs" />
     <Compile Include="Models\JobRole.cs" />
+    <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\Qualification.cs" />
     <Compile Include="Models\StaffModels.cs" />
     <Compile Include="Utils\DBUtils.cs" />
     <Compile Include="Utils\LocalDBConfig.cs">

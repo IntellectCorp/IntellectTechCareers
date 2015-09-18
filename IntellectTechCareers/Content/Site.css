@@ -374,7 +374,7 @@ aside {
     }
 
     #gender {
-        width: 100px;
+        width: 40px;
     }
 
  #LoginFormRight {
@@ -460,6 +460,14 @@ label {
 
 label.checkbox {
     display: inline;
+}
+
+.radio-label label {
+    display: inline;
+}
+
+.radio-label input  {
+    width: 30px;
 }
 
 input, textarea {
