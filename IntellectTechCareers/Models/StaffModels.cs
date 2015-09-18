@@ -17,8 +17,7 @@ namespace IntellectTechCareers.Models
         public IEnumerable<JobRole> JobRoles { get; set; }
 
         [Display(Name = "Skills")]
-        public List<string> SkillsSelected { get; set; }
-        public List<string> SkillsAvailable { get; set; }
+        public List<Skill> Skills { get; set; }
 
         [Display(Name = "Vacancies")]
         public int Vacancies { get; set; }

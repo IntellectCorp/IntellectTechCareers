@@ -11,7 +11,8 @@
     }
 }
 
-<h2>Post New Job</h2><br />
+<h2>Post New Job</h2>
+<br />
 @*using (Html.BeginForm("PostJob","Staff",FormMethod.Post))*@
 @using (Html.BeginForm())
 {
@@ -45,7 +46,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SkillsSelected)
+            @Html.LabelFor(model => model.Skills)
         </div>
         <div class="editor-field">
             @*Html.DropDownListFor(model => model.JobRole, new SelectList(new List<Object>{
@@ -55,11 +56,16 @@
                         new {value = "sdddd", text = "Cho"}
                         }, "value", "text", 0))*@
             @*Html.EditorFor(model => model.JobRole)*@
-            @Html.CheckBoxFor(model => model.SkillsSelected, "ji")
-            @Html.ValidationMessageFor(model => model.JobRole)
+            @for (int i = 0; i < Model.Skills.Count; i++)
+            {
+                
+                @Html.CheckBoxFor(model => model.Skills[i].Checked, Model.Skills[i].Id)
+                @Html.LabelFor(model => model.Skills[i],  Model.Skills[i].Name+"  ", new { @class = "checkbox" })
+             }
+            @Html.ValidationMessageFor(model => model.Skills)
         </div>
 
-         <div class="editor-label">
+        <div class="editor-label">
             @Html.LabelFor(model => model.Vacancies)
         </div>
         <div class="editor-field">
@@ -82,7 +88,7 @@
             @Html.EditorFor(model => model.MaxExperience)
             @Html.ValidationMessageFor(model => model.MaxExperience)
         </div>
-        
+
         <div class="radio-label">
             @Html.LabelFor(model => model.AgeLimit)
             @*@Html.RadioButton("AgeLimitYes", "Yes");
@@ -102,15 +108,15 @@
     
     <script>
         $(document).ready(function () {
-        $("#AgeLimit").hide();
-        $(".IsAgeLimit").change(function () {
-            if ($("#AgeLimitNo").attr("checked")) {
-                $("#AgeLimit").hide();
-            } else {
-                $("#AgeLimit").show();
-            }
+            $("#AgeLimit").hide();
+            $(".IsAgeLimit").change(function () {
+                if ($("#AgeLimitNo").attr("checked")) {
+                    $("#AgeLimit").hide();
+                } else {
+                    $("#AgeLimit").show();
+                }
+            });
         });
-    });
     </script>
 }
 

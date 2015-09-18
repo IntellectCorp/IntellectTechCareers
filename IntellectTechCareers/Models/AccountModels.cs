@@ -74,7 +74,7 @@ namespace IntellectTechCareers.Models
     public class RegisterModel
     {
         [Required]
-        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(15, ErrorMessage = "The {0} should be between 6 and 15 characters long.", MinimumLength = 6)]
         [RegularExpression("^[a-zA-Z_]+$", ErrorMessage="User name can only have alphabets ")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
