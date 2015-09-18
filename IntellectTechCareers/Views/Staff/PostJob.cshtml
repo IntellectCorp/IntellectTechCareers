@@ -1,5 +1,4 @@
-﻿@model IntellectTechCareers.Models.JobRoleModel
-
+﻿@model IntellectTechCareers.Models.Job
 @{
     ViewBag.Title = "PostJob";
     if (ViewBag.Layout != null)
@@ -13,9 +12,8 @@
 }
 
 <h2>Post New Job</h2><br />
-
-@*@using (Html.BeginForm())*@
- @using (Html.BeginForm("PostJob","Staff",FormMethod.Post))
+@*using (Html.BeginForm("PostJob","Staff",FormMethod.Post))*@
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -44,6 +42,29 @@
             @*Html.EditorFor(model => model.JobRole)*@
             @Html.DropDownListFor(model => model.JobRole, new SelectList(Model.JobRoles, "Id", "Name"))
             @Html.ValidationMessageFor(model => model.JobRole)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SkillsSelected)
+        </div>
+        <div class="editor-field">
+            @*Html.DropDownListFor(model => model.JobRole, new SelectList(new List<Object>{
+                        new {value = "sd", text = "Cho"},
+                        new {value = "sdd", text = "Cho"},
+                        new {value = "sddd", text = "Cho"},
+                        new {value = "sdddd", text = "Cho"}
+                        }, "value", "text", 0))*@
+            @*Html.EditorFor(model => model.JobRole)*@
+            @Html.CheckBoxFor(model => model.SkillsSelected, "ji")
+            @Html.ValidationMessageFor(model => model.JobRole)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Vacancies)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Vacancies)
+            @Html.ValidationMessageFor(model => model.Vacancies)
         </div>
 
         <div class="editor-label">

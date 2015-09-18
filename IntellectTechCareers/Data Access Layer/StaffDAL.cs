@@ -10,5 +10,6 @@ namespace IntellectTechCareers.Data_Access_Layer
 {
     public class StaffDAL
     {
+
     }
 }

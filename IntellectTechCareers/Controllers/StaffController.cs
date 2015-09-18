@@ -22,7 +22,7 @@ namespace IntellectTechCareers.Controllers
         {
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
 
-            JobRoleModel model = new JobRoleModel();
+            Job model = new Job();
             //model.JobRoles = new List<JobRole>{
             //            new JobRole {Id = 0, Name = "Cho"},
             //            new JobRole {Id = 1, Name = "Chio"},
@@ -35,11 +35,14 @@ namespace IntellectTechCareers.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult PostJob(JobRoleModel model)
+        public ActionResult PostJob(Job model)
         {
             string desc = model.JobDesc;
             string role = model.JobRole;
-            return RedirectToAction("Index","Home");
+            @ViewBag.Message = "Job Posted !";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            return View("Message");
+            //return RedirectToAction("Index","Home");
         }
     }
 }

@@ -26,10 +26,21 @@ namespace IntellectTechCareers.Controllers
         public ActionResult PostJob()
         {
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
-            JobRoleModel model = new JobRoleModel();
+            Job model = new Job();
             model.JobRoles = ASCommonDAL.getJobRoles();
             return View("../Staff/PostJob",model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult PostJob(Job model)
+        {
+            string desc = model.JobDesc;
+            string role = model.JobRole;
+            @ViewBag.Message = "Job Posted !";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("Message");
+            //return RedirectToAction("Index","Home");
+        }
     }
 }

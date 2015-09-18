@@ -17,13 +17,15 @@ namespace IntellectTechCareers.Utils
             SqlCommand command = new SqlCommand("select user_id, password, role, name, state from dbo.Users where username='" + username + "';", con);
             SqlDataReader reader = command.ExecuteReader();
 
-            if (reader == null || !reader.Read())
-            {
-                return null;
-            }
-
             //Creating a user object
             User user = new User();
+
+            if (reader == null || !reader.Read())
+            {
+                user.role = "INVALID";
+                return user;
+            }
+
             user.user_id = Convert.ToInt32(reader[0]);
             string pwd = Convert.ToString(reader[1]);
             user.role = Convert.ToString(reader[2]);

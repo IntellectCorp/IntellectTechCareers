@@ -1,0 +1,15 @@
+﻿@{
+    if (ViewBag.Layout != null)
+    {
+        Layout = ViewBag.Layout;//"~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<h2>@ViewBag.Message</h2>
+<br />
+<a href="/Home/Index" class="Button">Home</a>
+

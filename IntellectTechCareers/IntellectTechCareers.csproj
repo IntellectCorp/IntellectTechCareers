@@ -223,6 +223,8 @@
     <Content Include="Views\Shared\_LayoutPageStaff.cshtml" />
     <Content Include="Views\Shared\_PartialManagerNav.cshtml" />
     <Content Include="Views\Shared\_PartialBlank.cshtml" />
+    <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\Home\LoginFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

@@ -25,7 +25,7 @@ namespace IntellectTechCareers.Controllers
             string role = user.role;
             
             if (role.Equals("INVALID"))
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("LoginFailed", "Home");
             else
             {
                 Session["user"] = user;

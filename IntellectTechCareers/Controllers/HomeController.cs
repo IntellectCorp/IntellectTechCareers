@@ -11,6 +11,10 @@ namespace IntellectTechCareers.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult LoginFailed()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             if (Session["user"] != null)

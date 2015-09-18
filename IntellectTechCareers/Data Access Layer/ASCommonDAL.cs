@@ -68,5 +68,17 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             return listQualification;
         }
+
+        public static void postJobinDB(Job model, User poster)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            string skillSet = String.Join(",", model.SkillsSelected.Select(x => x.ToString()).ToArray());
+            SqlCommand command = new SqlCommand("insert into Job (job_description, job_role_id, skill,set, vacancies, min_experience, max_experience, age_limit, posted_by) values ('" + model.JobDesc + "', '" + model.JobRole + "', " + skillSet + ",'" + model.Vacancies + "', '" + model.MinExperience + "', '" + model.MaxExperience + "', '" + model.AgeLimit + "', '" + poster.user_id + ");", con);
+            command.ExecuteNonQuery();
+
+            con.Close();
+        }
     }
 }

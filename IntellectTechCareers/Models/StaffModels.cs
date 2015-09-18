@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace IntellectTechCareers.Models
 {
-    public class JobRoleModel
+    public class Job
     {
         [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
@@ -17,7 +17,11 @@ namespace IntellectTechCareers.Models
         public IEnumerable<JobRole> JobRoles { get; set; }
 
         [Display(Name = "Skills")]
-        public List<string> Skills { get; set; }
+        public List<string> SkillsSelected { get; set; }
+        public List<string> SkillsAvailable { get; set; }
+
+        [Display(Name = "Vacancies")]
+        public int Vacancies { get; set; }
 
         [Display(Name = "Min Experience")]
         public int MinExperience { get; set; }
