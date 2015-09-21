@@ -190,6 +190,7 @@
     <Compile Include="Data Access Layer\CandidateDAL.cs" />
     <Compile Include="Data Access Layer\GeneralDAL.cs" />
     <Compile Include="Data Access Layer\StaffDAL.cs" />
+    <Compile Include="Models\ApplicationModel.cs" />
     <Compile Include="Models\DashBoardsModels.cs" />
     <Compile Include="Models\JobModel.cs" />
     <Compile Include="Models\JobRole.cs" />
@@ -230,6 +231,9 @@
     <Content Include="Views\Candidate\_UpdateQualificationDetailsPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutPageCandidate.cshtml" />
     <Content Include="Views\Candidate\JobApplicationSuccess.cshtml" />
+    <Content Include="Views\Staff\ViewJobApplicationStatus.cshtml" />
+    <Content Include="Views\Staff\_PartialJobApplicationStatus.cshtml" />
+    <Content Include="Views\Candidate\ViewJobStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />
