@@ -62,19 +62,48 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ViewJobDetails()
         {
             User user = (User)Session["user"];
-            List<JobModel> jobs = CandidateDAL.getApplicableJobs(user.user_id);
+
+            CandidateModel candidate = new CandidateModel();
+            candidate = CandidateDAL.getCandidateDetails(user.user_id);
+            candidate.experienceDetails = CandidateDAL.getCandidateExperienceDetails(user.user_id);
+
+            int totalExperience = 0;
+            foreach (var item in candidate.experienceDetails)
+            {
+                totalExperience += item.experience;
+            }
 
             JobViewModel jobViewModel = new JobViewModel();
-            jobViewModel.jobs = jobs;
+            jobViewModel.jobs = CandidateDAL.getApplicableJobs(user.user_id);;
+            jobViewModel.qualifications = CandidateDAL.getQualificationsIdToName();
+            jobViewModel.candidateUgQualification = candidate.ugQualifications;
+            jobViewModel.candidatePgQualification = candidate.pgQualifications;
+            jobViewModel.totalExperience = totalExperience;
 
             return View(jobViewModel);
         }
 
         [HttpPost]
-        public ActionResult ViewJobDetails(JobViewModel model)
+        public ActionResult ApplyForJob(JobViewModel model)
         {
+            User user = (User)Session["user"];
+            CandidateDAL.ApplyForJobs(model.selectedJobs, user.user_id);
+
             return View();
         }
+
+        public ActionResult JobApplicationSuccess()
+        {
+            return View("JobApplicationSuccess");
+        }
+
+        //[HttpPost]
+        //public int CheckAppliedJobs()
+        //{
+        //    User user = (User)Session["user"];
+        //    int jobs = CandidateDAL.getNumJobsAppliedFor(user.user_id);
+        //    return jobs;
+        //}
 
         public string UpdateExperienceInfo(ExperienceModel expModel)
         {

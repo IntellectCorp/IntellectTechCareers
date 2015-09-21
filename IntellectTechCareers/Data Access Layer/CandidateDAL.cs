@@ -10,6 +10,9 @@ namespace IntellectTechCareers.Data_Access_Layer
 {
     public class CandidateDAL
     {
+        private static Dictionary<string, string> qualificationIdToName = null;
+        private static Dictionary<string, string> qualificationNameToId = null;
+
         public static CandidateModel getCandidateDetails(int userId)
         {
             SqlConnection con = DBUtils.getDBConnection();
@@ -36,14 +39,16 @@ namespace IntellectTechCareers.Data_Access_Layer
             can.ugQualifications = new List<string>();
             foreach (var item in ugList)
             {
-                can.ugQualifications.Add(item);
+                if(item.Length > 0)
+                    can.ugQualifications.Add(item);
             }
 
             String[] pgList = Convert.ToString(reader[8]).Split(',');
             can.pgQualifications = new List<string>();
             foreach (var item in pgList)
             {
-                can.pgQualifications.Add(item);
+                if (item.Length > 0)
+                    can.pgQualifications.Add(item);
             }
 
             con.Close();
@@ -101,24 +106,45 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
+            candidate.newUgQualification = getQualificationsNameToId()[candidate.newUgQualification];
+            candidate.newPgQualification = getQualificationsNameToId()[candidate.newPgQualification];
+
             String query = "";
-            if (candidate.newUgQualification.Equals("0"))
+
+            string graduation ="";
+            string post_graduation = "";
+            SqlCommand command = new SqlCommand("select graduation, post_graduation from dbo.Applicant where candidate_id = " + candidate.user_id + ";" , con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if(reader.Read())
             {
-                query = "update dbo.Applicant set post_graduation = post_graduation + '," + 
-                    candidate.newPgQualification + "'" + "where candidate_id = " + candidate.user_id;
+                graduation = reader.GetString(0);
+                post_graduation = reader.GetString(1);
             }
-            else if (candidate.newPgQualification.Equals("0"))
+            reader.Close();
+
+            if (graduation.Equals("") && !candidate.newUgQualification.Equals("0"))
             {
-                query = "update dbo.Applicant set graduation = graduation + '," + 
-                    candidate.newUgQualification + "'" + "where candidate_id = " + candidate.user_id;
+                graduation = candidate.newUgQualification;
             }
-            else
+            else if (!graduation.Equals("") && !candidate.newUgQualification.Equals("0"))
             {
-                query = "update dbo.Applicant set " + "graduation = graduation + '," + candidate.newUgQualification + "'" +
-                    ", " + "post_graduation = post_graduation + '," + candidate.newPgQualification + "'" + "where candidate_id = " + candidate.user_id;
+                graduation += "," + candidate.newUgQualification;
             }
-   
-            SqlCommand command = new SqlCommand(query, con);
+
+            if (post_graduation.Equals("") && !candidate.newPgQualification.Equals("0"))
+            {
+                post_graduation = candidate.newPgQualification;
+            }
+            else if (!post_graduation.Equals("") && !candidate.newPgQualification.Equals("0"))
+            {
+                post_graduation += "," + candidate.newPgQualification;
+            }
+
+            query = "update dbo.Applicant set " + "graduation = '" + graduation + "'" +
+                ", " + "post_graduation = '" + post_graduation + "'" + " where candidate_id = " + candidate.user_id;
+
+            command = new SqlCommand(query, con);
             command.ExecuteNonQuery();
             con.Close();
         }
@@ -152,7 +178,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Open();
 
             SqlCommand command = new SqlCommand(" select job_id, job_description, job_role_id, skill_set, vacancies, " + 
-                "min_experience, max_experience, age_limit, posted_by from dbo.Jobs ", con);
+                "min_experience, max_experience, age_limit, posted_by from dbo.Job ", con);
             command.ExecuteNonQuery();
 
             SqlDataReader reader = command.ExecuteReader();
@@ -173,6 +199,79 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             con.Close();
             return jobs;
+        }
+
+        public static Dictionary<string, string> getQualificationsIdToName()
+        {
+            if (qualificationIdToName == null)
+                getQualificationsFromDB();
+
+            return qualificationIdToName;
+        }
+
+        public static Dictionary<string, string> getQualificationsNameToId()
+        {
+            if (qualificationNameToId == null)
+                getQualificationsFromDB();
+
+            return qualificationNameToId;
+        }
+
+        private static void getQualificationsFromDB()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select qualification_id, qualification from dbo.Qualification ", con);
+            command.ExecuteNonQuery();
+            qualificationIdToName = new Dictionary<string, string>();
+            qualificationNameToId = new Dictionary<string, string>();
+
+            qualificationIdToName.Add("0", "0");
+            qualificationNameToId.Add("0", "0");
+
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                qualificationIdToName.Add(reader.GetInt32(0).ToString(), reader.GetString(1));
+                qualificationNameToId.Add(reader.GetString(1), reader.GetInt32(0).ToString());
+            }
+
+            con.Close();
+        }
+
+        public static int getNumJobsAppliedFor(int candidate_id)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select count(*) from dbo.Application where candidate_id = " + candidate_id , con);
+            command.ExecuteNonQuery();
+
+            int numJobsAppliedFor = 0;
+            SqlDataReader reader = command.ExecuteReader();
+            if(reader.Read())
+            {
+                numJobsAppliedFor = reader.GetInt32(0);
+            }
+
+            con.Close();
+            return numJobsAppliedFor;
+        }
+
+        public static void ApplyForJobs(string jobs, int user_id)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            foreach (var item in jobs.Split(','))
+            {
+                SqlCommand command = new SqlCommand(" insert into dbo.Application (candidate_id, job_id, status_code, status, app_date) values " + 
+                    " (" + user_id + ", " + Convert.ToInt32(item) + ", 'A', 'Applied', " + DateTime.Today + "') ", con);
+                command.ExecuteNonQuery();
+            }
+            
+            con.Close();
         }
     }
 }

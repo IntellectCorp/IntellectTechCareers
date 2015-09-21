@@ -39,5 +39,10 @@ namespace IntellectTechCareers.Models
     public class JobViewModel
     {
         public List<JobModel> jobs  { get; set; }
+        public Dictionary<string, string> qualifications { get; set; }
+        public List<string> candidateUgQualification { get; set; }
+        public List<string> candidatePgQualification { get; set; }
+        public int totalExperience { get; set; }
+        public string selectedJobs { get; set; }
     }
 }

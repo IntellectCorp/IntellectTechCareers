@@ -5,6 +5,118 @@
     Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
 }
 
+<script type="text/javascript">
+
+    function apply_for_jobs()
+    {
+        var num_applied_jobs = 0;
+        var jobs = '';
+
+        $('#apply_job').find('input[type="checkbox"]:checked').each(function () {
+
+            num_applied_jobs = num_applied_jobs + 1;
+            console.log(this.id);
+
+            if (jobs !== '')
+                jobs = jobs + ',' + this.id;
+            else
+                jobs = this.id;
+        });
+
+        if (num_applied_jobs > 3)
+        {
+            document.getElementById('notification').style.display = "block";
+            return false;
+        }
+        else
+        {
+            alert(num_applied_jobs);
+
+            var model = { "selectedJobs": jobs };
+            alert(jobs);
+
+            var url = '@Url.Action("ApplyForJob", "Candidate")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: model,
+                success: function (retValue) {
+                }
+            });
+        }
+    }
 
 
+</script>
 
+<h3>Applicable Jobs</h3>
+
+@using (Html.BeginForm("JobApplicationSuccess", "Candidate", FormMethod.Post))
+{
+    <table id="apply_job">
+        <thead>
+            <tr>
+                <td></td>
+                <td><b>Job Id</b></td>
+                <td><b>Job Description</b></td>
+                <td><b>Qualification required</b></td>
+                <td><b>Vacancies</b></td>
+                <td><b>Minimum Experience</b></td>
+                <td><b>Maximum Experience</b></td>
+            </tr>
+        </thead>
+
+        @{
+            foreach(var item in Model.jobs)
+            {
+                List<string> allowedQualifications = item.Skills;
+                List<string> candidateUg = Model.candidateUgQualification;
+                List<string> candidatePg = Model.candidatePgQualification;
+            
+                        
+                if((item.MinExperience != 0 && Model.totalExperience < item.MinExperience) || (item.MaxExperience != 0 && Model.totalExperience > item.MaxExperience ))
+                {
+                    continue;                
+                }
+
+                IEnumerable<string> ugMatch = (IEnumerable<string>)allowedQualifications.Intersect(candidateUg);
+                IEnumerable<string> pgMatch = (IEnumerable<string>)allowedQualifications.Intersect(candidatePg);
+
+                if (ugMatch.Count() == 0 && pgMatch.Count() == 0)
+                {
+                    continue;
+                }
+            
+                <tr>
+                    <td><input type="checkbox" id='@item.jobId'/></td>
+                    <td>@item.jobId</td>
+                    <td>@item.JobDesc</td>
+                    <td>
+                        @{
+                            string[] skills = item.Skills.ToArray();
+                            for (int i = 0; i < skills.Length; i++)
+                            {
+                                @Model.qualifications[skills[i]] 
+                                if (i != skills.Length - 1)
+                                {
+                                    <font> , </font>
+                                }
+                            }
+                         }
+                    </td>
+                    <td>@item.Vacancies</td>
+                    <td>@item.MinExperience</td>
+                    <td>@item.MaxExperience</td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    <input type="submit" id="apply" onclick="apply_for_jobs()" value="Apply" />
+}
+    <div id="notification" style="display:none">
+        <h3><font color="red">
+             You can only apply for maximum of 3 jobs ! 
+        </font></h3>
+    </div>
