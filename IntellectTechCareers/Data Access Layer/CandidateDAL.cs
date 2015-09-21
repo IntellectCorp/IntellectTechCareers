@@ -145,5 +145,34 @@ namespace IntellectTechCareers.Data_Access_Layer
             command.ExecuteNonQuery();
             con.Close();
         }
+
+        public static List<JobModel> getApplicableJobs(int userId)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select job_id, job_description, job_role_id, skill_set, vacancies, " + 
+                "min_experience, max_experience, age_limit, posted_by from dbo.Jobs ", con);
+            command.ExecuteNonQuery();
+
+            SqlDataReader reader = command.ExecuteReader();
+            List<JobModel> jobs = new List<JobModel>();
+            while (reader.Read())
+            {
+                JobModel job = new JobModel();
+                job.jobId = reader.GetInt32(0);
+                job.JobDesc = reader.GetString(1);
+                job.JobRole = reader.GetInt32(2);
+                job.Skills = new List<string>(reader.GetString(3).Split(','));
+                job.Vacancies = reader.GetInt32(4);
+                job.MinExperience = reader.GetInt32(5);
+                job.MaxExperience = reader.GetInt32(6);
+
+                jobs.Add(job);
+            }
+
+            con.Close();
+            return jobs;
+        }
     }
 }
