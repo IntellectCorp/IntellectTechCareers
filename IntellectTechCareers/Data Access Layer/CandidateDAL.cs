@@ -145,5 +145,18 @@ namespace IntellectTechCareers.Data_Access_Layer
             command.ExecuteNonQuery();
             con.Close();
         }
+
+        public static void getApplicableJobs(string userId)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select * from dbo.Jobs ", con);
+            
+
+
+            command.ExecuteNonQuery();
+            con.Close();
+        }
     }
 }
