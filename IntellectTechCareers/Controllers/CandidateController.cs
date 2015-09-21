@@ -61,7 +61,19 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ViewJobDetails()
         {
-            return View(Session["user"]);
+            User user = (User)Session["user"];
+            List<JobModel> jobs = CandidateDAL.getApplicableJobs(user.user_id);
+
+            JobViewModel jobViewModel = new JobViewModel();
+            jobViewModel.jobs = jobs;
+
+            return View(jobViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ViewJobDetails(JobViewModel model)
+        {
+            return View();
         }
 
         public string UpdateExperienceInfo(ExperienceModel expModel)
