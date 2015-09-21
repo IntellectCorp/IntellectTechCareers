@@ -39,6 +39,19 @@ namespace IntellectTechCareers.Data_Access_Layer
             return listJobRole;
         }
 
+        public static List<Skill> getListOfSkills()
+        {
+            List<Skill> skills = new List<Skill>();
+            List<Qualification> qualifications = ASCommonDAL.getQualifications();
+            foreach (Qualification item in qualifications)
+            {
+                Skill skill = new Skill(item);
+                skill.Checked = false;
+                skills.Add(skill);
+            }
+            return skills;
+        }
+
         public static List<Qualification> getQualifications()
         {
             SqlConnection con = DBUtils.getDBConnection();
@@ -74,9 +87,16 @@ namespace IntellectTechCareers.Data_Access_Layer
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
+            List<Skill> selectedSkills = new List<Skill>();
+            foreach (var item in model.Skills)
+            {
+                if(item.Checked){
+                    selectedSkills.Add(item);
+                }
+            }
 
-            string skillSet = String.Join(",", model.Skills.Select(x => x.Id).ToArray());
-            SqlCommand command = new SqlCommand("insert into Job (job_description, job_role_id, skill,set, vacancies, min_experience, max_experience, age_limit, posted_by) values ('" + model.JobDesc + "', '" + model.JobRole + "', " + skillSet + ",'" + model.Vacancies + "', '" + model.MinExperience + "', '" + model.MaxExperience + "', '" + model.AgeLimit + "', '" + poster.user_id + ");", con);
+            string skillSet = String.Join(",", selectedSkills.Select(x => x.Id.ToString()).ToArray());
+            SqlCommand command = new SqlCommand("insert into Job (job_description, job_role_id, skill_set, vacancies, min_experience, max_experience, age_limit, posted_by) values ('" + model.JobDesc + "', " + model.JobRole + ", '" + skillSet + "'," + model.Vacancies + ", " + model.MinExperience + ", " + model.MaxExperience + ", " + model.AgeLimit + ", " + poster.user_id + ");", con);
             command.ExecuteNonQuery();
 
             con.Close();

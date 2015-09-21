@@ -26,7 +26,7 @@ namespace IntellectTechCareers.Controllers
                 else if (role.Equals("manager"))
                     return View("ManagerHome", AdminDAL.getManagerHome());
                 else if (role.Equals("staff"))
-                    return View("StaffHome");
+                    return View("StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
                 else if (role.Equals("interviewer"))
                     return View("InterviewerHome");
                 else

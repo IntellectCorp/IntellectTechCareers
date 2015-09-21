@@ -15,7 +15,8 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
-            return View("StaffHome");
+            //return View("StaffHome");
+            return View("Home/StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
         }
 
         public ActionResult PostJob()
@@ -30,7 +31,7 @@ namespace IntellectTechCareers.Controllers
             //            new JobRole {Id = 3, Name = "Chyo"}
             //            };
             model.JobRoles = ASCommonDAL.getJobRoles();
-            model.Skills = getListOfSkills();
+            model.Skills = ASCommonDAL.getListOfSkills();
             return View(model);
         }
 
@@ -38,25 +39,16 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult PostJob(Job model)
         {
-            string desc = model.JobDesc;
-            string role = model.JobRole;
+            User user = ((User)Session["user"]);
+            ASCommonDAL.postJobinDB(model,user);
+            //string desc = model.JobDesc;
+            //string role = model.JobRole;
             @ViewBag.Message = "Job Posted !";
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             return View("Message");
             //return RedirectToAction("Index","Home");
         }
-        public List<Skill> getListOfSkills()
-        {
-            List<Skill> skills = new List<Skill>();
-            List<Qualification> qualifications = ASCommonDAL.getQualifications();
-            foreach (Qualification item in qualifications)
-            {
-                Skill skill = new Skill(item);
-                skill.Checked = false;
-                skills.Add(skill);
-            }
-            return skills;
-        }
+        
         //public Dictionary<int, string> getListOfSkills()
         //{
         //    Dictionary<int, string> skills = new Dictionary<int, string>();

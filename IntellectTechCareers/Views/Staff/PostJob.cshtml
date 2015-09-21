@@ -49,16 +49,12 @@
             @Html.LabelFor(model => model.Skills)
         </div>
         <div class="editor-field">
-            @*Html.DropDownListFor(model => model.JobRole, new SelectList(new List<Object>{
-                        new {value = "sd", text = "Cho"},
-                        new {value = "sdd", text = "Cho"},
-                        new {value = "sddd", text = "Cho"},
-                        new {value = "sdddd", text = "Cho"}
-                        }, "value", "text", 0))*@
             @*Html.EditorFor(model => model.JobRole)*@
             @for (int i = 0; i < Model.Skills.Count; i++)
             {
-                
+                @Html.HiddenFor(model => model.Skills[i].Id)
+                @Html.HiddenFor(model => model.Skills[i].Name)
+                @Html.HiddenFor(model => model.Skills[i].Type)
                 @Html.CheckBoxFor(model => model.Skills[i].Checked, Model.Skills[i].Id)
                 @Html.LabelFor(model => model.Skills[i],  Model.Skills[i].Name+"  ", new { @class = "checkbox" })
              }
