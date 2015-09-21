@@ -1,0 +1,45 @@
+﻿@model IntellectTechCareers.Models.Qualification
+
+@{
+    ViewBag.Title = "AddQualification";
+    Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+}
+
+<h2>Add Qualification</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Qualification</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="inline-label">
+            @Html.LabelFor(model => model.Type)
+
+            @Html.DropDownListFor(model => model.Type, new SelectList(new List<Object>{
+                        new {value = "UG", text = "UG"},
+                        new {value = "PG", text = "PG"}
+                        }, "value", "text", 0))
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+        <p>
+            <input type="submit" value="Add" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

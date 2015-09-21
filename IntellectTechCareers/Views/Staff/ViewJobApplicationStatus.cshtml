@@ -1,0 +1,45 @@
+﻿@model IntellectTechCareers.Models.ApplicantListModel
+
+@{
+    ViewBag.Title = "ViewJobApplicationStatus";
+    if (ViewBag.Layout != null)
+    {
+        Layout = ViewBag.Layout;//"~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#candidateList").change(function () {
+
+            var JobApplicationStatusDiv = $("#JobApplicationStatus");
+            var id = $("#CandidateId").val();
+            var model = { "CandidateId": id };
+            var url = '@Url.Action("ViewJobApplicationStatus", "Staff")'
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: url,
+                data: model,
+                success: function (retValue) {
+                    JobApplicationStatusDiv.html(retValue);
+                }
+            });
+        });
+    });
+</script>
+<h2>View Job Application Status</h2>
+<br />
+@using (Html.BeginForm())
+{    <div class="inline-label" id="candidateList">
+        @Html.LabelFor(model => model.CandidateId)
+        @Html.DropDownListFor(model => model.CandidateId, new SelectList(Model.CandidateIdList))
+        @Html.ValidationMessageFor(model => model.CandidateId)
+    </div>
+}
+<div id="JobApplicationStatus" style="display: block;">
+</div>

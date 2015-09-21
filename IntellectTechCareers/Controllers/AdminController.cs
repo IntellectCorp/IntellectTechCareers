@@ -20,7 +20,36 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult AddJobRoles()
         {
-            return View("ManagerHome", AdminDAL.getManagerHome());
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult AddJobRoles(JobRole model)
+        {
+            AdminDAL.addNewJobRole(model);
+         
+            @ViewBag.Message = "Job Role - "+model.Name+" Added !";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("Message");
+            //return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult AddQualification()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult AddQualification(Qualification model)
+        {
+            AdminDAL.addNewQualification(model);
+
+            @ViewBag.Message = "New Qualification - " + model.Name + " Added !";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("Message");
+            //return RedirectToAction("Index","Home");
         }
 
         public ActionResult PostJob()
@@ -45,6 +74,21 @@ namespace IntellectTechCareers.Controllers
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             return View("Message");
             //return RedirectToAction("Index","Home");
+        }
+        public ActionResult ViewJobApplicationStatus()
+        {
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            //int user_id = ((User)Session["user"]).user_id;
+            //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
+            return View("../Staff/ViewJobApplicationStatus", ASCommonDAL.getApplicantList());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ViewJobApplicationStatus(ApplicantListModel model)
+        {
+            IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetails(model.CandidateId);
+            return PartialView("_PartialJobApplicationStatus", data);
         }
     }
 }

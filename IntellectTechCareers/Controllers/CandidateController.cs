@@ -110,5 +110,12 @@ namespace IntellectTechCareers.Controllers
             CandidateDAL.addExperienceDetails(expModel);
             return "";
         }
+
+        public ActionResult ViewJobStatus()
+        {
+            int user_id = ((User)Session["user"]).user_id;
+            List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
+            return View(model);
+        }
     }
 }

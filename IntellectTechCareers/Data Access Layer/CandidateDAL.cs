@@ -40,7 +40,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             foreach (var item in ugList)
             {
                 if(item.Length > 0)
-                    can.ugQualifications.Add(item);
+                can.ugQualifications.Add(item);
             }
 
             String[] pgList = Convert.ToString(reader[8]).Split(',');
@@ -48,7 +48,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             foreach (var item in pgList)
             {
                 if (item.Length > 0)
-                    can.pgQualifications.Add(item);
+                can.pgQualifications.Add(item);
             }
 
             con.Close();
@@ -131,7 +131,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             {
                 graduation += "," + candidate.newUgQualification;
             }
-
+   
             if (post_graduation.Equals("") && !candidate.newPgQualification.Equals("0"))
             {
                 post_graduation = candidate.newPgQualification;

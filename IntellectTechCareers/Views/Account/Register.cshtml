@@ -1,4 +1,5 @@
 ﻿@model IntellectTechCareers.Models.RegisterModel
+
 @{
     ViewBag.Title = "Register";
 }
@@ -59,13 +60,13 @@
                 @Html.RadioButtonFor(m => m.gender,"female") Female
             </li>
             <li>
-
+                @Html.LabelFor(m => m.dob)
                 @Html.TextBoxFor(model => model.dob, new { type = "date" })
 
             </li>
             <li>
                 @Html.LabelFor(m => m.Address)
-                @Html.TextBoxFor(m => m.Address)
+                @Html.TextAreaFor(m => m.Address)
             </li>
         </ol>
         <input type="submit" value="Sign up" />
