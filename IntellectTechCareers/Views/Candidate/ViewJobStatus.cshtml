@@ -42,7 +42,7 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Date.Date)
+            @Html.DisplayFor(modelItem => item.Date.ToShortDateString())
         </td>
     </tr>
 }
