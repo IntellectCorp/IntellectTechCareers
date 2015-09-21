@@ -79,6 +79,8 @@ namespace IntellectTechCareers.Controllers
             jobViewModel.candidateUgQualification = candidate.ugQualifications;
             jobViewModel.candidatePgQualification = candidate.pgQualifications;
             jobViewModel.totalExperience = totalExperience;
+            jobViewModel.jobsAlreadyApplied = CandidateDAL.getNumJobsAppliedFor(user.user_id);
+            jobViewModel.appliedJobs = CandidateDAL.getAppliedJobs(user.user_id);
 
             return View(jobViewModel);
         }
@@ -97,14 +99,6 @@ namespace IntellectTechCareers.Controllers
             return View("JobApplicationSuccess");
         }
 
-        //[HttpPost]
-        //public int CheckAppliedJobs()
-        //{
-        //    User user = (User)Session["user"];
-        //    int jobs = CandidateDAL.getNumJobsAppliedFor(user.user_id);
-        //    return jobs;
-        //}
-
         public string UpdateExperienceInfo(ExperienceModel expModel)
         {
             CandidateDAL.addExperienceDetails(expModel);
@@ -116,6 +110,26 @@ namespace IntellectTechCareers.Controllers
             int user_id = ((User)Session["user"]).user_id;
             List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
             return View(model);
+        }
+
+        public ActionResult GetCandidateEducationDetails()
+        {
+            int user_id = ((User)Session["user"]).user_id;
+
+            QualificationViewModel viewModel = new QualificationViewModel();
+            viewModel.qualifications = CandidateDAL.getCandidateEducationDetails(user_id);
+
+            return Json(viewModel);
+        }
+
+        public ActionResult GetCandidateExperienceDetails()
+        {
+            int user_id = ((User)Session["user"]).user_id;
+
+            ExperienceViewModel viewModel = new ExperienceViewModel();
+            viewModel.experience = CandidateDAL.getCandidateExperienceDetails(user_id);
+
+            return Json(viewModel);
         }
     }
 }

@@ -642,6 +642,16 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+.alt-rows thead tr td{
+    background-color: #FFEBD6;
+}
+
+.alt-rows tr td{
+    padding-left:7px;
+    padding-top:7px;
+    background-color: #FFFCF9;
+}
+
 
 /********************
 *   Mobile Styles   *

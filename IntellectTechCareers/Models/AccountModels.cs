@@ -203,6 +203,16 @@ namespace IntellectTechCareers.Models
         public List<SelectListItem> ugList;
         public List<SelectListItem> pgList;
     }
+
+    public class QualificationViewModel
+    {
+        public List<QualificationModel> qualifications { get; set; }
+    }
+
+    public class ExperienceViewModel
+    {
+        public List<ExperienceModel> experience { get; set; }
+    }
 }
 
 //Microsoft enterprice library version 5

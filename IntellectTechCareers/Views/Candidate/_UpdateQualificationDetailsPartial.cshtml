@@ -23,6 +23,32 @@
             data: model,
             success: function (retValue) {
                 document.getElementById('add_edu_details').style.display = "none";
+
+                //AJAX call to refresh the grid
+                var url1 = '@Url.Action("GetCandidateEducationDetails", "Candidate")'
+
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    success: function (obj) {
+
+                        var htmlString = '<table>';
+                        htmlString += '<thead><tr>';
+                        htmlString += '<td><b>Graduation type</b></td>';
+                        htmlString += '<td><b>Qualification</b></td>';
+                        htmlString += '</tr></thead>';
+                        for(var i=0 ; i<obj.qualifications.length; i++)
+                        {
+                            htmlString += '<tr>';
+                            htmlString += '<td>' + obj.qualifications[i].type + '</td>';
+                            htmlString += '<td>' + obj.qualifications[i].qualification + '</td>';
+                            htmlString += '</tr>'
+                        }
+                        htmlString += '</table>';
+                        var div_elem = document.getElementById('education_details_div');
+                        div_elem.innerHTML = htmlString;
+                    }
+                });
             }
         });
 
@@ -30,7 +56,7 @@
     }
 </script>
 
-<table >
+<table>
 <tr>
     <td>Select your qualification and click on save to submit</td>
     <td>@Html.DropDownListFor(model => model.newUgQualification, new SelectList(ViewBag.ugListData, "Value", "Text"))</td>

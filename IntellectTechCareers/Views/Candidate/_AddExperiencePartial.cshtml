@@ -51,7 +51,39 @@
             url: url,
             data: model,
             success: function (retValue) {
+
                 document.getElementById('experience_details').style.display = "none";
+
+                //AJAX call to refresh the grid
+                var url1 = '@Url.Action("GetCandidateExperienceDetails", "Candidate")'
+
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    success: function (obj) {
+
+                        var htmlString = '<table>';
+                        htmlString += '<thead><tr>';
+                        htmlString += '<td><b>Company</b></td>';
+                        htmlString += '<td><b>Designation</b></td>';
+                        htmlString += '<td><b>Experience in months</b></td>';
+                        htmlString += '</tr></thead>';
+
+                        for (var i = 0 ; i < obj.experience.length; i++) {
+                            htmlString += '<tr>';
+                            htmlString += '<td>' + obj.experience[i].company + '</td>';
+                            htmlString += '<td>' + obj.experience[i].designation + '</td>';
+                            htmlString += '<td>' + obj.experience[i].experience + '</td>';
+                            htmlString += '</tr>';
+                        }
+                        htmlString += '</table>'
+                        var div_elem = document.getElementById('experience_details_div');
+                        div_elem.innerHTML = htmlString;
+                    }
+                });
+
+
+
             }
         });
     }

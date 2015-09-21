@@ -44,5 +44,7 @@ namespace IntellectTechCareers.Models
         public List<string> candidatePgQualification { get; set; }
         public int totalExperience { get; set; }
         public string selectedJobs { get; set; }
+        public int jobsAlreadyApplied { get; set; }
+        public List<int> appliedJobs { get; set; }
     }
 }

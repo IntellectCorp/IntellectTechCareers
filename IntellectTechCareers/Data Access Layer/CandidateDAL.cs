@@ -259,6 +259,25 @@ namespace IntellectTechCareers.Data_Access_Layer
             return numJobsAppliedFor;
         }
 
+        public static List<int> getAppliedJobs(int candidate_id)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select job_id from dbo.Application where candidate_id = " + candidate_id, con);
+            command.ExecuteNonQuery();
+
+            List<int> appliedJobs = new List<int>();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                appliedJobs.Add(reader.GetInt32(0));
+            }
+
+            con.Close();
+            return appliedJobs;
+        }
+
         public static void ApplyForJobs(string jobs, int user_id)
         {
             SqlConnection con = DBUtils.getDBConnection();
@@ -267,7 +286,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             foreach (var item in jobs.Split(','))
             {
                 SqlCommand command = new SqlCommand(" insert into dbo.Application (candidate_id, job_id, status_code, status, app_date) values " + 
-                    " (" + user_id + ", " + Convert.ToInt32(item) + ", 'A', 'Applied', " + DateTime.Today + "') ", con);
+                    " (" + user_id + ", " + Convert.ToInt32(item) + ", 'A', 'Applied', '" + DateTime.Today + "') ", con);
                 command.ExecuteNonQuery();
             }
             
@@ -301,6 +320,50 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
 
             return data;
+        }
+
+        public static List<QualificationModel> getCandidateEducationDetails(int user_id)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select graduation, post_graduation from dbo.Applicant where candidate_id=" + user_id + ";", con);
+            command.ExecuteNonQuery();
+
+            Dictionary<string, string> idToName = getQualificationsIdToName();
+
+            List<QualificationModel> qualifications = new List<QualificationModel>();
+            SqlDataReader reader = command.ExecuteReader();
+            if(reader.Read())
+            {
+                string ug = reader.GetString(0);
+                string pg = reader.GetString(1);
+
+                foreach (var item in ug.Split(','))
+                {
+                    QualificationModel model = new QualificationModel();
+                    model.qualification_id = Convert.ToInt32(item);
+                    model.qualification = idToName[item];
+                    model.type = "UG";
+
+                    qualifications.Add(model);
+                }
+
+                foreach (var item in pg.Split(','))
+                {
+                    QualificationModel model = new QualificationModel();
+                    model.qualification_id = Convert.ToInt32(item);
+                    model.qualification = idToName[item];
+                    model.type = "PG";
+
+                    qualifications.Add(model);
+                }
+
+            }
+            reader.Close();
+            con.Close();
+
+            return qualifications;
         }
     }
 }

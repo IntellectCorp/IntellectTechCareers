@@ -123,34 +123,37 @@
 <hr />
 <h3>Education details</h3>
 
-<table>
-    <thead>
-        <tr>
-            <td><b>Graduation type</b></td>
-            <td><b>Qualification</b></td>
-        </tr>
-    </thead>
+<div id="education_details_div">
+    <table class="alt-rows">
+        <thead>
+            <tr>
+                <td><b>Graduation type</b></td>
+                <td><b>Qualification</b></td>
+            </tr>
+        </thead>
 
-@{
+    @{
     
-    Dictionary<string, string> idToName = IntellectTechCareers.Data_Access_Layer.CandidateDAL.getQualificationsIdToName();
-    foreach (var item in Model.ugQualifications)
-    {
-        <tr>
-            <td>UG</td>
-            <td>@idToName[item]</td>
-        </tr>        
-    }
+        Dictionary<string, string> idToName = IntellectTechCareers.Data_Access_Layer.CandidateDAL.getQualificationsIdToName();
+        foreach (var item in Model.ugQualifications)
+        {
+            <tr>
+                <td>UG</td>
+                <td>@idToName[item]</td>
+            </tr>        
+        }
 
-    foreach (var item in Model.pgQualifications)
-    {
-        <tr>
-            <td>PG</td>
-            <td>@idToName[item]</td>
-        </tr>        
+        foreach (var item in Model.pgQualifications)
+        {
+            <tr>
+                <td>PG</td>
+                <td>@idToName[item]</td>
+            </tr>        
+        }
     }
-}
-</table>
+    </table>
+</div>
+
 <br />
 
 <a href="javascript:enable_add_detail_div()" >Add education detail</a>
@@ -164,25 +167,26 @@
 <h3>Experience details</h3>
 
 @{
-    
-    <table>
-        <thead>
-            <tr>
-                <td><b>Company</b></td>
-                <td><b>Designation</b></td>
-                <td><b>Experience in months</b></td>
-            </tr>
-        </thead>
+    <div id="experience_details_div">
+        <table class="alt-rows">
+            <thead>
+                <tr>
+                    <td><b>Company</b></td>
+                    <td><b>Designation</b></td>
+                    <td><b>Experience in months</b></td>
+                </tr>
+            </thead>
 
-        @foreach (var item in Model.experienceDetails)
-        {
-            <tr>
-                <td>@item.company</td>
-                <td>@item.designation</td>
-                <td>@item.experience</td>
-            </tr>        
-        }
-    </table>  
+            @foreach (var item in Model.experienceDetails)
+            {
+                <tr>
+                    <td>@item.company</td>
+                    <td>@item.designation</td>
+                    <td>@item.experience</td>
+                </tr>        
+            }
+        </table>  
+    </div>
 }
 <br />
 <a href="javascript:enable_add_exp()" >Add experience</a>

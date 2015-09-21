@@ -23,37 +23,47 @@
                 jobs = this.id;
         });
 
-        if (num_applied_jobs > 3)
+        if (num_applied_jobs === 0)
+        {
+            var notification_div = document.getElementById('notification');
+            notification_div.style.display = "block";
+            notification_div.innerHTML = "<h3><font color='red'>Please select atleast one job to apply !</font></h3>";
+            return false;
+        }
+
+        var jobs_already_applied = document.getElementById('already_applied_jobs');
+        alert(jobs_already_applied.value);
+        alert(num_applied_jobs);
+
+        if (parseInt(num_applied_jobs) + parseInt(jobs_already_applied.value) > 3)
         {
             document.getElementById('notification').style.display = "block";
             return false;
         }
         else
         {
-            alert(num_applied_jobs);
-
             var model = { "selectedJobs": jobs };
-            alert(jobs);
-
             var url = '@Url.Action("ApplyForJob", "Candidate")';
             $.ajax({
                 type: "POST",
                 url: url,
                 data: model,
                 success: function (retValue) {
+
                 }
             });
+            return true;
         }
     }
-
-
 </script>
 
 <h3>Applicable Jobs</h3>
 
 @using (Html.BeginForm("JobApplicationSuccess", "Candidate", FormMethod.Post))
 {
-    <table id="apply_job">
+    <input type="hidden" id='already_applied_jobs' value='@Model.jobsAlreadyApplied' />
+    
+    <table id="apply_job" class="alt-rows">
         <thead>
             <tr>
                 <td></td>
@@ -86,6 +96,11 @@
                 {
                     continue;
                 }
+
+                if (Model.appliedJobs.Contains(item.jobId))
+                {
+                    continue;
+                }
             
                 <tr>
                     <td><input type="checkbox" id='@item.jobId'/></td>
@@ -113,10 +128,10 @@
 
     </table>
 
-    <input type="submit" id="apply" onclick="apply_for_jobs()" value="Apply" />
+    <input type="submit" id="apply" onclick="return apply_for_jobs()" value="Apply" />
 }
     <div id="notification" style="display:none">
         <h3><font color="red">
-             You can only apply for maximum of 3 jobs ! 
+             You can apply for a maximum of 3 jobs !
         </font></h3>
     </div>
