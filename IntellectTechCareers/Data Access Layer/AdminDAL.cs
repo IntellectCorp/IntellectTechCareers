@@ -71,5 +71,16 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
             return model;
         }
+
+        public static void addNewJobRole(JobRole jobRole)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("insert into JobRole ( job_role) values ( '" + jobRole.Name + "');", con);
+            command.ExecuteNonQuery();
+
+            con.Close();
+        }
     }
 }

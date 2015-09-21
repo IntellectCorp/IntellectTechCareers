@@ -20,7 +20,19 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult AddJobRoles()
         {
-            return View("ManagerHome", AdminDAL.getManagerHome());
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult AddJobRoles(JobRole model)
+        {
+            AdminDAL.addNewJobRole(model);
+         
+            @ViewBag.Message = "Job Role - "+model.Name+" Added !";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("Message");
+            //return RedirectToAction("Index","Home");
         }
 
         public ActionResult PostJob()

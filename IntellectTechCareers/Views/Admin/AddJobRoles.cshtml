@@ -1,0 +1,35 @@
+﻿@model IntellectTechCareers.Models.JobRole
+
+@{
+    ViewBag.Title = "AddJobRoles";
+    Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+}
+
+<h2>Add Job Roles</h2>
+<br />
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>JobRole</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <p>
+            <input type="submit" value="Add" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
