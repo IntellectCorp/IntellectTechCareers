@@ -273,5 +273,34 @@ namespace IntellectTechCareers.Data_Access_Layer
             
             con.Close();
         }
+
+        public static List<ApplicationModel> getApplicationDetails(int user_id)
+        {
+            List<ApplicationModel> data = new List<ApplicationModel>();
+
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" SELECT app_id, candidate_id, job_id, status_code, status, app_date FROM dbo.Application WHERE candidate_id=" + user_id + ";", con);
+            command.ExecuteNonQuery();
+
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ApplicationModel model = new ApplicationModel();
+                model.AppId = reader.GetInt32(0);
+                model.CandidateId = reader.GetInt32(1);
+                model.JobId = reader.GetInt32(2);
+                model.StatusCode = reader.GetString(3);
+                model.Status = reader.GetString(4);
+                model.Date = reader.GetDateTime(5);
+
+                data.Add(model);
+            }
+            reader.Close();
+            con.Close();
+
+            return data;
+        }
     }
 }
