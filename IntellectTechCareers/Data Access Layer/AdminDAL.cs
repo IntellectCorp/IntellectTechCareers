@@ -23,7 +23,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             {
                 return null;
             }
-            model.TotalJobs = Convert.ToString(reader[0]);
+            model.TotalJobs = Convert.ToInt32(reader[0]);
             reader.Close();
 
             command = new SqlCommand("select COUNT(1) from dbo.Results ;", con);
@@ -33,7 +33,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             {
                 return null;
             }
-            model.TotalResults = Convert.ToString(reader[0]);
+            model.TotalResults = Convert.ToInt32(reader[0]);
             reader.Close();
 
             command = new SqlCommand("select COUNT(1) from dbo.Interview ;", con);
@@ -43,29 +43,31 @@ namespace IntellectTechCareers.Data_Access_Layer
             {
                 return null;
             }
-            model.TotalScheduledInterview = Convert.ToString(reader[0]);
+            model.TotalScheduledInterview = Convert.ToInt32(reader[0]);
             reader.Close();
 
-            command = new SqlCommand("select COUNT(DISTINCT job_id) from dbo.Application WHERE status_code=3;", con);
-            reader = command.ExecuteReader();
+            //command = new SqlCommand("select COUNT(DISTINCT job_id) from dbo.Application WHERE status_code=3;", con);
+            //reader = command.ExecuteReader();
 
-            if (reader == null || !reader.Read())
-            {
-                return null;
-            }
-            model.ResultsNotReleased = Convert.ToString(reader[0]);
-            reader.Close();
+            //if (reader == null || !reader.Read())
+            //{
+            //    return null;
+            //}
+            //model.ResultsNotReleased = Convert.ToString(reader[0]);
+            //reader.Close();
 
-            command = new SqlCommand("select COUNT(DISTINCT job_id) from dbo.Application WHERE status_code=1;", con);
-            reader = command.ExecuteReader();
+            //command = new SqlCommand("select COUNT(DISTINCT job_id) from dbo.Application WHERE status_code=1;", con);
+            //reader = command.ExecuteReader();
 
-            if (reader == null || !reader.Read())
-            {
-                return null;
-            }
-            model.UnscheduledInterviewJobs = Convert.ToString(reader[0]);
-            reader.Close();
+            //if (reader == null || !reader.Read())
+            //{
+            //    return null;
+            //}
+            //model.UnscheduledInterviewJobs = Convert.ToString(reader[0]);
+            //reader.Close();
 
+            model.UnscheduledInterviewJobs = model.TotalJobs - model.TotalScheduledInterview;
+            model.ResultsNotReleased = model.TotalScheduledInterview - model.TotalResults ;
             con.Close();
             return model;
         }
