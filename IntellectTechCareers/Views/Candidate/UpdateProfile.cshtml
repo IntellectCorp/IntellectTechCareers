@@ -136,7 +136,7 @@
     
         Dictionary<string, string> idToName = IntellectTechCareers.Data_Access_Layer.CandidateDAL.getQualificationsIdToName();
         foreach (var item in Model.ugQualifications)
-        {
+        {            
             <tr>
                 <td>UG</td>
                 <td>@idToName[item]</td>

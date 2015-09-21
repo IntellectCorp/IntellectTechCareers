@@ -36,6 +36,12 @@ namespace IntellectTechCareers.Controllers
 
             foreach (var item in qualifications)
             {
+                if (candidate.ugQualifications.Contains(Convert.ToString(item.qualification_id)))
+                    continue;
+
+                if (candidate.pgQualifications.Contains(Convert.ToString(item.qualification_id)))
+                    continue;
+
                 if (item.type.Equals("UG"))
                     ugQualifications.Add(new SelectListItem { Text = item.qualification, Value = item.qualification });
                 else
