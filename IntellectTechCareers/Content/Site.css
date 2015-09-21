@@ -470,6 +470,14 @@ label.checkbox {
     width: 30px;
 }
 
+.inline-label label {
+    display: inline;
+}
+
+.inline-label input  {
+    width: 30px;
+}
+
 input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;

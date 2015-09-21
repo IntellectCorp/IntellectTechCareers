@@ -26,4 +26,11 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Application Date")]
         public DateTime Date { get; set; }
     }
+
+    public class ApplicantListModel
+    {
+        [Display(Name = "Candidate")]
+        public int CandidateId { get; set; }
+        public List<int> CandidateIdList { get; set; }
+    }
 }

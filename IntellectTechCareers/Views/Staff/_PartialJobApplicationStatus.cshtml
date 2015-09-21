@@ -1,0 +1,50 @@
+﻿@model IEnumerable<IntellectTechCareers.Models.ApplicationModel>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandidateId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CandidateId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+    </tr>
+}
+
+</table>
+

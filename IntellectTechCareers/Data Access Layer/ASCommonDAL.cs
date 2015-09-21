@@ -101,5 +101,32 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             con.Close();
         }
+
+        public static ApplicantListModel getApplicantList()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select candidate_id from dbo.Applicant;", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+
+            //Creating a JobRole List
+            List<int> listApplicant = new List<int>();
+            do
+            { 
+                listApplicant.Add(Convert.ToInt32(reader[0]));
+            }
+            while (reader.Read());
+
+            con.Close();
+            ApplicantListModel model = new ApplicantListModel();
+            model.CandidateIdList = listApplicant;
+            return model;
+        }
     }
 }

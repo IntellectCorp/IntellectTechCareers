@@ -232,6 +232,8 @@
     <Content Include="Views\Shared\_LayoutPageCandidate.cshtml" />
     <Content Include="Views\Admin\AddJobRoles.cshtml" />
     <Content Include="Views\Candidate\ViewJobStatus.cshtml" />
+    <Content Include="Views\Staff\ViewJobApplicationStatus.cshtml" />
+    <Content Include="Views\Staff\_PartialJobApplicationStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

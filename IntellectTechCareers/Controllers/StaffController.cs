@@ -69,5 +69,21 @@ namespace IntellectTechCareers.Controllers
         //    }
         //    return skills;
         //}
+
+        public ActionResult ViewJobApplicationStatus()
+        {
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            //int user_id = ((User)Session["user"]).user_id;
+            //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
+            return View(ASCommonDAL.getApplicantList());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ViewJobApplicationStatus(ApplicantListModel model)
+        {
+            IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetails(model.CandidateId);
+            return PartialView("_PartialJobApplicationStatus",data);
+        }
     }
 }

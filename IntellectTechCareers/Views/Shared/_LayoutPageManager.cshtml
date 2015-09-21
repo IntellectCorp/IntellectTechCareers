@@ -98,7 +98,7 @@
                             <li>@Html.ActionLink("Reports", "About", "Home")
                                 <ul>
                                     <li><a href="#">Staff Responsiblities</a></li>
-                                    <li><a href="#">Job Application Status</a></li>
+                                    <li>@Html.ActionLink("Job Application Status", "ViewJobApplicationStatus", "Admin")</li>
                                     <li><a href="#">Applications By JobId</a></li>
                                     <li><a href="#">Selected Applicant Details</a></li>
                                     <li><a href="#">Blocked Applicant Details</a></li>
@@ -130,7 +130,7 @@
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - Intellect Technologies.</p>
+                <p style="color:white;">&copy; @DateTime.Now.Year - Intellect Technologies.</p>
             </div>
         </div>
     </footer>
