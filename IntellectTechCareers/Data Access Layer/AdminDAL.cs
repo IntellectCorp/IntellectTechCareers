@@ -67,7 +67,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             //reader.Close();
 
             model.UnscheduledInterviewJobs = model.TotalJobs - model.TotalScheduledInterview;
-            model.ResultsNotReleased = model.TotalScheduledInterview - model.TotalResults ;
+            model.ResultsNotReleased = model.TotalScheduledInterview - model.TotalResults;
             con.Close();
             return model;
         }
@@ -78,6 +78,17 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Open();
 
             SqlCommand command = new SqlCommand("insert into JobRole ( job_role) values ( '" + jobRole.Name + "');", con);
+            command.ExecuteNonQuery();
+
+            con.Close();
+        }
+
+        public static void addNewQualification(Qualification model)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("insert into Qualification ( qualification, type) values ( '" + model.Name + "', '" + model.Type + "');", con);
             command.ExecuteNonQuery();
 
             con.Close();

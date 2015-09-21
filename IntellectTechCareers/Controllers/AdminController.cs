@@ -35,6 +35,23 @@ namespace IntellectTechCareers.Controllers
             //return RedirectToAction("Index","Home");
         }
 
+        public ActionResult AddQualification()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult AddQualification(Qualification model)
+        {
+            AdminDAL.addNewQualification(model);
+
+            @ViewBag.Message = "New Qualification - " + model.Name + " Added !";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("Message");
+            //return RedirectToAction("Index","Home");
+        }
+
         public ActionResult PostJob()
         {
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
@@ -60,7 +77,7 @@ namespace IntellectTechCareers.Controllers
         }
         public ActionResult ViewJobApplicationStatus()
         {
-            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             //int user_id = ((User)Session["user"]).user_id;
             //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
             return View("../Staff/ViewJobApplicationStatus", ASCommonDAL.getApplicantList());
