@@ -1,9 +1,11 @@
-﻿@{
-    ViewBag.Title = "CandidateHome";
+﻿
+@{
+    ViewBag.Title = "Candidate Home";
     IntellectTechCareers.Models.User user = (IntellectTechCareers.Models.User)Session["user"];
+    Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
 }
 
-<h2>Candidate dashboard</h2>
+<h2>Candidate Dashboard</h2>
 
 <h3>Welcome,  @user.name </h3>
 <br />
