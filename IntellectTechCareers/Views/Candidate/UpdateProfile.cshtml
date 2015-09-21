@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "UpdateProfile";
+    Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
 }
 
 <script type="text/javascript">
@@ -153,7 +154,7 @@
 <a href="javascript:enable_add_detail_div()" >Add education detail</a>
 
 <div id="add_edu_details" style="display:none;">   
-    @Html.Partial("UpdateQualificationDetails", Model)
+    @Html.Partial("_UpdateQualificationDetailsPartial", Model)
     <input type="button" onclick="hide_div('add_edu_details')" value="Cancel" />
 </div>
 
@@ -185,6 +186,6 @@
 <a href="javascript:enable_add_exp()" >Add experience</a>
 
 <div id="experience_details" style="display:none;">
-    @Html.Partial("AddExperience", new IntellectTechCareers.Models.ExperienceModel() {user_id = Model.user_id })
+    @Html.Partial("_AddExperiencePartial", new IntellectTechCareers.Models.ExperienceModel() {user_id = Model.user_id })
     <input type="button" onclick="hide_div('experience_details')" value="Cancel" />
 </div>

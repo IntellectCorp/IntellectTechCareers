@@ -226,8 +226,9 @@
     <Content Include="Views\Shared\_PartialBlank.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\Home\LoginFailed.cshtml" />
-    <Content Include="Views\Candidate\AddExperience.cshtml" />
-    <Content Include="Views\Candidate\UpdateQualificationDetails.cshtml" />
+    <Content Include="Views\Candidate\_AddExperiencePartial.cshtml" />
+    <Content Include="Views\Candidate\_UpdateQualificationDetailsPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageCandidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

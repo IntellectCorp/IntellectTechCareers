@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Intellect Tech Careers</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+    @Scripts.Render("~/bundles/modernizr")
+    <script>
+        $(function () {
+            $("#dialog-message").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#modal-opener").click(function () {
+                $("#dialog-message").dialog("open");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.myMenu > li').bind('mouseover', openSubMenu);
+            $('.myMenu > li').bind('mouseout', closeSubMenu);
+
+            function openSubMenu() {
+                $(this).find('ul').css('visibility', 'visible');
+            };
+
+            function closeSubMenu() {
+                $(this).find('ul').css('visibility', 'hidden');
+            };
+        });
+    </script>
+</head>
+<body>
+    <div id="dialog-message" title="Modal Dialog">
+        <p>This is a Test Modal.</p>
+    </div>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="/Images/IntellectTech Logo.png" alt="" />
+                </a>
+                @*<p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>*@
+
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li><a href="#" id="modal-opener">Notifications</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="featured">
+            <div class="content-wrapper">
+                <hgroup class="title">
+                    <h1>Manager</h1>
+                    @*<h2>@ViewBag.Message</h2>*@
+                    <nav style="float: right;">
+                        <ul class="myMenu">
+                            <li>@Html.ActionLink("My DashBoard", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Candidate")</li>
+                            <li>@Html.ActionLink("Jobs", "About", "Home")
+                                <ul>
+                                    <li>@Html.ActionLink("Apply For Jobs", "ApplyForJob", "Candidate")</li>
+                                    <li>@Html.ActionLink("View Job Status", "ViewJobStatus", "Candidate")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Change My Password", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+                        </ul>
+                    </nav>
+                </hgroup>
+            </div>
+        </section>
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Intellect Technologies.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
