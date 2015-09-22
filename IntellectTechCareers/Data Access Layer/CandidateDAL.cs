@@ -116,11 +116,27 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlCommand command = new SqlCommand("select graduation, post_graduation from dbo.Applicant where candidate_id = " + candidate.user_id + ";" , con);
             SqlDataReader reader = command.ExecuteReader();
 
-            if(reader.Read())
+            if (reader.Read())
             {
-                graduation = reader.GetString(0);
-                post_graduation = reader.GetString(1);
+                try
+                {
+                    graduation = reader.GetString(0);
+                }
+                catch (Exception e)
+                {
+                    graduation = "";
+                }
+
+                try
+                {
+                    post_graduation = reader.GetString(1);
+                }
+                catch (Exception e)
+                {
+                    post_graduation = "";
+                }
             }
+                
             reader.Close();
 
             if (graduation.Equals("") && !candidate.newUgQualification.Equals("0"))
