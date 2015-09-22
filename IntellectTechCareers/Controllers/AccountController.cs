@@ -51,5 +51,10 @@ namespace IntellectTechCareers.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [HttpPost]
+        public string CheckUserNameAvailibility(RegisterModel user)
+        {
+            return AccountDAL.IsUserNameAvailable(user.UserName);
+        }
     }
 }

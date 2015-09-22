@@ -81,7 +81,7 @@ namespace IntellectTechCareers.Models
 
         [Required]
         [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [RegularExpression("(?=.*\\d)(?=.*[a-zA-Z]).{1,}", ErrorMessage = "Must have at least 1 digit and 1 alphabet")]
+        [RegularExpression("(?=.*\\d)(?=.*[a-zA-Z]).{1,}", ErrorMessage = "Password must have at least 1 digit and 1 alphabet")]
         [DataType(DataType.Password)]
         [Display(Name = "Password*")]
         //TODO : Must have one digit and one alphabet

@@ -69,5 +69,21 @@ namespace IntellectTechCareers.Utils
             command.ExecuteNonQuery();
             con.Close();
         }
+
+        public static string IsUserNameAvailable(string userName)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select count(*) from dbo.Users where username='" + userName + "';", con);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int num = Convert.ToInt32(reader[0]);
+            if (num == 0)
+                return "true";
+            else
+                return "false";
+        }
     }
 }
