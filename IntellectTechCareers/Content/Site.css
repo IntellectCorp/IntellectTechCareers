@@ -367,6 +367,18 @@ aside {
         width: 250px;
     }
 
+select {
+    border: 1px solid #93A9C8;
+    padding: 2px;
+    font-size: 1em;
+    color: #444;
+    width: 200px;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -o-border-radius: 3px 3px 3px 3px;
+}
+
     #loginForm input[type="checkbox"],
     #loginForm input[type="submit"],
     #loginForm input[type="button"],
