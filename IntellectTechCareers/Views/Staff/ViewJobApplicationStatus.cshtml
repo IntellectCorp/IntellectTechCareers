@@ -13,6 +13,24 @@
 }
 
 <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var JobApplicationStatusDiv = $("#JobApplicationStatus");
+        var id = $("#CandidateId").val();
+        var model = { "CandidateId": id };
+        var url = '@Url.Action("ViewJobApplicationStatus", "Staff")'
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: url,
+            data: model,
+            success: function (retValue) {
+                JobApplicationStatusDiv.html(retValue);
+            }
+        });
+    });
+
     $(document).ready(function () {
         $("#candidateList").change(function () {
 
@@ -31,6 +49,7 @@
             });
         });
     });
+
 </script>
 <h2>View Job Application Status</h2>
 <br />

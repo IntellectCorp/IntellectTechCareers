@@ -642,14 +642,30 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+.alt-rows {
+    border: 1px solid #333;
+}
 .alt-rows thead tr td{
+    padding-left:7px;
+    padding-top:7px;
     background-color: #FFEBD6;
+    border: 1px solid #333 !important;
+}
+
+.alt-rows tr th{
+    padding-left:7px;
+    padding-top:7px;
+    background-color: #FFEBD6;
+    border: 1px solid #333 !important;
+
 }
 
 .alt-rows tr td{
     padding-left:7px;
     padding-top:7px;
     background-color: #FFFCF9;
+    border-right: 1px solid #333;
+
 }
 
 

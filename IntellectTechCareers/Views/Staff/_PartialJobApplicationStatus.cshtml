@@ -1,47 +1,46 @@
 ﻿@model IEnumerable<IntellectTechCareers.Models.ApplicationModel>
 
-<table>
+<table class="alt-rows">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AppId)
+            <b>@Html.DisplayNameFor(model => model.AppId)</b>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CandidateId)
+            <b>@Html.DisplayNameFor(model => model.CandidateId)</b>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JobId)
+            <b>@Html.DisplayNameFor(model => model.JobName)</b>
         </th>
-        <th>
+       @* <th>
             @Html.DisplayNameFor(model => model.StatusCode)
+        </th>*@
+        <th>
+            <b>@Html.DisplayNameFor(model => model.Status)</b>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            <b>@Html.DisplayNameFor(model => model.Date)</b>
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AppId)
+            @Html.Label(item.AppId.ToString())
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CandidateId)
+            @Html.Label(item.CandidateId.ToString())
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JobId)
+            @Html.Label(item.JobName)
+        </td>
+      @*  <td>
+            @Html.Label(item.StatusCode)
+        </td>*@
+        <td>
+            @Html.Label(item.Status)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StatusCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date.ToShortDateString())
+            @Html.Label(item.Date.ToShortDateString())
         </td>
     </tr>
 }

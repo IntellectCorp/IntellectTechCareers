@@ -300,7 +300,10 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
-            SqlCommand command = new SqlCommand(" SELECT app_id, candidate_id, job_id, status_code, status, app_date FROM dbo.Application WHERE candidate_id=" + user_id + ";", con);
+            SqlCommand command = new SqlCommand(
+                " SELECT a.app_id, a.candidate_id, a.job_id, a.status_code, a.status, a.app_date, j.job_description " +
+                " FROM dbo.Application a inner join dbo.Job j on a.job_id = j.job_id" + 
+                " WHERE candidate_id=" + user_id + ";", con);
             command.ExecuteNonQuery();
 
             SqlDataReader reader = command.ExecuteReader();
@@ -313,6 +316,7 @@ namespace IntellectTechCareers.Data_Access_Layer
                 model.StatusCode = reader.GetString(3);
                 model.Status = reader.GetString(4);
                 model.Date = reader.GetDateTime(5);
+                model.JobName = reader.GetString(6);
 
                 data.Add(model);
             }

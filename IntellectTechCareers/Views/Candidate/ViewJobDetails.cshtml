@@ -57,7 +57,7 @@
     }
 </script>
 
-<h3>Applicable Jobs</h3>
+<h3>Available Jobs</h3>
 
 @using (Html.BeginForm("JobApplicationSuccess", "Candidate", FormMethod.Post))
 {
@@ -67,7 +67,7 @@
         <thead>
             <tr>
                 <td></td>
-                <td><b>Job Id</b></td>
+                <td><b>Job</b></td>
                 <td><b>Job Description</b></td>
                 <td><b>Qualification required</b></td>
                 <td><b>Vacancies</b></td>
@@ -127,7 +127,7 @@
         }
 
     </table>
-
+    <br />
     <input type="submit" id="apply" onclick="return apply_for_jobs()" value="Apply" />
 }
     <div id="notification" style="display:none">

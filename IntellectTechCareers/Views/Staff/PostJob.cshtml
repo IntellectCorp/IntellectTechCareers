@@ -11,6 +11,28 @@
     }
 }
 
+<script type="text/javascript">
+
+    function validate()
+    {
+        var min = parseInt(document.getElementById('MinExperience').value);
+        var max = parseInt(document.getElementById('MaxExperience').value);
+
+        var notify_div = document.getElementById('notification');
+        if (min > max)
+        {
+            notify_div.innerHTML = "<h3><font color='red'>Mininum experience cannot be greater than maximum experience</font></h3>";
+            notify_div.style.display = "block";
+            return false;
+        }
+        else
+        {
+            notify_div.style.display = "none";
+            return true;
+        }
+    }
+
+</script>
 <h2>Post New Job</h2>
 <br />
 @*using (Html.BeginForm("PostJob","Staff",FormMethod.Post))*@
@@ -98,11 +120,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Post" />
+            <input onclick="return validate()" type="submit" value="Post" />
         </p>
     </fieldset>
     
-    <script>
+    <div id="notification" style="display:none;"></div>
+
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#AgeLimit").hide();
             $(".IsAgeLimit").change(function () {

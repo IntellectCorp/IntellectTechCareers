@@ -5,46 +5,51 @@
     Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
 }
 
-<h2>View Application  Status</h2>
+<h3>Applied Jobs</h3>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AppId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
-
+<table class="alt-rows">
+    <thead>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.AppId)</b>
+            </td>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.JobId)</b>
+            </td>
+    @*        <th>
+                @Html.DisplayNameFor(model => model.StatusCode)
+            </th>*@
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Status)</b>
+            </td>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Date)</b>
+            </td>
+        </tr>
+    </thead>
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AppId)
+            @Html.Label(item.AppId.ToString())
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JobId)
+            @Html.Label(item.JobName)
         </td>
-        <td>
+@*        <td>
             @Html.DisplayFor(modelItem => item.StatusCode)
+        </td>*@
+        <td>
+            @Html.Label(item.Status)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date.ToShortDateString())
+            @Html.Label(item.Date.ToShortDateString())
         </td>
     </tr>
 }
 
 </table>
+<br />
+@using (Html.BeginForm("ViewJobDetails", "Candidate", FormMethod.Get))
+{
+    <input type="submit" value="Apply for new jobs" />    
+}
