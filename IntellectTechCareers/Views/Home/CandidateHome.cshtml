@@ -3,45 +3,109 @@
     ViewBag.Title = "Candidate Home";
     IntellectTechCareers.Models.User user = (IntellectTechCareers.Models.User)Session["user"];
     Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
+    IntellectTechCareers.Models.JobModel job = IntellectTechCareers.Data_Access_Layer.CandidateDAL.getJobForWhichUserIsSelected(user.user_id);
 }
 
 <h2>Candidate Dashboard</h2>
 
-<h3>Welcome,  @user.name </h3>
+<h3>Welcome, @user.name </h3>
 <br />
-<h3>Account status : 
 
 @{
-    if(@user.state.Equals("Active"))
+    if(user.state.Equals("Selected"))
     {
-        <font color="green">@user.state </font>
+        <h3><font color="green"> Congratulations ..! You have been selected for following job .. ! </font></h3>
+        <b>Job ID : </b> @job.jobId
+
+        <br />
+
+        <b>Job Description : </b> @job.JobDesc
+        
+        <div>
+            Please sign the below declaration and complete the process<br />
+            Once you do this : <br />
+            <ul>
+                <li>You will be logged out</li>
+                <li>Your account will be permanently deleted</li>
+                <li>Our HR personnel will get in touch with your within 10 days</li>
+            </ul>
+
+            <div style="border:3px solid black;padding-left:20px;width:50%" >
+                <div style="align-content:center;" >
+                    <center><h3>Declaration</h3></center>
+                </div>
+                
+                I agree that I will continue for the selected job and my account can be deleted forever.
+
+                <center>
+                    <div style="align-content:center;">
+                        @using (Html.BeginForm("DeleteCandidate","Account", FormMethod.Get)) {
+                            <input type="submit" value="I Accept" />
+                        }
+                    </div>
+                </center>            
+            
+            </div>
+            
+        </div>
     }
     else
     {
-        <font color="red">@user.state </font>
+        <table>
+            <tr>
+                <td><h3>Account status</h3></td>
+                <td><h3>:</h3></td>
+                @{
+                    if(@user.state.Equals("Active"))
+                    {
+                        <td><h3><font color="green">@user.state </font></h3></td>
+                    }
+                    else
+                    {
+                        <td><font color="red">@user.state </font></td>
+
+                        <tr>
+                            <td><h3>Your account will be unblocked on</h3></td>
+                            <td><h3>:</h3></td>
+                            <td><h3>@user.AccountActiveDate</h3></td>
+                        </tr>
+                    }                
+                }
+            </tr>
+            <tr>
+                <td><h3>View Job applications</h3></td>
+                <td><h3>:</h3></td>
+                <td>
+                    <h3>
+                    @using (Html.BeginForm("ViewJobStatus", "Candidate", FormMethod.Get))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="submit" value="View Job applications" />
+                    }
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <td><h3>Update your profile</h3></td>
+                <td><h3>:</h3></td>
+                <td>
+                    <h3>
+                    @using (Html.BeginForm("UpdateProfile", "Candidate", FormMethod.Get)) {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Update Profile" />
+                    }
+                    </h3>
+                </td>
+            </tr>
+        </table>
     }
+    
 }
 
 
-</h3>
-@using (Html.BeginForm("ViewJobStatus", "Candidate", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Log in Form</legend>
-        <h3>View Job applications :  <input type="submit" value="View Job applications" /> </h3>
-    </fieldset>
-}
 
-@using (Html.BeginForm("UpdateProfile", "Candidate", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Log in Form</legend>
-        <h3> Update your profile : <input type="submit" value="Update Profile" /> </h3>
-    </fieldset>
-}
+

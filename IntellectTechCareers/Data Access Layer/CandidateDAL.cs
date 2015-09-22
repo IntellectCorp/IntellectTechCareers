@@ -369,5 +369,26 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             return qualifications;
         }
+
+        public static JobModel getJobForWhichUserIsSelected(int candidate_id)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" select a.job_id, j.job_description " + 
+                "from dbo.Application a inner join job j on j.job_id = a.job_id where status_code = 'S' and candidate_id = " + candidate_id, con);
+            command.ExecuteNonQuery();
+
+            JobModel job = new JobModel();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                job.jobId = reader.GetInt32(0);
+                job.JobDesc = reader.GetString(1);
+            }
+
+            con.Close();
+            return job;
+        }
     }
 }

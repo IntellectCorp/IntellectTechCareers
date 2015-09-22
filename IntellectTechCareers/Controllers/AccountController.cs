@@ -56,5 +56,17 @@ namespace IntellectTechCareers.Controllers
         {
             return AccountDAL.IsUserNameAvailable(user.UserName);
         }
+
+        [HttpGet]
+        public ActionResult DeleteCandidate()
+        {
+            int user_id = ((User)Session["user"]).user_id;
+
+            AccountDAL.DeleteUser(user_id);
+            return RedirectToAction("Logout", "Account");
+        }
+
+
+
     }
 }

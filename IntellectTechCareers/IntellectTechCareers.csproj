@@ -213,14 +213,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data Access Layer\AccountDAL.cs" />
-    <Content Include="Content\themes\base\images\no.gif" />
-    <Content Include="Content\themes\base\images\yes.png" />
-    <Content Include="Images\no.gif" />
-    <Content Include="Images\yes.png" />
     <Content Include="Utils\DBQueries.txt" />
-    <Content Include="Views\Account\no.gif" />
     <Content Include="Views\Account\RegistrationSuccess.cshtml" />
-    <Content Include="Views\Account\yes.png" />
     <Content Include="Views\Home\CandidateHome.cshtml" />
     <Content Include="Views\Home\StaffHome.cshtml" />
     <Content Include="Views\Home\InterviewerHome.cshtml" />

@@ -14,7 +14,7 @@ namespace IntellectTechCareers.Utils
             SqlConnection con = DBUtils.getDBConnection(); 
             con.Open();
 
-            SqlCommand command = new SqlCommand("select user_id, password, role, name, state from dbo.Users where username='" + username + "';", con);
+            SqlCommand command = new SqlCommand("select user_id, password, role, name, state, account_act_date from dbo.Users where username='" + username + "';", con);
             SqlDataReader reader = command.ExecuteReader();
 
             //Creating a user object
@@ -31,6 +31,7 @@ namespace IntellectTechCareers.Utils
             user.role = Convert.ToString(reader[2]);
             user.name = Convert.ToString(reader[3]);
             user.state = Convert.ToString(reader[4]);
+            user.AccountActiveDate = Convert.ToDateTime(reader[5]);
             user.username = username;
 
             con.Close();
@@ -84,6 +85,31 @@ namespace IntellectTechCareers.Utils
                 return "true";
             else
                 return "false";
+        }
+
+        public static void DeleteUser(int userId)
+        {
+            string queryApplication = "delete from dbo.Application where candidate_id = " + userId + ";";
+            string queryExperience = "delete from dbo.Experience where user_id = " + userId + ";";
+            string queryApplicant = "delete from dbo.Applicant where candidate_id = " + userId + ";";
+            string queryUser = "delete from dbo.Users where user_id = " + userId + ";";
+
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(queryApplication, con);
+            command.ExecuteNonQuery();
+
+            command = new SqlCommand(queryExperience, con);
+            command.ExecuteNonQuery();
+
+            command = new SqlCommand(queryApplicant, con);
+            command.ExecuteNonQuery();
+
+            command = new SqlCommand(queryUser, con);
+            command.ExecuteNonQuery();
+
+            con.Close();
         }
     }
 }

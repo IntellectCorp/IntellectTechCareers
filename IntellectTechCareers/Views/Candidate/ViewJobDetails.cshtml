@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "ViewJobDetails";
     Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
+
+    IntellectTechCareers.Models.User user = (IntellectTechCareers.Models.User)Session["user"];
 }
 
 <script type="text/javascript">
@@ -126,7 +128,16 @@
 
     </table>
     <br />
-    <input type="submit" id="apply" onclick="return apply_for_jobs()" value="Apply" />
+    
+    if (user.state.Equals("Active"))
+    {
+        <input type="submit" id="apply" onclick="return apply_for_jobs()" value="Apply" />
+    }
+    else
+    {
+        <h3><font color="red">You cannot apply for jobs as your account is not active</font></h3>
+    }
+    
 }
     <div id="notification" style="display:none">
         <h3><font color="red">
