@@ -132,5 +132,23 @@ namespace IntellectTechCareers.Controllers
 
             return View("Message");
         }
+
+        public ActionResult ManageStaffResponsibilities()
+        {
+            List<Staff> staffs = StaffDAL.GetStaffDetails();
+            return View(staffs);
+        }
+
+        public string UpdateStaffResponsibilities(Staff staff)
+        {
+            AdminDAL.UpdateStaffResponsibilities(staff);
+            return "";
+        }
+
+        public ActionResult ViewStaffResponsibilities()
+        {
+            List<Staff> staffs = StaffDAL.GetStaffDetails();
+            return View(staffs);
+        }
     }
 }

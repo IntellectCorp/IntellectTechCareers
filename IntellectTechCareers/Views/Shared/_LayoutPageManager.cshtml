@@ -97,7 +97,7 @@
                             </li>
                             <li>@Html.ActionLink("Reports", "About", "Home")
                                 <ul>
-                                    <li><a href="#">Staff Responsiblities</a></li>
+                                    <li>@Html.ActionLink("Job Staff Responsibilities", "ViewStaffResponsibilities", "Admin")</li>
                                     <li>@Html.ActionLink("Job Application Status", "ViewJobApplicationStatus", "Admin")</li>
                                     <li><a href="#">Applications By JobId</a></li>
                                     <li><a href="#">Selected Applicant Details</a></li>
@@ -112,7 +112,7 @@
                                     <li>@Html.ActionLink("Add Qualification", "AddQualification", "Admin")</li>
                                     <li><a href="#">Appoint Staff</a></li>
                                     <li><a href="#">Activate / Deactivate Staff</a></li>
-                                    <li><a href="#">Staff Responsiblities</a></li>
+                                    <li>@Html.ActionLink("Staff Responsibilities", "ManageStaffResponsibilities", "Admin")</li>
                                     <li>@Html.ActionLink("Change Other's Password", "ChangeOthersPassword", "Admin")</li>
                                 </ul>
                             </li>

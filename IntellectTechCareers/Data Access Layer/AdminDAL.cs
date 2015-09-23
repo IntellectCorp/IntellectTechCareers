@@ -93,5 +93,21 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             con.Close();
         }
+
+        public static void UpdateStaffResponsibilities(Staff staff)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            int post = (staff.RightToPost ? 1 : 0);
+            int publish = (staff.RightToPublish ? 1 : 0);
+            int schedule = (staff.RightToSchedule ? 1 : 0);
+
+            SqlCommand command = new SqlCommand("update dbo.Staff set right_to_post = " + post +
+                " , right_to_publish = " + publish + " , right_to_schedule = " + schedule + " where staff_id = " + staff.StaffId, con);
+            command.ExecuteNonQuery();
+
+            con.Close();
+        }
     }
 }

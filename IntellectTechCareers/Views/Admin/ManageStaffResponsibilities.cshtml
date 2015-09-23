@@ -1,0 +1,179 @@
+﻿@model IEnumerable<IntellectTechCareers.Models.Staff>
+
+@{
+    ViewBag.Title = "ManageStaffResponsibilities";
+    Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+}
+
+<script type="text/javascript">
+    function allow_edit(i)
+    {
+        document.getElementById('rtos_label_' + i).style.display = "none";
+        document.getElementById('rtos_dropdown_' + i).style.display = "inline";
+
+        document.getElementById('rtopu_label_' + i).style.display = "none";
+        document.getElementById('rtopu_dropdown_' + i).style.display = "inline";
+
+        document.getElementById('rtopo_label_' + i).style.display = "none";
+        document.getElementById('rtopo_dropdown_' + i).style.display = "inline";
+
+        document.getElementById('edit_div_' + i).style.display = "none";
+        document.getElementById('update_div_' + i).style.display = "inline";
+    }
+
+    function disallow_edit(i)
+    {
+        document.getElementById('rtos_label_' + i).style.display = "inline";
+        document.getElementById('rtos_dropdown_' + i).style.display = "none";
+
+        document.getElementById('rtopu_label_' + i).style.display = "inline";
+        document.getElementById('rtopu_dropdown_' + i).style.display = "none";
+
+        document.getElementById('rtopo_label_' + i).style.display = "inline";
+        document.getElementById('rtopo_dropdown_' + i).style.display = "none";
+
+        document.getElementById('edit_div_' + i).style.display = "inline";
+        document.getElementById('update_div_' + i).style.display = "none";
+    }
+
+    function update_rights(i, user)
+    {
+        var e = document.getElementById("rtopo_dropdown_option_" + i);
+        var right_post = e.options[e.selectedIndex].value;
+        var right_to_post = (e.options[e.selectedIndex].value === "Yes" ? true : false);
+
+        var e1 = document.getElementById("rtopu_dropdown_option_" + i);
+        var right_to_publish = (e1.options[e1.selectedIndex].value === "Yes" ? true : false);
+        var right_publish = e1.options[e1.selectedIndex].value;
+
+        var e2 = document.getElementById("rtos_dropdown_option_" + i);
+        var right_to_schedule = (e2.options[e2.selectedIndex].value === "Yes" ? true : false);
+        var right_schedule = e2.options[e2.selectedIndex].value;
+
+        var model = { "StaffId": user , "RightToSchedule": right_to_schedule, "RightToPublish" : right_to_publish, "RightToPost":right_to_post };
+        var url = '@Url.Action("UpdateStaffResponsibilities", "Admin")';
+
+        console.log(right_post, right_publish, right_schedule);
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: model,
+            success: function (retValue) {
+                document.getElementById('notification').style.display = "inline";
+                disallow_edit(i);
+                document.getElementById('rtos_label_'+ i).innerHTML = right_schedule;
+                document.getElementById('rtopu_label_'+ i).innerHTML = right_publish;
+                document.getElementById('rtopo_label_'+ i).innerHTML = right_post;
+            }
+        });
+    }
+
+</script>
+
+<h2>Manage Staff Responsibilities</h2>
+
+<table class="alt-rows" id="staff-resp">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RightToSchedule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RightToPublish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RightToPost)
+        </th>
+        <th></th>
+    </tr>
+
+@{
+    int i = 0;
+
+    foreach (var item in Model) {
+    
+        <tr>
+            <td>
+                <input type="hidden" id="user_id_@i" value='@item.StaffId'/>
+                @Html.Label(item.StaffName)
+            </td>
+            <td>
+                <div id="rtos_label_@i">
+                    @{
+                        if(item.RightToSchedule)
+                        {
+                            <span>Yes</span>                            
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                     }
+                </div>
+                <div id="rtos_dropdown_@i" style="display:none;">
+                    <select id="rtos_dropdown_option_@i" name="right_to_schedule" class="select_small">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div id="rtopu_label_@i">
+                    @{
+                        if(item.RightToPublish)
+                        {
+                            <span>Yes</span>                            
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                     }
+                </div>
+                <div id="rtopu_dropdown_@i" style="display:none;">
+                    <select id="rtopu_dropdown_option_@i" name="right_to_publish" class="select_small">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div id="rtopo_label_@i">
+                    @{
+                        if(item.RightToPost)
+                        {
+                            <span>Yes</span>                            
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                     }
+                </div>
+                <div id="rtopo_dropdown_@i" style="display:none;">
+                    <select id="rtopo_dropdown_option_@i" name="right_to_post" class="select_small">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div id="edit_div_@i" style="display:inline;">
+                    <input type="button" id="editbtn_@i" onclick="allow_edit('@i')" class="scheduleButton" value="Edit" />
+                </div>
+                <div id="update_div_@i" style="display:none;">
+                    <input type="button" id="update_btn_@i" onclick="update_rights('@i', @item.StaffId)" class="scheduleButton" value="Update" />
+                    <input type="button" id="cancel_btn_@i" onclick="disallow_edit('@i')" class="scheduleButton" value="Cancel" />
+                </div>
+
+            </td>
+        </tr>
+    
+        i = i + 1;
+    }
+}    
+</table>
+<div id="notification" style="display:none;"><h3><font color="green">Staff responsibilities have been updated successfully</font></h3></div>
