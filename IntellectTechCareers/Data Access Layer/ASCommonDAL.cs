@@ -96,7 +96,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             }
 
             string skillSet = String.Join(",", selectedSkills.Select(x => x.Id.ToString()).ToArray());
-            SqlCommand command = new SqlCommand("insert into Job (job_description, job_role_id, skill_set, vacancies, min_experience, max_experience, age_limit, posted_by, posted_on, status) values ('" + model.JobDesc + "', " + model.JobRole + ", '" + skillSet + "'," + model.Vacancies + ", " + model.MinExperience + ", " + model.MaxExperience + ", " + model.AgeLimit + ", " + poster.user_id + ", " + DateTime.Today + ", 'P' );", con);
+            SqlCommand command = new SqlCommand("insert into Job (job_description, job_role_id, skill_set, vacancies, min_experience, max_experience, age_limit, posted_by, posted_on, status) values ('" + model.JobDesc + "', " + model.JobRole + ", '" + skillSet + "'," + model.Vacancies + ", " + model.MinExperience + ", " + model.MaxExperience + ", " + model.AgeLimit + ", " + poster.user_id + ", '" + DateTime.Now.ToShortDateString() + "', 'P' );", con);
             command.ExecuteNonQuery();
 
             con.Close();
