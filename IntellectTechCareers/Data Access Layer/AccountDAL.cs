@@ -28,6 +28,7 @@ namespace IntellectTechCareers.Utils
 
             user.user_id = Convert.ToInt32(reader[0]);
             string pwd = Convert.ToString(reader[1]);
+            user.password = pwd;
             user.role = Convert.ToString(reader[2]);
             user.name = Convert.ToString(reader[3]);
             user.state = Convert.ToString(reader[4]);
@@ -110,6 +111,25 @@ namespace IntellectTechCareers.Utils
             command.ExecuteNonQuery();
 
             con.Close();
+        }
+
+        public static bool ChangePassword(int userId, string passwdHash)
+        {
+            try
+            {
+                SqlConnection con = DBUtils.getDBConnection();
+                con.Open();
+
+                SqlCommand command = new SqlCommand("update dbo.Users set password = '" + passwdHash + "' where user_id=" + userId + ";", con);
+                command.ExecuteNonQuery();
+
+                con.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

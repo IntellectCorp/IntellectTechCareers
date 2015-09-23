@@ -136,10 +136,37 @@ namespace IntellectTechCareers.Models
     {
         public int user_id { get; set; }
         public string username { get; set; }
+        public string password { get; set; }
         public string name { get; set; }
         public string role { get; set; }
         public string state { get; set; }
         public DateTime AccountActiveDate { get; set; }
+    }
+
+    public class ChangePasswordModel
+    {
+        public int user_id { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+
+        [Required]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RegularExpression("(?=.*\\d)(?=.*[a-zA-Z]).{1,}", ErrorMessage = "Password must have at least 1 digit and 1 alphabet")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current Password")]
+        public string currentPassword { get; set; }     
+
+        [Required]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RegularExpression("(?=.*\\d)(?=.*[a-zA-Z]).{1,}", ErrorMessage = "Password must have at least 1 digit and 1 alphabet")]
+        [DataType(DataType.Password)]
+        [Display(Name = "New Password")]
+        public string newPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Confirm New Password")]
+        [System.ComponentModel.DataAnnotations.Compare("newPassword", ErrorMessage = "New password and confirmation new password do not match.")]
+        public string confirmNewPassword { get; set; }
     }
 
     public class ExperienceModel
