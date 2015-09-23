@@ -77,6 +77,17 @@ namespace IntellectTechCareers.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ScheduleInterviewDialog(JobModel jobModel)
+        {
+            InterviewModel model = new InterviewModel();
+            model.JobId = jobModel.JobId;
+            model.JobDesc = jobModel.JobDesc;
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            return PartialView("_PartialScheduleInterview", model);
+        }
+
         public ActionResult ReleaseResults()
         {
             List<JobModel> jobs = ASCommonDAL.getJobs();
@@ -84,7 +95,7 @@ namespace IntellectTechCareers.Controllers
             foreach (var item in jobs)
             {
                 JobWithApplicantsModel jobWithAppl = new JobWithApplicantsModel(item);
-                jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.jobId);
+                jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.JobId);
                 model.Add(jobWithAppl);
             }
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";

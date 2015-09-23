@@ -1,0 +1,152 @@
+﻿@model IntellectTechCareers.Models.InterviewModel
+
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.8.24.min.js")
+<link href="~/Content/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(function () {
+        $(".pastDates").datepicker({ maxDate: 0 });
+        $(".futureDates").datepicker({ minDate: +1, maxDate: +60 });
+        $(".ui-datepicker").css("font-size", "100%");
+    });
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>InterviewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobId)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.JobId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobDesc)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.JobDesc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Date, new { @type = "text", @id = "datefield", @readonly = "readonly", @style = "background:white", @class = "futureDates" })
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Time)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Time.Hour, new SelectList(new List<Object>{
+                        new {value = 1, text = 1},
+                        new {value = 2, text = 2},
+                        new {value = 3, text = 3},
+                        new {value = 4, text = 4},
+                        new {value = 5, text = 5},
+                        new {value = 6, text = 6},
+                        new {value = 7, text = 7},
+                        new {value = 8, text = 8},
+                        new {value = 9, text = 9},
+                        new {value = 10, text = 10},
+                        new {value = 11, text = 11},
+                        new {value = 12, text = 12},
+                        new {value = 13, text = 13},
+                        new {value = 14, text = 14},
+                        new {value = 15, text = 15},
+                        new {value = 16, text = 16},
+                        new {value = 17, text = 17},
+                        new {value = 18, text = 18},
+                        new {value = 19, text = 19},
+                        new {value = 20, text = 20},
+                        new {value = 21, text = 21},
+                        new {value = 22, text = 22},
+                        new {value = 23, text = 23},
+                        new {value = 24, text = 24}
+                        }, "value", "text", 0))
+            :
+            @Html.DropDownListFor(model => model.Time.Minute, new SelectList(new List<Object>{
+                        new {value = 1, text = 1},
+                        new {value = 2, text = 2},
+                        new {value = 3, text = 3},
+                        new {value = 4, text = 4},
+                        new {value = 5, text = 5},
+                        new {value = 6, text = 6},
+                        new {value = 7, text = 7},
+                        new {value = 8, text = 8},
+                        new {value = 9, text = 9},
+                        new {value = 10, text = 10},
+                        new {value = 11, text = 11},
+                        new {value = 12, text = 12},
+                        new {value = 13, text = 13},
+                        new {value = 14, text = 14},
+                        new {value = 15, text = 15},
+                        new {value = 16, text = 16},
+                        new {value = 17, text = 17},
+                        new {value = 18, text = 18},
+                        new {value = 19, text = 19},
+                        new {value = 20, text = 20},
+                        new {value = 21, text = 21},
+                        new {value = 22, text = 22},
+                        new {value = 23, text = 23},
+                        new {value = 24, text = 24},
+                        new {value = 25, text = 25},
+                        new {value = 26, text = 26},
+                        new {value = 27, text = 27},
+                        new {value = 28, text = 28},
+                        new {value = 29, text = 29},
+                        new {value = 30, text = 30},
+                        new {value = 31, text = 31},
+                        new {value = 32, text = 32},
+                        new {value = 33, text = 33},
+                        new {value = 34, text = 34},
+                        new {value = 35, text = 35},
+                        new {value = 36, text = 36},
+                        new {value = 37, text = 37},
+                        new {value = 38, text = 38},
+                        new {value = 39, text = 39},
+                        new {value = 40, text = 40},
+                        new {value = 41, text = 41},
+                        new {value = 42, text = 42},
+                        new {value = 43, text = 43},
+                        new {value = 44, text = 44},
+                        new {value = 45, text = 45},
+                        new {value = 46, text = 46},
+                        new {value = 47, text = 47},
+                        new {value = 48, text = 48},
+                        new {value = 49, text = 49},
+                        new {value = 50, text = 50},
+                        new {value = 51, text = 51},
+                        new {value = 52, text = 52},
+                        new {value = 53, text = 53},
+                        new {value = 54, text = 54},
+                        new {value = 55, text = 55},
+                        new {value = 56, text = 56},
+                        new {value = 57, text = 57},
+                        new {value = 58, text = 58},
+                        new {value = 59, text = 59},
+                        new {value = 60, text = 60}
+                        }, "value", "text", 0))
+            @Html.ValidationMessageFor(model => model.Time)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.venue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.venue)
+            @Html.ValidationMessageFor(model => model.venue)
+        </div>
+
+        <p>
+            <input type="submit" value="Schedule" />
+        </p>
+    </fieldset>
+}
+

@@ -12,12 +12,47 @@
     }
 }
 
+
+<script type="text/javascript">
+    //$('#jobTable').find('tr').click(function () {
+    //    var row = $(this).find('td:first').text();
+    //    alert('You clicked ' + row);
+    //});
+    $(document).ready(function () {
+        $(".scheduleButton").click(function () {
+            var rowValue = [];
+            $(this).closest('tr').find('td').not(':last').each(function () {
+                var textval = $(this).text(); // this will be the text of each <td>
+                //$(this).attr("bgcolor", "red");
+                rowValue.push(textval);
+            });
+            //alert(rowValue.join('\n'));
+            var ScheduleInterviewDialogDiv = $("#ScheduleInterviewDialog");
+            // var id = $("#CandidateId").val();
+            var model = { "JobId": rowValue[0] , "JobDesc": rowValue[1] };
+            var url = '@Url.Action("ScheduleInterviewDialog", "Staff")'
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: url,
+                data: model,
+                success: function (retValue) {
+                    ScheduleInterviewDialogDiv.html(retValue);
+                }
+            });
+        });
+    });
+    function ScheduleInterview() {
+
+    }
+</script>
+
 <h2>Schedule Interview</h2>
 
-<table class="alt-rows">
+<table id="jobTable" class="alt-rows">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.jobId)
+            @Html.DisplayNameFor(model => model.JobId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.JobDesc)
@@ -34,27 +69,32 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.jobId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobDesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobRole)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vacancies)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostedOn)
-        </td>
-        <td>
-            <input type="button" onclick="ScheduleInterview()" value="Schedule Interview"/>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.Label(item.JobId.ToString())
+            </td>
+            <td>
+                @Html.Label(item.JobDesc)
+            </td>
+            <td>
+                @Html.Label(item.JobRole.ToString())
+            </td>
+            <td>
+                @Html.Label(item.Vacancies.ToString())
+            </td>
+            <td>
+                @Html.Label(item.PostedOn.ToShortDateString())
+            </td>
+            <td>
+                <button type="button" class="scheduleButton" value="Schedule Interview">Schedule Interview</button>
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+<hr />
+<div id="ScheduleInterviewDialog" style="display: block;">
+</div>
