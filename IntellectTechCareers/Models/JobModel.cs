@@ -8,6 +8,7 @@ namespace IntellectTechCareers.Models
 {
     public class JobModel
     {
+        [Display(Name = "Job ID")]
         public int jobId { get; set; }
 
         [Display(Name = "Job Description")]
@@ -34,6 +35,13 @@ namespace IntellectTechCareers.Models
 
         [Display(Name = "Posted by")]
         public int PostedBy { get; set; }
+        
+        [Display(Name = "Posted On")]
+        public DateTime PostedOn { get; set; }
+
+        [Display(Name = "Status")]
+        public String Status { get; set; }
+    
     }
 
     public class JobViewModel
@@ -46,5 +54,30 @@ namespace IntellectTechCareers.Models
         public string selectedJobs { get; set; }
         public int jobsAlreadyApplied { get; set; }
         public List<int> appliedJobs { get; set; }
+    }
+
+    public class JobWithApplicantsModel : JobModel
+    {
+        public JobWithApplicantsModel()
+        {
+        }
+
+        public JobWithApplicantsModel(JobModel job)
+        {
+            this.jobId = job.jobId;
+            this.JobDesc = job.JobDesc;
+            this.JobRole = job.JobRole;
+            this.MinExperience = job.MinExperience;
+            this.MaxExperience = job.MaxExperience;
+            this.PostedBy = job.PostedBy;
+            this.PostedOn = job.PostedOn;
+            this.Skills = job.Skills;
+            this.Status = job.Status;
+            this.Vacancies = job.Vacancies;
+            this.AgeLimit = job.AgeLimit;
+        }
+
+        [Display(Name = "Number of Application")]
+        public int ApplicantCount { get; set; }
     }
 }

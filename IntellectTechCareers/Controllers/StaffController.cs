@@ -40,7 +40,7 @@ namespace IntellectTechCareers.Controllers
         public ActionResult PostJob(Job model)
         {
             User user = ((User)Session["user"]);
-            ASCommonDAL.postJobinDB(model,user);
+            ASCommonDAL.postJobinDB(model, user);
             //string desc = model.JobDesc;
             //string role = model.JobRole;
             @ViewBag.Message = "Job Posted !";
@@ -48,7 +48,7 @@ namespace IntellectTechCareers.Controllers
             return View("Message");
             //return RedirectToAction("Index","Home");
         }
-        
+
         //public Dictionary<int, string> getListOfSkills()
         //{
         //    Dictionary<int, string> skills = new Dictionary<int, string>();
@@ -70,6 +70,28 @@ namespace IntellectTechCareers.Controllers
         //    return skills;
         //}
 
+        public ActionResult ScheduleInterview()
+        {
+            List<JobModel> model = ASCommonDAL.getJobs();
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            return View(model);
+        }
+
+        public ActionResult ReleaseResults()
+        {
+            List<JobModel> jobs = ASCommonDAL.getJobs();
+            List<JobWithApplicantsModel> model = new List<JobWithApplicantsModel>();
+            foreach (var item in jobs)
+            {
+                JobWithApplicantsModel jobWithAppl = new JobWithApplicantsModel(item);
+                jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.jobId);
+                model.Add(jobWithAppl);
+            }
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            return View(model);
+        }
+
+
         public ActionResult ViewJobApplicationStatus()
         {
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
@@ -83,7 +105,7 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ViewJobApplicationStatus(ApplicantListModel model)
         {
             IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetails(model.CandidateId);
-            return PartialView("_PartialJobApplicationStatus",data);
+            return PartialView("_PartialJobApplicationStatus", data);
         }
     }
 }

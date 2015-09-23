@@ -194,7 +194,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Open();
 
             SqlCommand command = new SqlCommand(" select job_id, job_description, job_role_id, skill_set, vacancies, " + 
-                "min_experience, max_experience, age_limit, posted_by from dbo.Job ", con);
+                "min_experience, max_experience, age_limit, posted_by, posted_on, status from dbo.Job ", con);
             command.ExecuteNonQuery();
 
             SqlDataReader reader = command.ExecuteReader();
@@ -209,8 +209,15 @@ namespace IntellectTechCareers.Data_Access_Layer
                 job.Vacancies = reader.GetInt32(4);
                 job.MinExperience = reader.GetInt32(5);
                 job.MaxExperience = reader.GetInt32(6);
+                job.AgeLimit = reader.GetInt32(7);
+                job.PostedBy = reader.GetInt32(8);
+                job.PostedOn = reader.GetDateTime(9);
+                job.Status = reader.GetString(10);
 
-                jobs.Add(job);
+                if (job.Status.Equals("P"))
+                {
+                    jobs.Add(job);
+                }
             }
 
             con.Close();
