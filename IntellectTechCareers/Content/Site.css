@@ -120,6 +120,7 @@ h5, h6 {
         background: url("../Images/heroRibbon2.png") no-repeat;
         background-color:lavender;
         padding-left: 70px;
+        padding-right: 70px;
     }
 
 header .content-wrapper {
@@ -379,6 +380,9 @@ select {
     -o-border-radius: 3px 3px 3px 3px;
 }
 
+#Time_Hour, #Time_Minute {
+    width: 150px;
+}
     #loginForm input[type="checkbox"],
     #loginForm input[type="submit"],
     #loginForm input[type="button"],
@@ -669,14 +673,16 @@ tr.pager td {
 .alt-rows thead tr td{
     padding-left:7px;
     padding-top:7px;
-    background-color: #FFEBD6;
+    /*background-color: #FFEBD6;*/
+    background-color: #9FC6E2;
     border: 1px solid #333 !important;
 }
 
 .alt-rows tr th{
     padding-left:7px;
     padding-top:7px;
-    background-color: #FFEBD6;
+    /*background-color: #FFEBD6;*/
+    background-color: #9FC6E2;
     border: 1px solid #333 !important;
 
 }
@@ -684,7 +690,7 @@ tr.pager td {
 .alt-rows tr td{
     padding-left:7px;
     padding-top:7px;
-    background-color: #FFFCF9;
+    /*background-color: #FFFCF9;*/
     border-right: 1px solid #333;
 
 }

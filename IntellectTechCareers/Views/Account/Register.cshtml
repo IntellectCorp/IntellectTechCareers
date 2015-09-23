@@ -8,23 +8,27 @@
 
     @Scripts.Render("~/bundles/jqueryval")
     <link href="~/Content/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
-    
+
     @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
     @Scripts.Render("~/Scripts/jquery-ui-1.8.24.min.js")
 }
-
+<script type="text/javascript">
+    $(function () {
+        $(".pastDates").datepicker({ maxDate: 0 });
+        $(".futureDates").datepicker({ minDate: +1, maxDate: +60 });
+        $(".ui-datepicker").css("font-size", "100%");
+    });
+</script>
 <script type="text/javascript">
 
     var user_name_valid = "null";
 
-    function validate_user_name()
-    {
+    function validate_user_name() {
         if (user_name_valid === "null") {
             document.getElementById('notification').innerHTML = "<h3><font color='red'>Please check if user name is available</font></h3>";
             return false;
         }
-        else if (user_name_valid === "true")
-        {
+        else if (user_name_valid === "true") {
             document.getElementById('notification').innerHTML = "";
             return true;
         }
@@ -34,10 +38,9 @@
         }
     }
 
-    function check_user_name_avail()
-    {
+    function check_user_name_avail() {
         var user_name = document.getElementById('UserName').value;
-    
+
         var model = { "UserName": user_name };
         var url = '@Url.Action("CheckUserNameAvailibility", "Account")'
 
@@ -52,8 +55,7 @@
                     document.getElementById('no').style.display = "none";
                     user_name_valid = "true";
                 }
-                else
-                {
+                else {
                     document.getElementById('yes').style.display = "none";
                     document.getElementById('no').style.display = "inline";
                     user_name_valid = "false";
@@ -70,7 +72,8 @@
     <h2>Create a new account.</h2>
 </hgroup>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
 
     <fieldset>
@@ -81,22 +84,23 @@
                 <div>
                     @Html.LabelFor(m => m.UserName)
                     @Html.TextBoxFor(m => m.UserName)
-                    @Html.ValidationMessageFor(m => m.UserName)                
-                    &nbsp; <input type="button" onclick="check_user_name_avail()" value="Check availability"/>
+                    @Html.ValidationMessageFor(m => m.UserName)
+                    &nbsp;
+                    <input type="button" onclick="check_user_name_avail()" value="Check availability" />
 
-                    <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top:10px;display:none;"/>
-                    <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top:10px;display:none;"/>
+                    <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
+                    <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
                 </div>
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)                
+                @Html.ValidationMessageFor(m => m.Password)
             </li>
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)                
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </li>
         </ol>
 
@@ -105,12 +109,12 @@
             <li>
                 @Html.LabelFor(m => m.Name)
                 @Html.TextBoxFor(m => m.Name)
-                @Html.ValidationMessageFor(m => m.Name)                
+                @Html.ValidationMessageFor(m => m.Name)
             </li>
             <li>
                 @Html.LabelFor(m => m.EmailID)
                 @Html.TextBoxFor(m => m.EmailID)
-                @Html.ValidationMessageFor(m => m.EmailID)                
+                @Html.ValidationMessageFor(m => m.EmailID)
             </li>
             <li>
                 @Html.LabelFor(m => m.ContactNo)
@@ -119,12 +123,12 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.gender)
-                @Html.RadioButtonFor(m => m.gender,"male", new { @checked = "checked" }) Male
-                @Html.RadioButtonFor(m => m.gender,"female") Female
+                @Html.RadioButtonFor(m => m.gender, "male", new { @checked = "checked" }) Male
+                @Html.RadioButtonFor(m => m.gender, "female") Female
             </li>
             <li>
                 @Html.LabelFor(m => m.dob)
-                @Html.TextBoxFor(model => model.dob, new { type = "date" })
+                @Html.TextBoxFor(m => m.dob, new { type = "text", @id = "datefield", @readonly = "readonly", @style = "background:white", @class = "pastDates" })
                 @Html.ValidationMessageFor(m => m.dob)
             </li>
             <li>

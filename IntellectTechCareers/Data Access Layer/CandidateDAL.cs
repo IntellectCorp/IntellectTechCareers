@@ -202,7 +202,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             while (reader.Read())
             {
                 JobModel job = new JobModel();
-                job.jobId = reader.GetInt32(0);
+                job.JobId = reader.GetInt32(0);
                 job.JobDesc = reader.GetString(1);
                 job.JobRole = reader.GetInt32(2);
                 job.Skills = new List<string>(reader.GetString(3).Split(','));
@@ -406,7 +406,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
-                job.jobId = reader.GetInt32(0);
+                job.JobId = reader.GetInt32(0);
                 job.JobDesc = reader.GetString(1);
             }
 

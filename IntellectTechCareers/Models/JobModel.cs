@@ -9,7 +9,7 @@ namespace IntellectTechCareers.Models
     public class JobModel
     {
         [Display(Name = "Job ID")]
-        public int jobId { get; set; }
+        public int JobId { get; set; }
 
         [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
@@ -64,7 +64,7 @@ namespace IntellectTechCareers.Models
 
         public JobWithApplicantsModel(JobModel job)
         {
-            this.jobId = job.jobId;
+            this.JobId = job.JobId;
             this.JobDesc = job.JobDesc;
             this.JobRole = job.JobRole;
             this.MinExperience = job.MinExperience;
