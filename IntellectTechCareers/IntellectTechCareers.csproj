@@ -235,6 +235,8 @@
     <Content Include="Views\Staff\ViewJobApplicationStatus.cshtml" />
     <Content Include="Views\Staff\_PartialJobApplicationStatus.cshtml" />
     <Content Include="Views\Candidate\ViewJobStatus.cshtml" />
+    <Content Include="Views\Staff\ScheduleInterview.cshtml" />
+    <Content Include="Views\Staff\ReleaseResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

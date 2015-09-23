@@ -1,0 +1,60 @@
+﻿@model IEnumerable<IntellectTechCareers.Models.JobModel>
+
+@{
+    ViewBag.Title = "Schedule Interview";
+    if (ViewBag.Layout != null)
+    {
+        Layout = ViewBag.Layout;//"~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<h2>Schedule Interview</h2>
+
+<table class="alt-rows">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.jobId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vacancies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostedOn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.jobId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobRole)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vacancies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostedOn)
+        </td>
+        <td>
+            <input type="button" onclick="ScheduleInterview()" value="Schedule Interview"/>
+        </td>
+    </tr>
+}
+
+</table>
