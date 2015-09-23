@@ -113,10 +113,10 @@
                                     <li><a href="#">Appoint Staff</a></li>
                                     <li><a href="#">Activate / Deactivate Staff</a></li>
                                     <li><a href="#">Staff Responsiblities</a></li>
-                                    <li><a href="#">Change Other's Password</a></li>
+                                    <li>@Html.ActionLink("Change Other's Password", "ChangeOthersPassword", "Admin")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Change My Password", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                             <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
                         </ul>
                     </nav>

@@ -138,45 +138,5 @@ namespace IntellectTechCareers.Controllers
 
             return Json(viewModel);
         }
-
-        public ActionResult ChangePassword()
-        {
-            User user = (User)Session["user"];
-            ChangePasswordModel model = new ChangePasswordModel();
-            model.user_id = user.user_id;
-            model.username = user.username;
-            model.password = user.password;
-
-            ViewBag.ErrorMessage = "";
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            User user = (User)Session["user"];
-            String currentPasswordHash = StringUtils.getMD5Hash(StringUtils.Reverse(model.currentPassword));
-            if (!currentPasswordHash.Equals(user.password))
-            {
-                ViewBag.ErrorMessage = "Current password is incorrect !";
-                return View(model);
-            }
-
-            if (user.password.Equals( StringUtils.getMD5Hash(StringUtils.Reverse(model.newPassword))))
-            {
-                ViewBag.ErrorMessage = " New Password cannot be same as current Password !";
-                return View(model);
-            }
-
-            bool isSuccess = AccountDAL.ChangePassword(user.user_id, StringUtils.getMD5Hash(StringUtils.Reverse(model.newPassword)));
-
-            if (isSuccess)
-                return RedirectToAction("Logout", "Account");
-            else
-            {
-                ViewBag.ErrorMessage = "Failed to change the password";
-                return View(model);
-            }
-        }
     }
 }

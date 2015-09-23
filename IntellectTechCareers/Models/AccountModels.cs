@@ -167,6 +167,11 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Confirm New Password")]
         [System.ComponentModel.DataAnnotations.Compare("newPassword", ErrorMessage = "New password and confirmation new password do not match.")]
         public string confirmNewPassword { get; set; }
+
+        public bool isApplicant { get; set; }
+        public int selectedStaff { get; set; }
+        public int selectedApplicant { get; set; }
+
     }
 
     public class ExperienceModel

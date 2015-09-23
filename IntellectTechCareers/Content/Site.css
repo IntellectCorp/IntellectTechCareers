@@ -390,6 +390,15 @@ select {
         width: 40px;
     }
 
+    #role {
+        width: 40px;
+    }
+
+    #isApplicant {
+        width: 40px;
+    }
+
+
  #LoginFormRight {
     margin-right: 10px;
     border-left: solid 2px #c8c8c8;
