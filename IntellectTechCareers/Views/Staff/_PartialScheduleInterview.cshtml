@@ -10,7 +10,10 @@
         $(".ui-datepicker").css("font-size", "100%");
     });
 </script>
-@using (Html.BeginForm())
+@{
+    string postController = @ViewBag.Controller;
+}
+@using (Html.BeginForm("ScheduleInterview", postController, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -23,6 +26,7 @@
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.JobId)
+            @Html.HiddenFor(model => model.JobId)
         </div>
 
         <div class="editor-label">
@@ -30,6 +34,7 @@
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.JobDesc)
+            @Html.HiddenFor(model => model.JobDesc)
         </div>
 
         <div class="editor-label">
@@ -44,7 +49,9 @@
             @Html.LabelFor(model => model.Time)
         </div>
         <div class="editor-field">
+            @Html.Label("Hour :")
             @Html.DropDownListFor(model => model.Time.Hour, new SelectList(new List<Object>{
+                        new {value = 0, text = 0},             
                         new {value = 1, text = 1},
                         new {value = 2, text = 2},
                         new {value = 3, text = 3},
@@ -70,8 +77,9 @@
                         new {value = 23, text = 23},
                         new {value = 24, text = 24}
                         }, "value", "text", 0))
-            :
+            @Html.Label(" Minutes :")
             @Html.DropDownListFor(model => model.Time.Minute, new SelectList(new List<Object>{
+                        new {value = 0, text = 0},
                         new {value = 1, text = 1},
                         new {value = 2, text = 2},
                         new {value = 3, text = 3},
@@ -131,17 +139,16 @@
                         new {value = 57, text = 57},
                         new {value = 58, text = 58},
                         new {value = 59, text = 59},
-                        new {value = 60, text = 60}
                         }, "value", "text", 0))
             @Html.ValidationMessageFor(model => model.Time)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.venue)
+            @Html.LabelFor(model => model.Venue)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.venue)
-            @Html.ValidationMessageFor(model => model.venue)
+            @Html.EditorFor(model => model.Venue)
+            @Html.ValidationMessageFor(model => model.Venue)
         </div>
 
         <p>
@@ -149,4 +156,3 @@
         </p>
     </fieldset>
 }
-

@@ -20,6 +20,7 @@
     //});
     $(document).ready(function () {
         $(".scheduleButton").click(function () {
+            alert("Hi");
             var rowValue = [];
             $(this).closest('tr').find('td').not(':last').each(function () {
                 var textval = $(this).text(); // this will be the text of each <td>
@@ -37,6 +38,7 @@
                 url: url,
                 data: model,
                 success: function (retValue) {
+                    alert("uuu");
                     ScheduleInterviewDialogDiv.html(retValue);
                 }
             });
@@ -74,6 +76,7 @@
         <tr>
             <td>
                 @Html.Label(item.JobId.ToString())
+                @*@Html.DisplayFor(itemModel => item.JobId)*@
             </td>
             <td>
                 @Html.Label(item.JobDesc)
