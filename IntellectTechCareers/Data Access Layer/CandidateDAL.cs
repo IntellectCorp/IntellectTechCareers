@@ -122,7 +122,7 @@ namespace IntellectTechCareers.Data_Access_Layer
                 {
                     graduation = reader.GetString(0);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     graduation = "";
                 }
@@ -131,7 +131,7 @@ namespace IntellectTechCareers.Data_Access_Layer
                 {
                     post_graduation = reader.GetString(1);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     post_graduation = "";
                 }
