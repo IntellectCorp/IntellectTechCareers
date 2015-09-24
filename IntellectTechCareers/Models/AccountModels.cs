@@ -246,6 +246,15 @@ namespace IntellectTechCareers.Models
     {
         public List<ExperienceModel> experience { get; set; }
     }
+
+    public class ShowApplicantModel
+    {
+        public int CandidateId { get; set; }
+        public string Name { get; set; }
+        public int JobId { get; set; }
+        public string JobDesc { get; set; }
+        public DateTime Date { get; set; }
+    }
 }
 
 //Microsoft enterprice library version 5
