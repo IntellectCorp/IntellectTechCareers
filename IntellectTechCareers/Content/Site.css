@@ -709,6 +709,34 @@ tr.pager td {
 }
 
 
+.select-table {
+    border: 1px solid #333;
+}
+.select-table thead tr td{
+    padding-left:7px;
+    padding-top:7px;
+    /*background-color: #FFEBD6;*/
+    background-color: #9FC6E2;
+    border: 1px solid #333 !important;
+}
+
+.select-table tr th{
+    padding-left:7px;
+    padding-top:7px;
+    /*background-color: #FFEBD6;*/
+    background-color: #9FC6E2;
+    border: 1px solid #333 !important;
+
+}
+
+.select-table tr td{
+    padding-left:7px;
+    padding-top:7px;
+    /*background-color: #FFFCF9;*/
+    border-right: 1px solid #333;
+
+}
+
 /********************
 *   Mobile Styles   *
 ********************/
