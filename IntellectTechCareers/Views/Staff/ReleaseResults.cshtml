@@ -12,6 +12,35 @@
     }
 }
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".releaseResult").click(function () {
+            //alert("Hi");
+            var rowValue = [];
+            $(this).closest('tr').find('td').not(':last').each(function () {
+                var textval = $(this).text(); // this will be the text of each <td>
+                //$(this).attr("bgcolor", "red");
+                rowValue.push(textval);
+            });
+            //alert(rowValue.join('\n'));
+            var ReleaseResultDialogDiv = $("#ReleaseResultDialog");
+            // var id = $("#CandidateId").val();
+            var model = { "JobId": $.trim(rowValue[0]), "JobDesc": $.trim(rowValue[1]), "Vacancies": $.trim(rowValue[3]) };
+            var url = '@Url.Action("ReleaseResultsDialog", "Staff")'
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: url,
+                data: model,
+                success: function (retValue) {
+                    //alert("uuu");
+                    ReleaseResultDialogDiv.html(retValue);
+                }
+            });
+        });
+    });
+</script>
+
 <h2>Release Results</h2>
 
 <table class="alt-rows">
@@ -39,25 +68,30 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.JobId)
+                @*@Html.DisplayFor(modelItem => item.JobId)*@
+                @Html.Label(item.JobId.ToString())
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.JobDesc)
+                @Html.Label(item.JobDesc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.JobRole)
+                @Html.Label(item.JobRole.ToString())
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vacancies)
+                @Html.Label(item.Vacancies.ToString())
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ApplicantCount)
+                @Html.Label(item.ApplicantCount.ToString())
             </td>
 
             <td>
-                <input type="button" onclick="ReleaseResult()" value="Release Result" />
+               <button type="button"  class="releaseResult" value="Release Result" >Schedule Interview</button>
             </td>
         </tr>
     }
 
 </table>
+<br />
+<hr />
+<div id="ReleaseResultDialog" style="display: block;">
+</div>
