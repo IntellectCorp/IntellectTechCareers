@@ -27,8 +27,6 @@ namespace IntellectTechCareers.Controllers
                     return View("ManagerHome", AdminDAL.getManagerHome());
                 else if (role.Equals("staff"))
                     return View("StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
-                else if (role.Equals("interviewer"))
-                    return View("InterviewerHome");
                 else
                     return View();
             }
@@ -38,6 +36,18 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult About()
         {
+            ViewBag.Layout = "";
+            User user = ((User)Session["user"]);
+            if (user != null)
+            {
+                if (user.role.Equals("candidate"))
+                    ViewBag.Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
+                else if (user.role.Equals("manager"))
+                    ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+                else if (user.role.Equals("staff"))
+                    ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            }
+
             ViewBag.Message = "Your app description page.";
 
             return View();
@@ -45,6 +55,18 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.Layout = "";
+            User user = ((User)Session["user"]);
+            if (user != null)
+            {
+                if (user.role.Equals("candidate"))
+                    ViewBag.Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
+                else if (user.role.Equals("manager"))
+                    ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+                else if (user.role.Equals("staff"))
+                    ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            }
+
             ViewBag.Message = "Your contact page.";
 
             return View();
