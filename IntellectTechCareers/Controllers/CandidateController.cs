@@ -16,12 +16,18 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             return View();
         }
 
         [HttpGet]
         public ActionResult UpdateProfile()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             CandidateModel candidate = new CandidateModel();
 
             int user_id = ((User)Session["user"]).user_id;
@@ -68,6 +74,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ViewJobDetails()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             User user = (User)Session["user"];
 
             CandidateModel candidate = new CandidateModel();
@@ -95,6 +104,9 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult ApplyForJob(JobViewModel model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             User user = (User)Session["user"];
             CandidateDAL.ApplyForJobs(model.selectedJobs, user.user_id);
 
@@ -103,7 +115,11 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult JobApplicationSuccess()
         {
-            return View("JobApplicationSuccess");
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            ViewBag.Message = "You have successfully applied for the selected jobs ! You can view their status in job status view !";
+            return View("Message");
         }
 
         public string UpdateExperienceInfo(ExperienceModel expModel)
@@ -114,6 +130,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ViewJobStatus()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             int user_id = ((User)Session["user"]).user_id;
             List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
             return View(model);
@@ -121,6 +140,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult GetCandidateEducationDetails()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             int user_id = ((User)Session["user"]).user_id;
 
             QualificationViewModel viewModel = new QualificationViewModel();
@@ -131,6 +153,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult GetCandidateExperienceDetails()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             int user_id = ((User)Session["user"]).user_id;
 
             ExperienceViewModel viewModel = new ExperienceViewModel();

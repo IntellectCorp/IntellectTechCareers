@@ -15,8 +15,12 @@ namespace IntellectTechCareers.Controllers
         {
             return View();
         }
+
         public ActionResult Index()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             if (Session["user"] != null)
             {
                 String role = ((User)Session["user"]).role ;

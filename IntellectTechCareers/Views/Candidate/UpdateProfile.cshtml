@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/_LayoutPageCandidate.cshtml";
 }
 
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/Content/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+
+    @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.8.24.min.js")
+}
+
 <script type="text/javascript">
     function enable_add_detail_div() 
     {
@@ -53,6 +62,23 @@
         elem.style.display = "block";
     }
 
+    function validate_email(email) {
+        var regex = /^[a-zA-Z0-9]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return regex.test(email);
+    }
+
+    function validate_contact(contact)
+    {
+        var regex = /[\d]{10}/
+        return regex.test(contact);
+    }
+
+    function validate_address(address)
+    {
+        var regex = /^.{1,30}$/
+        return regex.test(address);
+    }
+
     function add_personal_details() {
         var email = document.getElementById('EmailID').value;
         var contact = document.getElementById('ContactNo').value;
@@ -62,11 +88,30 @@
 
         var url = '@Url.Action("UpdatePersonalInfo", "Candidate")'
 
+        if(!validate_email(email))
+        {
+            document.getElementById('update_details_notification').innerHTML = "<h3><font color=red>Email id is not valid ! </font></h3>";
+            return;
+        }
+
+        if(!validate_contact(contact))
+        {
+            document.getElementById('update_details_notification').innerHTML = "<h3><font color=red> Contact number must be exactly of length 10 and must contain only digits </font></h3>";
+            return;
+        } 
+
+        if(!validate_address(address))
+        {
+            document.getElementById('update_details_notification').innerHTML = "<h3><font color=red> Address is required and can have maximum 30 characters </font></h3>";
+            return;
+        }
+
         $.ajax({
             type: "POST",
             url: url,
             data: model,
             success: function (retValue) {
+                document.getElementById('update_details_notification').innerHTML = "";
                 onCancel();
             }
         });
@@ -107,14 +152,14 @@
     </table>
 
     <div id="save_cancel" style="display:none;">
-        <input type="button" onclick="add_personal_details(); onCancel();" value="Save" />
+        <input type="button" onclick="add_personal_details();" value="Save" />
         <input type="button" onclick="onCancel();" value="Cancel" />
     </div>
     
     <div id="edit_details" style="display:block;">
         <input type="submit" onclick="enable_edit_details()" value="Edit details" />
     </div>
-
+    <div id="update_details_notification"></div>
 </fieldset>
 
     

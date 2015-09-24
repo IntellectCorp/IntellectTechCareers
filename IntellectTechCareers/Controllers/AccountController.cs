@@ -47,6 +47,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Logout()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                RedirectToAction("Login", "Account");
+
             Session.Remove("user");
             return RedirectToAction("Login", "Account");
         }
@@ -60,6 +63,9 @@ namespace IntellectTechCareers.Controllers
         [HttpGet]
         public ActionResult DeleteCandidate()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             int user_id = ((User)Session["user"]).user_id;
 
             AccountDAL.DeleteUser(user_id);
@@ -68,6 +74,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ChangePassword()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             User user = (User)Session["user"];
             ChangePasswordModel model = new ChangePasswordModel();
             model.user_id = user.user_id;
@@ -81,6 +90,9 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             User user = (User)Session["user"];
             String currentPasswordHash = StringUtils.getMD5Hash(StringUtils.Reverse(model.currentPassword));
             if (!currentPasswordHash.Equals(user.password))
