@@ -413,5 +413,36 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
             return job;
         }
+
+        public static List<ShowApplicantModel> getCandidates(string Status)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            String query = "select a.candidate_id, app.name, a.job_id, j.job_description , a.status, r.declaration_date from dbo.Application a " +
+                            " inner join dbo.Applicant app on app.candidate_id = a.candidate_id " +
+                            " inner join dbo.Job j on a.job_id = j.job_id " +
+                            " inner join dbo.Results r on r.job_id = j.job_id where a.status_code = '" + Status + "';";
+
+            SqlCommand command = new SqlCommand(query , con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<ShowApplicantModel> applicants = new List<ShowApplicantModel>();
+            while(reader.Read())
+            {
+                ShowApplicantModel model = new ShowApplicantModel();
+                model.CandidateId = reader.GetInt32(0);
+                model.Name = reader.GetString(1);
+                model.JobId = reader.GetInt32(2);
+                model.JobDesc = reader.GetString(3);
+                model.Date = reader.GetDateTime(5);
+
+                applicants.Add(model);
+            }
+
+            con.Close();
+            return applicants;
+        }
+    
     }
 }

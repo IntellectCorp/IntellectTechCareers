@@ -250,6 +250,8 @@
     <Content Include="Views\Admin\ViewStaffResponsibilities.cshtml" />
     <Content Include="Views\Staff\_PartialReleaseResults.cshtml" />
     <Content Include="Views\Admin\AppointStaff.cshtml" />
+    <Content Include="Views\Admin\SelectedApplicants.cshtml" />
+    <Content Include="Views\Admin\BlockedApplicants.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

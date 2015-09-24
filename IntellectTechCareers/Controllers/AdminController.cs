@@ -210,5 +210,23 @@ namespace IntellectTechCareers.Controllers
             ViewBag.Message = "Staff has been appointed successfully";
             return View("Message");
         }
+
+        public ActionResult SelectedApplicants()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("A");
+            return View(candidates);
+        }
+
+        public ActionResult BlockedApplicants()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("R");
+            return View(candidates);
+        }
     }
 }
