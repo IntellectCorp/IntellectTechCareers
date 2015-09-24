@@ -16,8 +16,18 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
-            if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+           if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             return View();
         }
@@ -26,7 +36,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult UpdateProfile()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             CandidateModel candidate = new CandidateModel();
 
@@ -75,7 +95,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ViewJobDetails()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             User user = (User)Session["user"];
 
@@ -105,7 +135,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ApplyForJob(JobViewModel model)
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             User user = (User)Session["user"];
             CandidateDAL.ApplyForJobs(model.selectedJobs, user.user_id);
@@ -116,7 +156,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult JobApplicationSuccess()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             ViewBag.Message = "You have successfully applied for the selected jobs ! You can view their status in job status view !";
             return View("Message");
@@ -131,7 +181,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ViewJobStatus()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             int user_id = ((User)Session["user"]).user_id;
             List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
@@ -141,7 +201,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult GetCandidateEducationDetails()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             int user_id = ((User)Session["user"]).user_id;
 
@@ -154,7 +224,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult GetCandidateExperienceDetails()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             int user_id = ((User)Session["user"]).user_id;
 

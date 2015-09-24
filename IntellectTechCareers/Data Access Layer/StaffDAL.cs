@@ -121,6 +121,31 @@ namespace IntellectTechCareers.Data_Access_Layer
             reader.Close();
             return staffs;
         }
+
+        public static void getResponsiblities(out bool RightToPost, out bool RightToSchedule, out bool RightToPublish, int userID)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("SELECT right_to_post,right_to_schedule,right_to_publish FROM dbo.Staff WHERE staff_id='" + userID + "';", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader != null && reader.Read())
+            {
+                RightToPost = Convert.ToBoolean(reader[0]);
+                RightToSchedule = Convert.ToBoolean(reader[1]);
+                RightToPublish = Convert.ToBoolean(reader[2]);
+            }
+            else
+            {
+                RightToPost = false;
+                RightToSchedule = false;
+                RightToPublish = false;
+            }
+    
+            reader.Close();
+            con.Close();
+        }
     }
 
 }

@@ -56,7 +56,11 @@ namespace IntellectTechCareers.Controllers
         public ActionResult Logout()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             Session.Remove("user");
             return RedirectToAction("Login", "Account");
@@ -72,7 +76,17 @@ namespace IntellectTechCareers.Controllers
         public ActionResult DeleteCandidate()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             int user_id = ((User)Session["user"]).user_id;
 
@@ -83,7 +97,11 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ChangePassword()
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             User user = (User)Session["user"];
             ChangePasswordModel model = new ChangePasswordModel();
@@ -99,7 +117,11 @@ namespace IntellectTechCareers.Controllers
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
             if (!Navigator.isUserLoggedIn(Session))
-                return RedirectToAction("Login", "Account");
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
 
             User user = (User)Session["user"];
             String currentPasswordHash = StringUtils.getMD5Hash(StringUtils.Reverse(model.currentPassword));

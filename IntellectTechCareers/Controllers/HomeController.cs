@@ -47,7 +47,7 @@ namespace IntellectTechCareers.Controllers
                     ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             }
 
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "ABOUT US.";
 
             return View();
         }
@@ -66,7 +66,7 @@ namespace IntellectTechCareers.Controllers
                     ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             }
 
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "CONTACT US";
 
             return View();
         }
