@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="CheckUserAvailibilityController.cs" />
+    <Compile Include="Utils\Time24hrFormat.cs" />
     <None Include="Controllers\AccountController.cs.original" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />

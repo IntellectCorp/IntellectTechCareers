@@ -129,7 +129,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return model;
         }
 
-        public static List<JobModel> getJobs()
+        private static List<JobModel> getJobs()
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -180,6 +180,51 @@ namespace IntellectTechCareers.Data_Access_Layer
             return applicantCount;
         }
 
+
+        public static List<JobModel> getJobsToBeInterviewed()
+        {
+            List<JobModel> toBeInterviewedModel = new List<JobModel>();
+            List<JobModel> allJobs = getJobs();
+            foreach (var item in allJobs)
+            {
+                if (item.Status.Equals("P"))
+                {
+                    toBeInterviewedModel.Add(item);
+                }
+            }
+            return toBeInterviewedModel;
+        }
+
+        public static List<JobModel> getJobsForReleasingResult()
+        {
+            List<JobModel> newModel = new List<JobModel>();
+            List<JobModel> allJobs = getJobs();
+            foreach (var item in allJobs)
+            {
+                if (item.Status.Equals("S"))
+                {
+                    newModel.Add(item);
+                }
+            }
+            return newModel;
+        }
+
+        public static void scheduleInterviewToDB(InterviewModel interviewModel, User user)
+        {
+
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+            SqlCommand command;
+
+            command = new SqlCommand("insert into Interview (job_id, date, time, venue, scheduled_by) values (" + interviewModel.JobId + ", '" + interviewModel.Date.ToShortDateString() + "', '" + interviewModel.Time.ToString() + "', '" + interviewModel.Venue + "', " + user.user_id + ");", con);
+            command.ExecuteNonQuery();
+
+            command = new SqlCommand("UPDATE Job SET status='S' WHERE job_id=" + interviewModel.JobId + " ;", con);
+            command.ExecuteNonQuery();
+
+            con.Close();
+        }
+
         public static List<User> getUsers()
         {
             SqlConnection con = DBUtils.getDBConnection();
@@ -204,7 +249,6 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             return userList;
         }
-
 
     }
 }

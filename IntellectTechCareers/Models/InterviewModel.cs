@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntellectTechCareers.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace IntellectTechCareers.Models
         public DateTime Date { get; set; }
 
         [Display(Name = "Time")]
-        public DateTime Time { get; set; }
+        public Time24hrFormat Time { get; set; }
 
         [Display(Name = "Venue")]
-        public string venue { get; set; }
+        public string Venue { get; set; }
 
     }
 }

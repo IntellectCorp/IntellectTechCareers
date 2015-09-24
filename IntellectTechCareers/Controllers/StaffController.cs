@@ -72,7 +72,7 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ScheduleInterview()
         {
-            List<JobModel> model = ASCommonDAL.getJobs();
+            List<JobModel> model = ASCommonDAL.getJobsToBeInterviewed();
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             return View(model);
         }
@@ -83,14 +83,26 @@ namespace IntellectTechCareers.Controllers
         {
             InterviewModel model = new InterviewModel();
             model.JobId = jobModel.JobId;
-            model.JobDesc = jobModel.JobDesc;
+            model.JobDesc = jobModel.JobDesc.Replace(Environment.NewLine,"");
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            @ViewBag.Controller = "Staff";
             return PartialView("_PartialScheduleInterview", model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ScheduleInterview(InterviewModel interviewModel)
+        {
+            User user = ((User)Session["user"]);
+            ASCommonDAL.scheduleInterviewToDB(interviewModel,user);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            @ViewBag.Message = "Interview Scheduled for Job - ["+interviewModel.JobId+"] "+interviewModel.JobDesc+" !";
+            return View("Message");
         }
 
         public ActionResult ReleaseResults()
         {
-            List<JobModel> jobs = ASCommonDAL.getJobs();
+            List<JobModel> jobs = ASCommonDAL.getJobsForReleasingResult();
             List<JobWithApplicantsModel> model = new List<JobWithApplicantsModel>();
             foreach (var item in jobs)
             {
