@@ -254,6 +254,9 @@ namespace IntellectTechCareers.Data_Access_Layer
             command = new SqlCommand("UPDATE Job SET status='S' WHERE job_id=" + interviewModel.JobId + " ;", con);
             command.ExecuteNonQuery();
 
+            command = new SqlCommand("UPDATE Application SET status_code='I', status='Interview Scheduled' WHERE job_id=" + interviewModel.JobId + " ;", con);
+            command.ExecuteNonQuery();
+
             con.Close();
         }
 
@@ -283,9 +286,9 @@ namespace IntellectTechCareers.Data_Access_Layer
         }
 
 
-        internal static void releaseResultToDB(ResultModel resultModel, User user)
+        public static void releaseResultToDB(ResultModel resultModel, User user)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
