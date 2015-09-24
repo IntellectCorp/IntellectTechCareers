@@ -302,10 +302,16 @@ namespace IntellectTechCareers.Data_Access_Layer
 
                     command = new SqlCommand("UPDATE Application SET status_code='S', status='Selected' WHERE candidate_id=" + item.UserID + " ;", con);
                     command.ExecuteNonQuery();
+
+                    command = new SqlCommand("UPDATE Users SET state='Selected' WHERE user_id=" + item.UserID + " ;", con);
+                    command.ExecuteNonQuery();
                 }
                 else
                 {
                     command = new SqlCommand("UPDATE Application SET status_code='R', status='Rejected' WHERE candidate_id=" + item.UserID + " ;", con);
+                    command.ExecuteNonQuery();
+
+                    command = new SqlCommand("UPDATE Users SET state='Blocked', account_act_date='"+DateTime.Now.AddDays(90).ToShortDateString()+"' WHERE user_id=" + item.UserID + " ;", con);
                     command.ExecuteNonQuery();
                 }
             }
