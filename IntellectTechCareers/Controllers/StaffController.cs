@@ -160,6 +160,7 @@ namespace IntellectTechCareers.Controllers
             @ViewBag.Message = "Result Released for Job - [" + resultModel.JobId + "] " + resultModel.JobDesc + ".";
             return View("Message");
         }
+
         public ActionResult ViewJobApplicationStatus()
         {
             if (!Navigator.isUserLoggedIn(Session))

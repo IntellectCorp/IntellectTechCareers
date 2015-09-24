@@ -17,21 +17,55 @@
         <legend>ResultModel</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.JobId)
+            <h3>Releasing Results</h3>
+            @Html.Label("For Job - ["+Model.JobId+"] "+Model.JobDesc)
+            @Html.HiddenFor(model => model.JobId)
+            @Html.HiddenFor(model => model.JobDesc)
+            @Html.HiddenFor(model => model.Vacancies)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.JobId)
-            @Html.ValidationMessageFor(model => model.JobId)
-        </div>
+        <br />
+        @if (Model.Candidates.Count > 0)
+        {
+            <div class="editor-label">
+                @Html.Label("Slect Candidates : ")
 
-          <div class="editor-label">
-            @Html.LabelFor(model => model.Vacancies)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Vacancies)
-            @Html.ValidationMessageFor(model => model.Vacancies)
-        </div>
+                <table class="select-table">
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Candidates[0].UserID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Candidates[0].Username)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Candidates[0].Name)
+                        </th>
+                    </tr>
 
+                    @for (int i = 0; i < Model.Candidates.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(model => model.Candidates[i].UserID)
+                                @Html.HiddenFor(model => model.Candidates[i].Name)
+                                @Html.HiddenFor(model => model.Candidates[i].Username)
+                                @Html.CheckBoxFor(model => model.Candidates[i].IsSelected, Model.Candidates[i].UserID)
+                            </td>
+                            <td>
+                                @Html.Label(Model.Candidates[i].UserID.ToString())
+                            </td>
+                            <td>
+                                @Html.Label(Model.Candidates[i].Username.ToString())
+                            </td>
+                            <td>
+                                @Html.Label(Model.Candidates[i].Name.ToString())
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
         <p>
             <input type="submit" value="Release" />
         </p>

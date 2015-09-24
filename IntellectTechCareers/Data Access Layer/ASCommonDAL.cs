@@ -243,7 +243,6 @@ namespace IntellectTechCareers.Data_Access_Layer
 
         public static void scheduleInterviewToDB(InterviewModel interviewModel, User user)
         {
-
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
             SqlCommand command;
@@ -288,7 +287,38 @@ namespace IntellectTechCareers.Data_Access_Layer
 
         public static void releaseResultToDB(ResultModel resultModel, User user)
         {
-            
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+            SqlCommand command;
+
+            List<CandidateResult> selectedCandidates = new List<CandidateResult>();
+            int count = 0;
+            foreach (var item in resultModel.Candidates)
+            {
+                if (item.IsSelected)
+                {
+                    selectedCandidates.Add(item);
+                    count++;
+
+                    command = new SqlCommand("UPDATE Application SET status_code='S', status='Selected' WHERE candidate_id=" + item.UserID + " ;", con);
+                    command.ExecuteNonQuery();
+                }
+                else
+                {
+                    command = new SqlCommand("UPDATE Application SET status_code='R', status='Rejected' WHERE candidate_id=" + item.UserID + " ;", con);
+                    command.ExecuteNonQuery();
+                }
+            }
+            resultModel.numOfCandidatesSelected = count;
+
+            string selectedCandidatesSet = String.Join(",", selectedCandidates.Select(x => x.UserID.ToString()).ToArray());
+            command = new SqlCommand("INSERT INTO dbo.Results (job_id, declaration_date, num_of_candidates_selected, candidates, released_by) values (" + resultModel.JobId + ", '" + DateTime.Now.ToShortDateString() + "', " + resultModel.numOfCandidatesSelected + ", '" + selectedCandidatesSet + "', " + user.user_id + " );", con);
+            command.ExecuteNonQuery();
+
+            command = new SqlCommand("UPDATE Job SET status='R' WHERE job_id=" + resultModel.JobId + " ;", con);
+            command.ExecuteNonQuery();
+
+            con.Close();
         }
     }
 }
