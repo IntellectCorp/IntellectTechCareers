@@ -10,7 +10,7 @@ namespace IntellectTechCareers.Utils
     {
         public static bool isUserLoggedIn(HttpSessionStateBase session)
         {
-            Object user = session["User"];
+            var user = session["User"];
             if (user == null)
                 return false;
             else
@@ -19,7 +19,7 @@ namespace IntellectTechCareers.Utils
 
         public static bool UserRoleValidation(HttpSessionStateBase session, string role)
         {
-            Object user = session["User"];
+            var user = session["User"];
             if (user == null)
                 return false;
             else
