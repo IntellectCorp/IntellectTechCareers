@@ -129,6 +129,33 @@ namespace IntellectTechCareers.Data_Access_Layer
             return model;
         }
 
+        public static JobListModel getJobList()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select job_id from dbo.Job;", con);
+            SqlDataReader reader = command.ExecuteReader();
+                
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+
+            //Creating a JobRole List
+            List<int> listItems = new List<int>();
+            do
+            {
+                listItems.Add(Convert.ToInt32(reader[0]));
+            }
+            while (reader.Read());
+
+            con.Close();
+            JobListModel model = new JobListModel();
+            model.JobIdList = listItems;
+            return model;
+        }
+
         private static List<JobModel> getJobs()
         {
             SqlConnection con = DBUtils.getDBConnection();

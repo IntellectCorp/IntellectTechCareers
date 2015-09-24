@@ -182,5 +182,27 @@ namespace IntellectTechCareers.Controllers
             IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetails(model.CandidateId);
             return PartialView("_PartialJobApplicationStatus", data);
         }
+
+        public ActionResult ViewJobApplicationByJobId()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            //int user_id = ((User)Session["user"]).user_id;
+            //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
+            return View(ASCommonDAL.getJobList());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ViewJobApplicationByJobId(JobListModel model)
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetailsByJobId(model.JobId);
+            return PartialView("_PartialJobApplicationStatus", data);
+        }
     }
 }

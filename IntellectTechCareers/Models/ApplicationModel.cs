@@ -36,4 +36,11 @@ namespace IntellectTechCareers.Models
         public int CandidateId { get; set; }
         public List<int> CandidateIdList { get; set; }
     }
+
+    public class JobListModel
+    {
+        [Display(Name = "Job")]
+        public int JobId { get; set; }
+        public List<int> JobIdList { get; set; }
+    }
 }

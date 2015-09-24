@@ -1,0 +1,63 @@
+﻿@model IntellectTechCareers.Models.JobListModel
+
+@{
+    ViewBag.Title = "ViewJobApplicationStatus";
+    if (ViewBag.Layout != null)
+    {
+        Layout = ViewBag.Layout;//"~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+    }
+}
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var JobApplicationStatusDiv = $("#JobApplicationStatus");
+        var id = $("#JobId").val();
+        var model = { "JobId": 2001 };
+        var url = '@Url.Action("ViewJobApplicationByJobId", "Staff")'
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: url,
+            data: model,
+            success: function (retValue) {
+                JobApplicationStatusDiv.html(retValue);
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#jobList").change(function () {
+            var JobApplicationStatusDiv = $("#JobApplicationStatus");
+            var id = $("#JobId").val();
+            var model = { "JobId": id };
+            var url = '@Url.Action("ViewJobApplicationByJobId", "Staff")'
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: url,
+                data: model,
+                success: function (retValue) {
+                    JobApplicationStatusDiv.html(retValue);
+                }
+            });
+        });
+    });
+
+</script>
+<h2>View Job Application Status</h2>
+<br />
+@using (Html.BeginForm())
+{    <div class="inline-label" id="jobList">
+        @Html.LabelFor(model => model.JobId)
+        @Html.DropDownListFor(model => model.JobId, new SelectList(Model.JobIdList))
+        @Html.ValidationMessageFor(model => model.JobId)
+    </div>
+}
+<div id="JobApplicationStatus" style="display: block;">
+</div>
