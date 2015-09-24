@@ -1,11 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact US";
+    
+    if(ViewBag.Layout.Equals(""))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = ViewBag.Layout;
+    }
+    
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
 
 <section class="contact">
     <header>
@@ -13,11 +18,11 @@
     </header>
     <p>
         <span class="label">Main:</span>
-        <span>425.555.0100</span>
+        <span>1900-1400-1200</span>
     </p>
     <p>
         <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
+        <span>1900-1400-2400</span>
     </p>
 </section>
 
@@ -27,15 +32,15 @@
     </header>
     <p>
         <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
+        <span>Support@intellecttech.com</span>
     </p>
     <p>
         <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
+        <span>Marketing@intellecttech.com</span>
     </p>
     <p>
         <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
+        <span>General@intellecttech.com</span>
     </p>
 </section>
 
@@ -44,7 +49,8 @@
         <h3>Address</h3>
     </header>
     <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
+        VCSSI, Bagmane world technology center<br />
+        KR Puram-Marathalli outer ring road  <br />
+        Mahadevpura, Bangalore, India.
     </p>
 </section>

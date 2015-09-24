@@ -16,11 +16,17 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             return View("Home/ManagerHome", AdminDAL.getManagerHome());
         }
 
         public ActionResult AddJobRoles()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             return View();
         }
 
@@ -28,6 +34,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult AddJobRoles(JobRole model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             AdminDAL.addNewJobRole(model);
          
             @ViewBag.Message = "Job Role - "+model.Name+" Added !";
@@ -38,6 +47,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult AddQualification()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             return View();
         }
 
@@ -45,6 +57,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult AddQualification(Qualification model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             AdminDAL.addNewQualification(model);
 
             @ViewBag.Message = "New Qualification - " + model.Name + " Added !";
@@ -55,6 +70,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult PostJob()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             Job model = new Job();
             model.JobRoles = ASCommonDAL.getJobRoles();
@@ -66,6 +84,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult PostJob(Job model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             Job mo = model;
             User user = ((User)Session["user"]);
             ASCommonDAL.postJobinDB(model, user);
@@ -78,6 +99,9 @@ namespace IntellectTechCareers.Controllers
         }
         public ActionResult ViewJobApplicationStatus()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             //int user_id = ((User)Session["user"]).user_id;
             //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
@@ -88,12 +112,18 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ViewJobApplicationStatus(ApplicantListModel model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetails(model.CandidateId);
             return PartialView("_PartialJobApplicationStatus", data);
         }
 
         public ActionResult ChangeOthersPassword()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             List<User> userList = ASCommonDAL.getUsers();
 
             List<SelectListItem> candidates = new List<SelectListItem>();
@@ -116,6 +146,9 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult ChangeOthersPassword(ChangePasswordModel model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             int userId = 0;
             if (model.isApplicant)
                 userId = model.selectedApplicant;
@@ -135,6 +168,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ManageStaffResponsibilities()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             List<Staff> staffs = StaffDAL.GetStaffDetails();
             return View(staffs);
         }
@@ -147,6 +183,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ViewStaffResponsibilities()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             List<Staff> staffs = StaffDAL.GetStaffDetails();
             return View(staffs);
         }

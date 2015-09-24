@@ -72,7 +72,6 @@
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li><a href="#" id="modal-opener">Notifications</a></li>
                     </ul>
                 </nav>
             </div>
@@ -88,14 +87,14 @@
                     <nav style="float: right;">
                         <ul class="myMenu">
                             <li>@Html.ActionLink("My DashBoard", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Jobs", "About", "Home")
+                            <li>@Html.ActionLink("Jobs", "", "")
                                 <ul>
                                     <li>@Html.ActionLink("Post Job", "PostJob", "Staff")</li>
                                     <li>@Html.ActionLink("Schedule Interview", "ScheduleInterview", "Staff")</li>
                                     <li>@Html.ActionLink("Release Results", "ReleaseResults", "Staff")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Reports", "About", "Home")
+                            <li>@Html.ActionLink("Reports", "", "")
                                 <ul>
                                     <li>@Html.ActionLink("Job Application Status", "ViewJobApplicationStatus", "Staff")</li>
                                     <li><a href="#">Applications By JobId</a></li>

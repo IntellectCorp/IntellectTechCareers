@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IntellectTechCareers.Utils;
 
 namespace IntellectTechCareers.Controllers
 {
@@ -15,12 +16,18 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             //return View("StaffHome");
             return View("Home/StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
         }
 
         public ActionResult PostJob()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
 
             Job model = new Job();
@@ -39,6 +46,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult PostJob(Job model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             User user = ((User)Session["user"]);
             ASCommonDAL.postJobinDB(model, user);
             //string desc = model.JobDesc;
@@ -72,6 +82,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ScheduleInterview()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             List<JobModel> model = ASCommonDAL.getJobsToBeInterviewed();
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             return View(model);
@@ -81,6 +94,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ScheduleInterviewDialog(JobModel jobModel)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             InterviewModel model = new InterviewModel();
             model.JobId = jobModel.JobId;
             model.JobDesc = jobModel.JobDesc.Replace(Environment.NewLine,"");
@@ -93,6 +109,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ScheduleInterview(InterviewModel interviewModel)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             User user = ((User)Session["user"]);
             ASCommonDAL.scheduleInterviewToDB(interviewModel,user);
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
@@ -102,6 +121,9 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ReleaseResults()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             List<JobModel> jobs = ASCommonDAL.getJobsForReleasingResult();
             List<JobWithApplicantsModel> model = new List<JobWithApplicantsModel>();
             foreach (var item in jobs)
@@ -140,6 +162,9 @@ namespace IntellectTechCareers.Controllers
         }
         public ActionResult ViewJobApplicationStatus()
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             //int user_id = ((User)Session["user"]).user_id;
             //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
@@ -150,6 +175,9 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ViewJobApplicationStatus(ApplicantListModel model)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
             IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetails(model.CandidateId);
             return PartialView("_PartialJobApplicationStatus", data);
         }

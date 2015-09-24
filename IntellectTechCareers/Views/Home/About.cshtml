@@ -1,34 +1,31 @@
 ﻿@{
     ViewBag.Title = "About";
+
+    if (ViewBag.Layout.Equals(""))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = ViewBag.Layout;
+    }
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
-
-<article>
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-</article>
-
-<aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
-    <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
-</aside>
+<div class="container-wrapper">
+<div class="information-section">
+<h2 class="information-title">About Us</h2>
+<p class="information-text">Welcome to Intellect Tech, the world's largest professional network with 300 million members in over 200 countries and territories around the globe.</p>
+</div>
+<div class="information-section">
+<h2 class="information-title">Mission</h2>
+<p class="information-text">Our mission is simple: connect the world's professionals to make them more productive and successful. When you join Intellect Tech, you get access to people, jobs, news, updates, and insights that help you be great at what you do.</p>
+</div>
+<div class="information-section">
+<h2 class="information-title">Company Info</h2>
+<div class="information-text">
+<p>Intellect started out in the VISA office of co-founder Kaushik and Ashish in 2015, and it officially launched on Sept 1, 2015.</p>
+<p>The company's management team is made up of seasoned executives from companies like Yahoo!, Google, Microsoft, TiVo, PayPal, and Electronic Arts.</p>
+<p>Intellect Tech is publicly held and has a diversified business model with revenues coming from member subscriptions, advertising sales, and talent solutions.</p>
+</div>
+</div>
+</div>
