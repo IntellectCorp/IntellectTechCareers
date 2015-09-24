@@ -20,7 +20,7 @@
     //});
     $(document).ready(function () {
         $(".scheduleButton").click(function () {
-            alert("Hi");
+            //alert("Hi");
             var rowValue = [];
             $(this).closest('tr').find('td').not(':last').each(function () {
                 var textval = $(this).text(); // this will be the text of each <td>
@@ -30,7 +30,7 @@
             //alert(rowValue.join('\n'));
             var ScheduleInterviewDialogDiv = $("#ScheduleInterviewDialog");
             // var id = $("#CandidateId").val();
-            var model = { "JobId": rowValue[0] , "JobDesc": rowValue[1] };
+            var model = { "JobId": $.trim(rowValue[0]), "JobDesc": $.trim(rowValue[1]) };
             var url = '@Url.Action("ScheduleInterviewDialog", "Staff")'
             $.ajax({
                 type: "POST",
@@ -38,7 +38,7 @@
                 url: url,
                 data: model,
                 success: function (retValue) {
-                    alert("uuu");
+                    //alert("uuu");
                     ScheduleInterviewDialogDiv.html(retValue);
                 }
             });

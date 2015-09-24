@@ -25,16 +25,18 @@
             @Html.LabelFor(model => model.JobId)
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.JobId)
-            @Html.HiddenFor(model => model.JobId)
+            @*@Html.DisplayFor(model => model.JobId)
+            @Html.HiddenFor(model => model.JobId)*@
+			@Html.TextBoxFor(model => model.JobId, new { @type = "text", @readonly = "readonly"})
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.JobDesc)
         </div>
         <div class="editor-field">
-            @Html.DisplayFor(model => model.JobDesc)
-            @Html.HiddenFor(model => model.JobDesc)
+            @*@Html.DisplayFor(model => model.JobDesc)
+            @Html.HiddenFor(model => model.JobDesc)*@
+			@Html.TextBoxFor(model => model.JobDesc, new { @type = "text", @readonly = "readonly"})
         </div>
 
         <div class="editor-label">
