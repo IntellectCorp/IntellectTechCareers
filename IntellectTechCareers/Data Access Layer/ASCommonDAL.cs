@@ -180,6 +180,38 @@ namespace IntellectTechCareers.Data_Access_Layer
             return applicantCount;
         }
 
+        public static List<CandidateResult> getApplicantForTheJob(int jobID)
+        {
+            List<CandidateResult> candidates = new List<CandidateResult>();
+
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("SELECT candidate_id FROM dbo.Application WHERE job_id=" + jobID + ";", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+            do
+            {
+                CandidateResult candi = new CandidateResult();
+                candi.UserID = Convert.ToInt32(reader[0]);
+                string username, name;
+                AccountDAL.GetNameOfUser(out name, out username, candi.UserID);
+                candi.Username = username;
+                candi.Name = name;
+                candi.IsSelected = false;
+
+                candidates.Add(candi);
+
+            } while (reader.Read());
+
+            reader.Close();
+            con.Close();
+            return candidates;
+        }
 
         public static List<JobModel> getJobsToBeInterviewed()
         {
@@ -222,6 +254,9 @@ namespace IntellectTechCareers.Data_Access_Layer
             command = new SqlCommand("UPDATE Job SET status='S' WHERE job_id=" + interviewModel.JobId + " ;", con);
             command.ExecuteNonQuery();
 
+            command = new SqlCommand("UPDATE Application SET status_code='I', status='Interview Scheduled' WHERE job_id=" + interviewModel.JobId + " ;", con);
+            command.ExecuteNonQuery();
+
             con.Close();
         }
 
@@ -250,5 +285,10 @@ namespace IntellectTechCareers.Data_Access_Layer
             return userList;
         }
 
+
+        public static void releaseResultToDB(ResultModel resultModel, User user)
+        {
+            
+        }
     }
 }

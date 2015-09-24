@@ -115,7 +115,7 @@ namespace IntellectTechCareers.Controllers
             User user = ((User)Session["user"]);
             ASCommonDAL.scheduleInterviewToDB(interviewModel,user);
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
-            @ViewBag.Message = "Interview Scheduled for Job - ["+interviewModel.JobId+"] "+interviewModel.JobDesc+" !";
+            @ViewBag.Message = "Interview Scheduled for Job - ["+interviewModel.JobId+"] "+interviewModel.JobDesc+".";
             return View("Message");
         }
 
@@ -136,7 +136,30 @@ namespace IntellectTechCareers.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ReleaseResultsDialog(JobModel jobModel)
+        {
+            ResultModel model = new ResultModel();
+            model.JobId = jobModel.JobId;
+            model.JobDesc = jobModel.JobDesc;
+            model.Vacancies = jobModel.Vacancies;
+            model.Candidates = ASCommonDAL.getApplicantForTheJob(jobModel.JobId);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            @ViewBag.Controller = "Staff";
+            return PartialView("_PartialReleaseResults", model);
+        }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ReleaseResults(ResultModel resultModel)
+        {
+            User user = ((User)Session["user"]);
+            ASCommonDAL.releaseResultToDB(resultModel, user);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+            @ViewBag.Message = "Result Released for Job - [" + resultModel.JobId + "] " + resultModel.JobDesc + ".";
+            return View("Message");
+        }
         public ActionResult ViewJobApplicationStatus()
         {
             if (!Navigator.isUserLoggedIn(Session))

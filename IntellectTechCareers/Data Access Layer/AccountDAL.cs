@@ -11,7 +11,7 @@ namespace IntellectTechCareers.Utils
     {
         public static User validateUserAndGetRole(string username, string passwd)
         {
-            SqlConnection con = DBUtils.getDBConnection(); 
+            SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
             SqlCommand command = new SqlCommand("select user_id, password, role, name, state, account_act_date from dbo.Users where username='" + username + "';", con);
@@ -65,6 +65,27 @@ namespace IntellectTechCareers.Utils
             }
 
             return "Failed";
+        }
+
+        public static void GetNameOfUser(out string name, out string username, int userId)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select username, name from dbo.Users where user_id=" + userId + ";", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                username = reader.GetString(0);
+                name = reader.GetString(1);
+                con.Close();
+            }
+            else
+            {
+                username = "NA";
+                name = "NA";
+            }
         }
 
         public static string getCandidateId(SqlConnection con, string uname)

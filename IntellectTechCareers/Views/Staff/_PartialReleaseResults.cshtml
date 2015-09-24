@@ -1,0 +1,39 @@
+﻿@model IntellectTechCareers.Models.ResultModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@*@using (Html.BeginForm()) *@
+@{
+    string postController = @ViewBag.Controller;
+}
+@using (Html.BeginForm("ReleaseResults", postController, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ResultModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JobId)
+            @Html.ValidationMessageFor(model => model.JobId)
+        </div>
+
+          <div class="editor-label">
+            @Html.LabelFor(model => model.Vacancies)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Vacancies)
+            @Html.ValidationMessageFor(model => model.Vacancies)
+        </div>
+
+        <p>
+            <input type="submit" value="Release" />
+        </p>
+    </fieldset>
+}
