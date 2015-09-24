@@ -380,6 +380,19 @@ select {
     -o-border-radius: 3px 3px 3px 3px;
 }
 
+.select_small {
+    border: 1px solid #93A9C8;
+    padding: 2px;
+    font-size: 1em;
+    color: #444;
+    width: 60px;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -o-border-radius: 3px 3px 3px 3px;
+}
+
+
 #Time_Hour, #Time_Minute {
     width: 150px;
 }
@@ -393,6 +406,15 @@ select {
     #gender {
         width: 40px;
     }
+
+    #role {
+        width: 40px;
+    }
+
+    #isApplicant {
+        width: 40px;
+    }
+
 
  #LoginFormRight {
     margin-right: 10px;

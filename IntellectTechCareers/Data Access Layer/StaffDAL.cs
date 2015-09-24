@@ -81,5 +81,46 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
             return model;
         }
+
+
+        public static List<Staff> GetStaffDetails()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("SELECT staff_id, right_to_post, right_to_schedule, right_to_publish, users.name" + 
+                " FROM dbo.Staff staff inner join dbo.Users users on users.user_id = staff.staff_id;", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<Staff> staffs = new List<Staff>();
+            while(reader.Read())
+            {
+                Staff staff = new Staff();
+
+                staff.StaffId = reader.GetInt32(0);
+                if (Convert.ToBoolean(reader[1]))
+                    staff.RightToPost = true;
+                else
+                    staff.RightToPost = false;
+
+                if (Convert.ToBoolean(reader[2]))
+                    staff.RightToSchedule = true;
+                else
+                    staff.RightToSchedule = false;
+
+                if (Convert.ToBoolean(reader[3]))
+                    staff.RightToPublish = true;
+                else
+                    staff.RightToPublish = false;
+
+                staff.StaffName = reader.GetString(4);
+
+                staffs.Add(staff);
+            }
+
+            reader.Close();
+            return staffs;
+        }
     }
+
 }

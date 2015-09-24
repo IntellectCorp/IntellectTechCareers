@@ -31,4 +31,22 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Age Limit")]
         public int AgeLimit { get; set; }
     }
+
+    public class Staff
+    {
+        [Display(Name = "Staff ID")]
+        public int StaffId { get; set; }
+
+        [Display(Name = "Staff")]
+        public string StaffName { get; set; }
+
+        [Display(Name = "Right to schedule")]
+        public bool RightToSchedule { get; set; }
+
+        [Display(Name = "Right to publish")]
+        public bool RightToPublish { get; set; }
+        
+        [Display(Name = "Right to post")]
+        public bool RightToPost { get; set; }
+    }
 }

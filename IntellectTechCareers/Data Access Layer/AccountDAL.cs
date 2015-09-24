@@ -43,6 +43,24 @@ namespace IntellectTechCareers.Utils
             return user;
         }
 
+        public static string GetUserName(int userId)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select username from dbo.Users where user_id=" + userId + ";", con);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string userName = reader.GetString(0);
+                con.Close();
+                return userName;
+            }
+
+            return "Failed";
+        }
+
         public static string getCandidateId(SqlConnection con, string uname)
         {
             SqlCommand command = new SqlCommand("select user_id from dbo.Users where username='" + uname + "';", con);

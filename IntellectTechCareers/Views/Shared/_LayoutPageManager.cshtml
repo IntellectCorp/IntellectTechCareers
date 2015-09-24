@@ -88,7 +88,7 @@
                     <nav style="float: right;">
                         <ul class="myMenu">
                             <li>@Html.ActionLink("My DashBoard", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Jobs", "About", "Home")
+                            <li>@Html.ActionLink("Jobs", "Index", "Home")
                                 <ul>
                                     <li>@Html.ActionLink("Post Job", "PostJob", "Admin")</li>
                                     <li><a href="#">Schedule Interview</a></li>
@@ -97,6 +97,7 @@
                             </li>
                             <li>@Html.ActionLink("Reports", "About", "Home")
                                 <ul>
+                                    <li>@Html.ActionLink("Job Staff Responsibilities", "ViewStaffResponsibilities", "Admin")</li>
                                     <li>@Html.ActionLink("Job Application Status", "ViewJobApplicationStatus", "Admin")</li>
                                     <li><a href="#">Applications By JobId</a></li>
                                     <li><a href="#">Selected Applicant Details</a></li>
@@ -111,11 +112,11 @@
                                     <li>@Html.ActionLink("Add Qualification", "AddQualification", "Admin")</li>
                                     <li><a href="#">Appoint Staff</a></li>
                                     <li><a href="#">Activate / Deactivate Staff</a></li>
-                                    <li><a href="#">Staff Responsiblities</a></li>
-                                    <li><a href="#">Change Other's Password</a></li>
+                                    <li>@Html.ActionLink("Staff Responsibilities", "ManageStaffResponsibilities", "Admin")</li>
+                                    <li>@Html.ActionLink("Change Other's Password", "ChangeOthersPassword", "Admin")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Change My Password", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                             <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
                         </ul>
                     </nav>

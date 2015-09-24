@@ -224,5 +224,31 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             con.Close();
         }
+
+        public static List<User> getUsers()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select user_id, username, role from dbo.Users ;", con);
+            command.ExecuteNonQuery();
+
+            List<User> userList = new List<User>();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                User user = new User();
+                user.user_id = reader.GetInt32(0);
+                user.username = reader.GetString(1);
+                user.role = reader.GetString(2);
+
+                userList.Add(user);
+            }
+            reader.Close();
+            con.Close();
+
+            return userList;
+        }
+
     }
 }
