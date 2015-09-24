@@ -119,6 +119,28 @@ namespace IntellectTechCareers.Controllers
             return PartialView("_PartialJobApplicationStatus", data);
         }
 
+        public ActionResult ViewJobApplicationByJobId()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            //int user_id = ((User)Session["user"]).user_id;
+            //List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
+            return View("../Staff/ViewJobApplicationByJobId", ASCommonDAL.getJobList());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ViewJobApplicationByJobId(JobListModel model)
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetailsByJobId(model.JobId);
+            return PartialView("_PartialJobApplicationStatus", data);
+        }
+
         public ActionResult ChangeOthersPassword()
         {
             if (!Navigator.isUserLoggedIn(Session))
@@ -227,6 +249,87 @@ namespace IntellectTechCareers.Controllers
 
             List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("R");
             return View(candidates);
+        }
+
+        public ActionResult ScheduleInterview()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            List<JobModel> model = ASCommonDAL.getJobsToBeInterviewed();
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("../Staff/ScheduleInterview", model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ScheduleInterviewDialog(JobModel jobModel)
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            InterviewModel model = new InterviewModel();
+            model.JobId = jobModel.JobId;
+            model.JobDesc = jobModel.JobDesc.Replace(Environment.NewLine, "");
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            @ViewBag.Controller = "Staff";
+            return PartialView("_PartialScheduleInterview", model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ScheduleInterview(InterviewModel interviewModel)
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            User user = ((User)Session["user"]);
+            ASCommonDAL.scheduleInterviewToDB(interviewModel, user);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            @ViewBag.Message = "Interview Scheduled for Job - [" + interviewModel.JobId + "] " + interviewModel.JobDesc + ".";
+            return View("Message");
+        }
+
+        public ActionResult ReleaseResults()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            List<JobModel> jobs = ASCommonDAL.getJobsForReleasingResult();
+            List<JobWithApplicantsModel> model = new List<JobWithApplicantsModel>();
+            foreach (var item in jobs)
+            {
+                JobWithApplicantsModel jobWithAppl = new JobWithApplicantsModel(item);
+                jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.JobId);
+                model.Add(jobWithAppl);
+            }
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return View("../Staff/ReleaseResults", model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ReleaseResultsDialog(JobModel jobModel)
+        {
+            ResultModel model = new ResultModel();
+            model.JobId = jobModel.JobId;
+            model.JobDesc = jobModel.JobDesc;
+            model.Vacancies = jobModel.Vacancies;
+            model.Candidates = ASCommonDAL.getApplicantForTheJob(jobModel.JobId);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            @ViewBag.Controller = "Staff";
+            return PartialView("_PartialReleaseResults", model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ReleaseResults(ResultModel resultModel)
+        {
+            User user = ((User)Session["user"]);
+            ASCommonDAL.releaseResultToDB(resultModel, user);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            @ViewBag.Message = "Result Released for Job - [" + resultModel.JobId + "] " + resultModel.JobDesc + ".";
+            return View("Message");
         }
     }
 }
