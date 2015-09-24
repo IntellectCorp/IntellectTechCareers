@@ -26,6 +26,12 @@ namespace IntellectTechCareers.Utils
                 return user;
             }
 
+            if (Convert.ToString(reader[4]).Equals("Disabled"))
+            {
+                user.role = "INVALID";
+                return user;
+            }
+
             user.user_id = Convert.ToInt32(reader[0]);
             string pwd = Convert.ToString(reader[1]);
             user.password = pwd;
@@ -108,24 +114,12 @@ namespace IntellectTechCareers.Utils
 
         public static void DeleteUser(int userId)
         {
-            string queryApplication = "delete from dbo.Application where candidate_id = " + userId + ";";
-            string queryExperience = "delete from dbo.Experience where user_id = " + userId + ";";
-            string queryApplicant = "delete from dbo.Applicant where candidate_id = " + userId + ";";
-            string queryUser = "delete from dbo.Users where user_id = " + userId + ";";
+            string queryUser = "update dbo.Users set state='Disabled' where user_id = " + userId + ";";
 
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
-            SqlCommand command = new SqlCommand(queryApplication, con);
-            command.ExecuteNonQuery();
-
-            command = new SqlCommand(queryExperience, con);
-            command.ExecuteNonQuery();
-
-            command = new SqlCommand(queryApplicant, con);
-            command.ExecuteNonQuery();
-
-            command = new SqlCommand(queryUser, con);
+            SqlCommand command = new SqlCommand(queryUser, con);
             command.ExecuteNonQuery();
 
             con.Close();
