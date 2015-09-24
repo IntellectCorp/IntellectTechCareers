@@ -39,31 +39,38 @@
     }
 
     function check_user_name_avail() {
-        var user_name = document.getElementById('UserName').value;
 
-        var model = { "UserName": user_name };
-        var url = '@Url.Action("CheckUserNameAvailibility", "Account")'
-
+        var username = document.getElementById("UserName").value;
+        var serviceurl = "http://localhost:51124/UserNameValidation.svc/checkavailability?username=" + username;
+        jQuery.support.cors = true;
         $.ajax({
-            type: "POST",
-            url: url,
-            data: model,
-            success: function (obj) {
+            url: serviceurl,
+            cache: false,
+            type: "GET",
+            async: false,
+            dataType: "jsonp",
+            success: function (data) {
 
-                if (obj == 'true') {
-                    document.getElementById('yes').style.display = "inline";
-                    document.getElementById('no').style.display = "none";
-                    user_name_valid = "true";
-                }
-                else {
+                var retval = JSON.parse(data);
+                if (retval["available"] == false)
+                {
                     document.getElementById('yes').style.display = "none";
                     document.getElementById('no').style.display = "inline";
                     user_name_valid = "false";
                 }
+                else
+                {
+                    document.getElementById('yes').style.display = "inline";
+                    document.getElementById('no').style.display = "none";
+                    user_name_valid = "true";
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                debugger;
+                alert("Service Error");
             }
         });
     }
-
 
 </script>
 
@@ -149,3 +156,28 @@
     </script>
 }
 
+@*function check_user_name_avail() {
+        var user_name = document.getElementById('UserName').value;
+
+        var model = { "UserName": user_name };
+        var url = '@Url.Action("CheckUserNameAvailibility", "Account")'
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: model,
+            success: function (obj) {
+
+                if (obj == 'true') {
+                    document.getElementById('yes').style.display = "inline";
+                    document.getElementById('no').style.display = "none";
+                    user_name_valid = "true";
+                }
+                else {
+                    document.getElementById('yes').style.display = "none";
+                    document.getElementById('no').style.display = "inline";
+                    user_name_valid = "false";
+                }
+            }
+        });
+    }*@

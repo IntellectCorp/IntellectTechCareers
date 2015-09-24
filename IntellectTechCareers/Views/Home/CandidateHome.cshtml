@@ -62,13 +62,23 @@
                     }
                     else
                     {
-                        <td><font color="red">@user.state </font></td>
 
-                        <tr>
-                            <td><h3>Your account will be unblocked on</h3></td>
-                            <td><h3>:</h3></td>
-                            <td><h3>@user.AccountActiveDate</h3></td>
-                        </tr>
+                        if (@user.AccountActiveDate < DateTime.Now)
+                        {
+                            IntellectTechCareers.Data_Access_Layer.CandidateDAL.ActivateUser(@user.user_id);
+                            <td><h3><font color="green">@user.state </font></h3></td>                        
+                        }
+                        else
+                        {
+                            
+                            <td><font color="red">@user.state </font></td>
+
+                            <tr>
+                                <td><h3>Your account will be unblocked on</h3></td>
+                                <td><h3>:</h3></td>
+                                <td><h3>@user.AccountActiveDate</h3></td>
+                            </tr>
+                        }
                     }                
                 }
             </tr>
