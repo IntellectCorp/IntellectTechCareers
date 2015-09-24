@@ -23,6 +23,7 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Time")]
         public Time24hrFormat Time { get; set; }
 
+        [Required(ErrorMessage = "Required")]
         [Display(Name = "Venue")]
         public string Venue { get; set; }
 

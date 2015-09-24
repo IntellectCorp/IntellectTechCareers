@@ -11,6 +11,7 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Job ID")]
         public int JobId { get; set; }
 
+        [Required]
         [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
 
