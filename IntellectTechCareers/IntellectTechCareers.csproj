@@ -249,6 +249,7 @@
     <Content Include="Views\Admin\SelectedApplicants.cshtml" />
     <Content Include="Views\Admin\BlockedApplicants.cshtml" />
     <Content Include="Views\Staff\ViewJobApplicationByJobId.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />
