@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Mvc;
@@ -9,34 +8,6 @@ using System.Web.Security;
 
 namespace IntellectTechCareers.Models
 {
-    public class UsersContext : DbContext
-    {
-        public UsersContext()
-            : base("DefaultConnection")
-        {
-        }
-
-        public DbSet<UserProfile> UserProfiles { get; set; }
-    }
-
-    [Table("UserProfile")]
-    public class UserProfile
-    {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-    }
-
-    public class RegisterExternalLoginModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        public string ExternalLoginData { get; set; }
-    }
-
     public class LocalPasswordModel
     {
         [Required]
@@ -52,7 +23,7 @@ namespace IntellectTechCareers.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -90,7 +61,7 @@ namespace IntellectTechCareers.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -99,7 +70,7 @@ namespace IntellectTechCareers.Models
         public string Name { get; set; }
 
         [Required]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [RegularExpression("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Invalid Email Address")]
         [Display(Name = "Email ID*")]
         public string EmailID { get; set; }
 
@@ -165,7 +136,7 @@ namespace IntellectTechCareers.Models
 
         [Required]
         [Display(Name = "Confirm New Password")]
-        [System.ComponentModel.DataAnnotations.Compare("newPassword", ErrorMessage = "New password and confirmation new password do not match.")]
+        [Compare("newPassword", ErrorMessage = "New password and confirmation new password do not match.")]
         public string confirmNewPassword { get; set; }
 
         public bool isApplicant { get; set; }
@@ -249,10 +220,19 @@ namespace IntellectTechCareers.Models
 
     public class ShowApplicantModel
     {
+        [Display(Name = "Candidate ID")]
         public int CandidateId { get; set; }
+
+        [Display(Name = "Canidate Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Job ID")]
         public int JobId { get; set; }
+
+        [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
+
+        [Display(Name = "Result Date")]
         public DateTime Date { get; set; }
     }
 }

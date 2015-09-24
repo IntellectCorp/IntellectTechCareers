@@ -11,11 +11,6 @@ namespace IntellectTechCareers.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult LoginFailed()
-        {
-            return View();
-        }
-
         public ActionResult Index()
         {
             if (!Navigator.isUserLoggedIn(Session))

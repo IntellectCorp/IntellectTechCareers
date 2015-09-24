@@ -28,7 +28,7 @@ namespace IntellectTechCareers.Utils
 
             if (Convert.ToString(reader[4]).Equals("Disabled"))
             {
-                user.role = "INVALID";
+                user.role = "Disabled";
                 return user;
             }
 
