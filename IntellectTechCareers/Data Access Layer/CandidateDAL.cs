@@ -443,6 +443,19 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
             return applicants;
         }
+
+        public static void ActivateUser(int userId)
+        {
+            string queryUser = "update dbo.Users set state='Active' where user_id = " + userId + ";";
+
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(queryUser, con);
+            command.ExecuteNonQuery();
+
+            con.Close();
+        }
     
     }
 }
