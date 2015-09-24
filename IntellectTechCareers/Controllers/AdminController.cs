@@ -189,5 +189,26 @@ namespace IntellectTechCareers.Controllers
             List<Staff> staffs = StaffDAL.GetStaffDetails();
             return View(staffs);
         }
+
+        [HttpGet]
+        public ActionResult AppointStaff()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            return View(new Staff());
+        }
+
+        [HttpPost]
+        public ActionResult AppointStaff(Staff staff)
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+                return RedirectToAction("Login", "Account");
+
+            AdminDAL.AddStaff(staff);
+
+            ViewBag.Message = "Staff has been appointed successfully";
+            return View("Message");
+        }
     }
 }

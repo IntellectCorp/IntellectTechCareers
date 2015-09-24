@@ -37,8 +37,27 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Staff ID")]
         public int StaffId { get; set; }
 
-        [Display(Name = "Staff")]
+        [Display(Name = "Username")]
+        [Required]
+        public string StaffUserName { get; set; }
+
+        [Display(Name = "Staff Name")]
+        [Required]
         public string StaffName { get; set; }
+
+        [Required]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RegularExpression("(?=.*\\d)(?=.*[a-zA-Z]).{1,}", ErrorMessage = "Password must have at least 1 digit and 1 alphabet")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        //TODO : Must have one digit and one alphabet
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
         [Display(Name = "Right to schedule")]
         public bool RightToSchedule { get; set; }

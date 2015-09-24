@@ -109,5 +109,27 @@ namespace IntellectTechCareers.Data_Access_Layer
 
             con.Close();
         }
+
+        public static void AddStaff(Staff staff)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(staff.Password));
+            SqlCommand command = new SqlCommand("insert into Users (username, password, role, account_act_date, name, state) values ('"
+                + staff.StaffUserName + "', '" + passwdHash + "', 'staff','" +
+                DateTime.Today + "', '" + staff.StaffName + "', 'Active');", con);
+            command.ExecuteNonQuery();
+
+            int publish = (staff.RightToPublish ? 1 : 0);
+            int post = (staff.RightToPost ? 1 : 0);
+            int schedule = (staff.RightToSchedule ? 1 : 0);
+
+            command = new SqlCommand("insert into Staff (staff_id, right_to_schedule, right_to_publish, right_to_post)"
+            + " values (" + AccountDAL.getCandidateId(con, staff.StaffUserName) + "," + schedule + "," + publish + "," + post + ")", con);
+
+            command.ExecuteNonQuery();
+            con.Close();
+        }
     }
 }

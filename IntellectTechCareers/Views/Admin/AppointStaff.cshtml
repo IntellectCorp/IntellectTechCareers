@@ -1,0 +1,131 @@
+﻿@model IntellectTechCareers.Models.Staff
+
+@{
+    ViewBag.Title = "AppointStaff";
+    Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+}
+
+<script type="text/javascript">
+
+    var user_name_valid = "null";
+
+    function validate_user_name() {
+        if (user_name_valid === "null") {
+            document.getElementById('notification').innerHTML = "<h3><font color='red'>Please check if user name is available</font></h3>";
+            return false;
+        }
+        else if (user_name_valid === "true") {
+            document.getElementById('notification').innerHTML = "";
+            return true;
+        }
+        else {
+            document.getElementById('notification').innerHTML = "<h3><font color='red'>Entered user name is not available</font></h3>";
+            return false;
+        }
+    }
+
+    function check_user_name_avail() {
+        var user_name = document.getElementById('StaffUserName').value;
+
+        var model = { "UserName": user_name };
+        var url = '@Url.Action("CheckUserNameAvailibility", "Account")'
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: model,
+            success: function (obj) {
+
+                if (obj == 'true') {
+                    document.getElementById('yes').style.display = "inline";
+                    document.getElementById('no').style.display = "none";
+                    user_name_valid = "true";
+                }
+                else {
+                    document.getElementById('yes').style.display = "none";
+                    document.getElementById('no').style.display = "inline";
+                    user_name_valid = "false";
+                }
+            }
+        });
+    }
+
+</script>
+
+<h2>AppointStaff</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Staff</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StaffUserName)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StaffUserName)
+            @Html.ValidationMessageFor(model => model.StaffUserName)
+            <input type="button" onclick="check_user_name_avail()" value="Check availability" />
+            <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
+            <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StaffName)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StaffName)
+            @Html.ValidationMessageFor(model => model.StaffName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RightToSchedule)
+
+            @Html.EditorFor(model => model.RightToSchedule)
+            @Html.ValidationMessageFor(model => model.RightToSchedule)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RightToPublish)
+
+            @Html.EditorFor(model => model.RightToPublish)
+            @Html.ValidationMessageFor(model => model.RightToPublish)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RightToPost)
+
+            @Html.EditorFor(model => model.RightToPost)
+            @Html.ValidationMessageFor(model => model.RightToPost)
+        </div>
+
+        <p>
+            <input type="submit" onclick="return validate_user_name()" value="Create" />
+        </p>
+    </fieldset>
+        <div id="notification"></div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
