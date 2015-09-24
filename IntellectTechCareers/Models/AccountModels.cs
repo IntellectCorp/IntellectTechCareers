@@ -249,10 +249,19 @@ namespace IntellectTechCareers.Models
 
     public class ShowApplicantModel
     {
+        [Display(Name = "Candidate ID")]
         public int CandidateId { get; set; }
+
+        [Display(Name = "Canidate Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Job ID")]
         public int JobId { get; set; }
+
+        [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
+
+        [Display(Name = "Result Date")]
         public DateTime Date { get; set; }
     }
 }

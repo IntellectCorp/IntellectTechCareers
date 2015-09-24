@@ -23,9 +23,17 @@ namespace IntellectTechCareers.Controllers
         {
             User user = AccountDAL.validateUserAndGetRole(model.UserName, model.Password);
             string role = user.role;
-            
+
             if (role.Equals("INVALID"))
-                return RedirectToAction("LoginFailed", "Home");
+            {
+                ViewBag.Message = "Username or Password is incorrect ! ";
+                return View("LoginFailed");
+            }
+            else if (role.Equals("Disabled"))
+            {
+                ViewBag.Message = "Your account has been disabled !";
+                return View("LoginFailed");
+            }
             else
             {
                 Session["user"] = user;

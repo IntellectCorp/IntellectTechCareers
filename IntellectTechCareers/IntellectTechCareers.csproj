@@ -233,7 +233,7 @@
     <Content Include="Views\Shared\_PartialManagerNav.cshtml" />
     <Content Include="Views\Shared\_PartialBlank.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
-    <Content Include="Views\Home\LoginFailed.cshtml" />
+    <Content Include="Views\Account\LoginFailed.cshtml" />
     <Content Include="Views\Candidate\_AddExperiencePartial.cshtml" />
     <Content Include="Views\Candidate\_UpdateQualificationDetailsPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutPageCandidate.cshtml" />
