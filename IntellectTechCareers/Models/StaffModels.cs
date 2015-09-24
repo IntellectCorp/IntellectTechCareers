@@ -63,7 +63,7 @@ namespace IntellectTechCareers.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Right to schedule")]
