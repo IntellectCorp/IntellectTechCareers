@@ -11,10 +11,44 @@
         $(".ui-datepicker").css("font-size", "100%");
     });
 </script>
+<script>
+
+    function validateForm() {
+        if (!validateDate()) {
+            document.getElementById('validation_notification').innerHTML = "<h3><font color=red> Date is required</font></h3>";
+            return false;
+        }
+        if (!validateVenue()) {
+            document.getElementById('validation_notification').innerHTML = "<h3><font color=red> Venue is required and can have maximum 30 characters </font></h3>";
+            return false;
+        }
+
+    }
+
+    function validateDate() {
+        var x = document.getElementById('datefield').value;
+        if (x == null || x == "") {
+            //alert("Name must be filled out" + x);
+            return false;
+        }
+        else {
+            //alert(x);
+            return true;
+        }
+    }
+
+    function validateVenue() {
+        var venue = document.getElementById('Venue').value;
+        var regex = /^.{1,30}$/
+        return regex.test(venue);
+        //alert(venue + ":" + regex.test(venue));
+    }
+</script>
+
 @{
     string postController = @ViewBag.Controller;
 }
-@using (Html.BeginForm("ScheduleInterview", postController, FormMethod.Post))
+@using (Html.BeginForm("ScheduleInterview", postController, FormMethod.Post, new { @onsubmit = "return validateForm()" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -28,7 +62,7 @@
         <div class="editor-field">
             @*@Html.DisplayFor(model => model.JobId)
             @Html.HiddenFor(model => model.JobId)*@
-			@Html.TextBoxFor(model => model.JobId, new { @type = "text", @readonly = "readonly"})
+            @Html.TextBoxFor(model => model.JobId, new { @type = "text", @readonly = "readonly" })
         </div>
 
         <div class="editor-label">
@@ -37,7 +71,7 @@
         <div class="editor-field">
             @*@Html.DisplayFor(model => model.JobDesc)
             @Html.HiddenFor(model => model.JobDesc)*@
-			@Html.TextBoxFor(model => model.JobDesc, new { @type = "text", @readonly = "readonly"})
+            @Html.TextBoxFor(model => model.JobDesc, new { @type = "text", @readonly = "readonly" })
         </div>
 
         <div class="editor-label">
@@ -154,6 +188,7 @@
             @Html.ValidationMessageFor(model => model.Venue)
         </div>
 
+        <div id="validation_notification"></div>
         <p>
             <input type="submit" value="Schedule" />
         </p>

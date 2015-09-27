@@ -274,7 +274,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Open();
             SqlCommand command;
 
-            command = new SqlCommand("insert into Interview (job_id, date, time, venue, scheduled_by) values (" + interviewModel.JobId + ", '" + interviewModel.Date.ToShortDateString() + "', '" + interviewModel.Time.ToString() + "', '" + interviewModel.Venue + "', " + user.user_id + ");", con);
+            command = new SqlCommand("insert into Interview (job_id, date, time, venue, scheduled_by) values (" + interviewModel.JobId + ", '" + interviewModel.Date.ToString() + "', '" + interviewModel.Time.ToString() + "', '" + interviewModel.Venue + "', " + user.user_id + ");", con);
             command.ExecuteNonQuery();
 
             command = new SqlCommand("UPDATE Job SET status='S' WHERE job_id=" + interviewModel.JobId + " ;", con);

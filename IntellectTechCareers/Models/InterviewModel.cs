@@ -15,16 +15,16 @@ namespace IntellectTechCareers.Models
         [Display(Name = "Job Description")]
         public string JobDesc { get; set; }
 
-        [Display(Name = "Date")]
+        [Display(Name = "Date*")]
         [DisplayFormat(DataFormatString = "{0:dd/MMM/yyyy}")]
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [Display(Name = "Time")]
         public Time24hrFormat Time { get; set; }
 
         [Required(ErrorMessage = "Required")]
-        [Display(Name = "Venue")]
+        [Display(Name = "Venue*")]
         public string Venue { get; set; }
 
     }
