@@ -79,7 +79,7 @@ namespace IntellectTechCareers.Data_Access_Layer
                 job.PostedOn = reader.GetDateTime(9);
                 job.Status = reader.GetString(10);
 
-                jobs.Add(job);
+                //jobs.Add(job);
                 if (job.Status.Equals("S"))
                 {
                     jobs.Add(job);
@@ -123,6 +123,42 @@ namespace IntellectTechCareers.Data_Access_Layer
                 jobsToBeSelect.Add(jobToBeSelected);
             }
             return jobsToBeSelect;
+        }
+
+        public static List<string> getListOfInterviewers()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(" SELECT username FROM dbo.Users WHERE role='interviewer';", con);
+
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> interviewers = new List<string>();
+            while (reader.Read())
+            {
+                interviewers.Add(reader.GetString(0));
+            }
+
+            con.Close();
+            return interviewers;
+        }
+
+        public static void ReallocateInterviewerInDB(InterviewerModel model)
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+            SqlCommand command;
+
+            foreach (var item in model.Jobs)
+            {
+                if (item.Checked)
+                {
+                    command = new SqlCommand("INSERT INTO dbo.InterviewerJob (interviewer_username, job_id ) values ('" + model.SelectedInterviewer + "', '" + item.JobId + "' );", con);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            con.Close();
         }
     }
 }

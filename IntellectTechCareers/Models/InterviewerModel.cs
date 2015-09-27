@@ -36,5 +36,11 @@ namespace IntellectTechCareers.Models
 
         [Display(Name = "Jobs*")]
         public List<JobSelectModel> Jobs { get; set; }
+
+        public bool NewInterviewer { get; set; }
+
+        [Display(Name = "Select Interviewer")]
+        public string SelectedInterviewer { get; set; }
+        public List<string> ListOfInterviewers { get; set; }
     }
 }

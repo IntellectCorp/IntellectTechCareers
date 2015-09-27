@@ -601,6 +601,7 @@ namespace IntellectTechCareers.Controllers
 
             InterviewerModel model = new InterviewerModel();
             model.Jobs = InterviewerDAL.getSelectJobsToBeInterviewed();
+            model.ListOfInterviewers = InterviewerDAL.getListOfInterviewers();
             return View(model);
         }
 
@@ -620,8 +621,14 @@ namespace IntellectTechCareers.Controllers
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-
-            InterviewerDAL.setInterviewerInDB(model);
+            if (model.NewInterviewer)
+            {
+                InterviewerDAL.setInterviewerInDB(model);
+            }
+            else
+            {
+                InterviewerDAL.ReallocateInterviewerInDB(model);
+            }
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             @ViewBag.Message = "Interviewer Allocated.";
             return View("Message");

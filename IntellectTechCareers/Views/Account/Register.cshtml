@@ -41,7 +41,7 @@
     });
 
     function validate_user_name() {
-        alert(user_name_valid);
+        //alert(user_name_valid);
         if (user_name_valid == "null") {
             document.getElementById('notification').innerHTML = "<h3><font color='red'>Please check if user name is available</font></h3>";
             return false;
@@ -118,14 +118,13 @@
                 <div>
                     @Html.LabelFor(m => m.UserName)
                     @Html.TextBoxFor(m => m.UserName)
-                    @Html.ValidationMessageFor(m => m.UserName)
                     <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
                     <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
-                
+
                     &nbsp;
                     <input type="button" onclick="check_user_name_avail()" value="Check availability" />
-
-                    </div>
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
