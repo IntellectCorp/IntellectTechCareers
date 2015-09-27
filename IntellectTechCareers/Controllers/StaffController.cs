@@ -145,7 +145,14 @@ namespace IntellectTechCareers.Controllers
                 //return RedirectToAction("Login", "Account");
             }
 
-            List<JobModel> model = ASCommonDAL.getJobsToBeInterviewed();
+            List<JobModel> jobs = ASCommonDAL.getJobsToBeInterviewed();
+            List<JobWithApplicantsModel> model = new List<JobWithApplicantsModel>();
+            foreach (var item in jobs)
+            {
+                JobWithApplicantsModel jobWithAppl = new JobWithApplicantsModel(item);
+                jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.JobId);
+                model.Add(jobWithAppl);
+            }
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             return View(model);
         }

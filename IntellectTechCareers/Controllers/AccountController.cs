@@ -55,12 +55,7 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Logout()
         {
-            if (!Navigator.isUserLoggedIn(Session))
-            {
-                @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
-                //return RedirectToAction("Login", "Account");
-            }
+            
 
             Session.Remove("user");
             return RedirectToAction("Login", "Account");

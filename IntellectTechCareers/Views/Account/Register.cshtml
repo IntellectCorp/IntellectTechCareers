@@ -14,7 +14,16 @@
 }
 <script type="text/javascript">
     $(function () {
-        $(".pastDates").datepicker({ maxDate: 0 });
+        $(".dob").datepicker({
+            maxDate: "-13Y",
+            changeMonth: true,
+            changeYear: true
+        });
+        $(".pastDates").datepicker({
+            maxDate: 0,
+            changeMonth: true,
+            changeYear: true
+        });
         $(".futureDates").datepicker({ minDate: +1, maxDate: +60 });
         $(".ui-datepicker").css("font-size", "100%");
     });
@@ -135,7 +144,7 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.dob)
-                @Html.TextBoxFor(m => m.dob, new { type = "text", @id = "datefield", @readonly = "readonly", @style = "background:white", @class = "pastDates" })
+                @Html.TextBoxFor(m => m.dob, new { type = "text", @id = "datefield", @readonly = "readonly", @style = "background:white", @class = "dob" })
                 @Html.ValidationMessageFor(m => m.dob)
             </li>
             <li>

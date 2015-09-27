@@ -78,7 +78,7 @@ namespace IntellectTechCareers.Models
             this.AgeLimit = job.AgeLimit;
         }
 
-        [Display(Name = "Number of Application")]
+        [Display(Name = "No. of Application")]
         public int ApplicantCount { get; set; }
     }
 
