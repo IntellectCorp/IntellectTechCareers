@@ -474,7 +474,7 @@ namespace IntellectTechCareers.Controllers
             model.JobId = jobModel.JobId;
             model.JobDesc = jobModel.JobDesc.Replace(Environment.NewLine, "");
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
-            @ViewBag.Controller = "Staff";
+            @ViewBag.Controller = "Admin";
             return PartialView("_PartialScheduleInterview", model);
         }
 
@@ -549,7 +549,7 @@ namespace IntellectTechCareers.Controllers
             model.Vacancies = jobModel.Vacancies;
             model.Candidates = ASCommonDAL.getApplicantForTheJob(jobModel.JobId);
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
-            @ViewBag.Controller = "Staff";
+            @ViewBag.Controller = "Admin";
             return PartialView("_PartialReleaseResults", model);
         }
 
@@ -573,6 +573,50 @@ namespace IntellectTechCareers.Controllers
             ASCommonDAL.releaseResultToDB(resultModel, user);
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             @ViewBag.Message = "Result Released for Job - [" + resultModel.JobId + "] " + resultModel.JobDesc + ".";
+            return View("Message");
+        }
+
+        [HttpGet]
+        public ActionResult ManageInterviewer()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "manager"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+
+            InterviewerModel model = new InterviewerModel();
+            model.Jobs = InterviewerDAL.getSelectJobsToBeInterviewed();
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ManageInterviewer(InterviewerModel model)
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "manager"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+
+            InterviewerDAL.setInterviewerInDB(model);
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            @ViewBag.Message = "Interviewer Allocated.";
             return View("Message");
         }
     }

@@ -154,6 +154,25 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ScheduleInterviewDialog(JobModel jobModel)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "staff"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.isStaffAllowed(Session, "RightToSchedule"))
+            {
+                @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+                @ViewBag.Message = "User Rights Denied! You don't have permission for this.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
             InterviewModel model = new InterviewModel();
             model.JobId = jobModel.JobId;
             model.JobDesc = jobModel.JobDesc.Replace(Environment.NewLine, "");
@@ -230,6 +249,26 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ReleaseResultsDialog(JobModel jobModel)
         {
+            if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "staff"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.isStaffAllowed(Session, "RightToPublish"))
+            {
+                @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
+                @ViewBag.Message = "User Rights Denied! You don't have permission for this.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+
             ResultModel model = new ResultModel();
             model.JobId = jobModel.JobId;
             model.JobDesc = jobModel.JobDesc;
@@ -350,6 +389,42 @@ namespace IntellectTechCareers.Controllers
             }
             IEnumerable<ApplicationModel> data = CandidateDAL.getApplicationDetailsByJobId(model.JobId);
             return PartialView("_PartialJobApplicationStatus", data);
+        }
+
+        public ActionResult SelectedApplicants()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "staff"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("A");
+            return View(candidates);
+        }
+
+        public ActionResult BlockedApplicants()
+        {
+            if (!Navigator.isUserLoggedIn(Session))
+            {
+                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            else if (!Navigator.userRoleValidation(Session, "staff"))
+            {
+                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                return View("Message");
+                //return RedirectToAction("Login", "Account");
+            }
+            List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("R");
+            return View(candidates);
         }
     }
 }
