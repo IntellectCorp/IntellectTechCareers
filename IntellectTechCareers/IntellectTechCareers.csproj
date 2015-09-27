@@ -256,6 +256,7 @@
     <Content Include="Views\Admin\ManageInterviewer.cshtml" />
     <Content Include="Views\Staff\BlockedApplicants.cshtml" />
     <Content Include="Views\Staff\SelectedApplicants.cshtml" />
+    <Content Include="Views\Shared\_PartialMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />

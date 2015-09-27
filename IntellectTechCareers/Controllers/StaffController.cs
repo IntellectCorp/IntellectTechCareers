@@ -164,20 +164,19 @@ namespace IntellectTechCareers.Controllers
             if (!Navigator.isUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "staff"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.isStaffAllowed(Session, "RightToSchedule"))
             {
-                @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
                 @ViewBag.Message = "User Rights Denied! You don't have permission for this.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             InterviewModel model = new InterviewModel();
@@ -194,13 +193,13 @@ namespace IntellectTechCareers.Controllers
         {
             if (!Navigator.isUserLoggedIn(Session))
             {
-                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                @ViewBag.Message = "Sorry! You need to login to continue.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "staff"))
             {
-                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                @ViewBag.Message = "Access Denied !   You are not allowed to continue.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
@@ -258,21 +257,20 @@ namespace IntellectTechCareers.Controllers
         {
             if (!Navigator.isUserLoggedIn(Session))
             {
-                @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
+                @ViewBag.Message = "Sorry! You need to login to continue.";
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "staff"))
             {
-                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
-                return View("Message");
+                @ViewBag.Message = "Access Denied !   You are not allowed to continue.";
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.isStaffAllowed(Session, "RightToPublish"))
             {
-                @ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
                 @ViewBag.Message = "User Rights Denied! You don't have permission for this.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
 
