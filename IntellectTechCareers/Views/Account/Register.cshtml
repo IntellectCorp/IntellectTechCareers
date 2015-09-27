@@ -17,7 +17,8 @@
         $(".dob").datepicker({
             maxDate: "-13Y",
             changeMonth: true,
-            changeYear: true
+            changeYear: true,
+            defaultDate: '01/01/90'
         });
         $(".pastDates").datepicker({
             maxDate: 0,
@@ -29,20 +30,32 @@
     });
 </script>
 <script type="text/javascript">
-
     var user_name_valid = "null";
 
+    $(document).ready(function () {
+        $("#UserName").change(function () {
+            document.getElementById('yes').style.display = "none";
+            document.getElementById('no').style.display = "none";
+            user_name_valid = null;
+        });
+    });
+
     function validate_user_name() {
-        if (user_name_valid === "null") {
+        alert(user_name_valid);
+        if (user_name_valid == "null") {
             document.getElementById('notification').innerHTML = "<h3><font color='red'>Please check if user name is available</font></h3>";
             return false;
         }
-        else if (user_name_valid === "true") {
+        else if (user_name_valid == "true") {
             document.getElementById('notification').innerHTML = "";
             return true;
         }
-        else {
+        else if (user_name_valid == "false") {
             document.getElementById('notification').innerHTML = "<h3><font color='red'>Entered user name is not available</font></h3>";
+            return false;
+        }
+        else {
+            document.getElementById('notification').innerHTML = "<h3><font color='red'>Please check if user name is available</font></h3>";
             return false;
         }
     }
@@ -50,35 +63,40 @@
     function check_user_name_avail() {
 
         var username = document.getElementById("UserName").value;
-        var serviceurl = "http://localhost:51124/UserNameValidation.svc/checkavailability?username=" + username;
-        jQuery.support.cors = true;
-        $.ajax({
-            url: serviceurl,
-            cache: false,
-            type: "GET",
-            async: false,
-            dataType: "jsonp",
-            success: function (data) {
+        if (username != "") {
+            var serviceurl = "http://localhost:51124/UserNameValidation.svc/checkavailability?username=" + username;
+            jQuery.support.cors = true;
+            $.ajax({
+                url: serviceurl,
+                cache: false,
+                type: "GET",
+                async: false,
+                dataType: "jsonp",
+                success: function (data) {
 
-                var retval = JSON.parse(data);
-                if (retval["available"] == false)
-                {
-                    document.getElementById('yes').style.display = "none";
-                    document.getElementById('no').style.display = "inline";
-                    user_name_valid = "false";
+                    var retval = JSON.parse(data);
+                    if (retval["available"] == false) {
+                        document.getElementById('yes').style.display = "none";
+                        document.getElementById('no').style.display = "inline";
+                        user_name_valid = "false";
+                    }
+                    else {
+                        document.getElementById('yes').style.display = "inline";
+                        document.getElementById('no').style.display = "none";
+                        user_name_valid = "true";
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    debugger;
+                    alert("Service Error");
                 }
-                else
-                {
-                    document.getElementById('yes').style.display = "inline";
-                    document.getElementById('no').style.display = "none";
-                    user_name_valid = "true";
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                debugger;
-                alert("Service Error");
-            }
-        });
+            });
+        }
+        else {
+            document.getElementById('yes').style.display = "none";
+            document.getElementById('no').style.display = "inline";
+            user_name_valid = "false";
+        }
     }
 
 </script>
@@ -101,12 +119,13 @@
                     @Html.LabelFor(m => m.UserName)
                     @Html.TextBoxFor(m => m.UserName)
                     @Html.ValidationMessageFor(m => m.UserName)
+                    <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
+                    <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
+                
                     &nbsp;
                     <input type="button" onclick="check_user_name_avail()" value="Check availability" />
 
-                    <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
-                    <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
-                </div>
+                    </div>
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -158,11 +177,6 @@
     </fieldset>
     <div id="notification"></div>
     
-    <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
-            $('.datepicker').datepicker({ defaultDate: '01/01/90' }); //Initialise any date pickers
-        });
-    </script>
 }
 
 @*function check_user_name_avail() {
