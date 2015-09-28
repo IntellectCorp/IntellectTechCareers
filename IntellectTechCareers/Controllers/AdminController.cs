@@ -601,7 +601,7 @@ namespace IntellectTechCareers.Controllers
             }
 
             InterviewerModel model = new InterviewerModel();
-            model.Jobs = InterviewerDAL.getSelectJobsToBeInterviewed();
+            model.Jobs = InterviewerDAL.getSelectJobsForReleasingResult();
             model.ListOfInterviewers = InterviewerDAL.getListOfInterviewers();
             return View(model);
         }

@@ -16,16 +16,13 @@
                 $("#UserName").val("");
                 $("#Password").val("");
                 $("#ConfirmPassword").val("");
-                @{
-                    Model.NewInterviewer = false;
-                 }
+                document.getElementById('NewInterviewer').value = false;
+  
 
             } else {
                 $("#registrationSection").show();
                 $("#oldAccounts").hide();
-                @{
-                    Model.NewInterviewer = true;
-                 }
+                document.getElementById('NewInterviewer').value = true;
             }
         });
     });
@@ -119,6 +116,7 @@
             @Html.RadioButton("AgeLimitNo", "No");*@
             <input class="IsNew" id="IsNewYes" type="radio" name="IsNew" value="IsNewYes">Yes
             <input class="IsNew" id="IsNewNo" type="radio" name="IsNew" value="IsNewNo" checked>No
+            @Html.HiddenFor(model => model.NewInterviewer)
         </div>
         <br />
         <div id="registrationSection">
