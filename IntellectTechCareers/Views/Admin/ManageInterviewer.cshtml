@@ -13,9 +13,9 @@
             if ($("#IsNewNo").attr("checked")) {
                 $("#registrationSection").hide();
                 $("#oldAccounts").show();
-                $("#UserName").val("");
-                $("#Password").val("");
-                $("#ConfirmPassword").val("");
+                //$("#UserName").val("");
+                //$("#Password").val("");
+                //$("#ConfirmPassword").val("");
                 document.getElementById('NewInterviewer').value = false;
   
 
@@ -180,6 +180,7 @@
             }
             @Html.ValidationMessageFor(model => model.Jobs)
         </div>
+        <div id="notification"></div>
         <p>
             <input type="submit" onclick="return validate_user_name()" value="Create" />
         </p>
