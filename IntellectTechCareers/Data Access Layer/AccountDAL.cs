@@ -42,7 +42,7 @@ namespace IntellectTechCareers.Utils
             user.username = username;
 
             con.Close();
-            string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
+            string passwdHash = StringUtils.GetMD5Hash(StringUtils.Reverse(passwd));
             if (!passwdHash.Equals(pwd))
                 user.role = "INVALID";
 
@@ -105,7 +105,7 @@ namespace IntellectTechCareers.Utils
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
-            string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(passwd));
+            string passwdHash = StringUtils.GetMD5Hash(StringUtils.Reverse(passwd));
             SqlCommand command = new SqlCommand("insert into Users (username, password, role, account_act_date, name, state) values ('" + uname + "', '" + passwdHash + "', 'candidate','" +
                 DateTime.Today + "', '" + name + "', 'Active');", con);
             command.ExecuteNonQuery();

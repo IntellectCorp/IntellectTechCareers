@@ -52,7 +52,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static List<JobModel> getJobsForReleasingResultForInterviewer(Models.User user)
+        public static List<JobModel> GetJobsForReleasingResultForInterviewer(Models.User user)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -90,13 +90,13 @@ namespace IntellectTechCareers.Data_Access_Layer
             return jobs;
         }
 
-        public static void setInterviewerInDB(InterviewerModel model)
+        public static void SetInterviewerInDB(InterviewerModel model)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
             SqlCommand command;
 
-            string hashPassword = StringUtils.getMD5Hash(StringUtils.Reverse(model.Password));
+            string hashPassword = StringUtils.GetMD5Hash(StringUtils.Reverse(model.Password));
             command = new SqlCommand("INSERT INTO dbo.Users (username, password, role, account_act_date, name, state) VALUES ('" + model.UserName + "', '" + hashPassword + "', 'interviewer', '" + DateTime.Now.ToShortDateString() + "', '" + model.Name + "', 'Active');", con);
             command.ExecuteNonQuery();
 
@@ -112,10 +112,10 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static List<JobSelectModel> getSelectJobsToBeInterviewed()
+        public static List<JobSelectModel> GetSelectJobsToBeInterviewed()
         {
             List<JobSelectModel> jobsToBeSelect = new List<JobSelectModel>();
-            List<JobModel> jobs = ASCommonDAL.getJobsToBeInterviewed();
+            List<JobModel> jobs = ASCommonDAL.GetJobsToBeInterviewed();
             foreach (var item in jobs)
             {
                 JobSelectModel jobToBeSelected = new JobSelectModel(item);
@@ -125,7 +125,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return jobsToBeSelect;
         }
 
-        public static List<string> getListOfInterviewers()
+        public static List<string> GetListOfInterviewers()
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();

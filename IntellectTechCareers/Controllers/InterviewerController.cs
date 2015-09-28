@@ -21,25 +21,25 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ReleaseResults()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "interviewer"))
+            else if (!Navigator.UserRoleValidation(Session, "interviewer"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
             User user = ((User)Session["user"]);
-            List<JobModel> jobs = InterviewerDAL.getJobsForReleasingResultForInterviewer(user);
+            List<JobModel> jobs = InterviewerDAL.GetJobsForReleasingResultForInterviewer(user);
             List<JobWithApplicantsModel> model = new List<JobWithApplicantsModel>();
             foreach (var item in jobs)
             {
                 JobWithApplicantsModel jobWithAppl = new JobWithApplicantsModel(item);
-                jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.JobId);
+                jobWithAppl.ApplicantCount = ASCommonDAL.GetApplicantCount(item.JobId);
                 model.Add(jobWithAppl);
             }
             @ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,7 +54,7 @@ namespace IntellectTechCareers.Controllers
             model.JobId = jobModel.JobId;
             model.JobDesc = jobModel.JobDesc;
             model.Vacancies = jobModel.Vacancies;
-            model.Candidates = ASCommonDAL.getApplicantForTheJob(jobModel.JobId);
+            model.Candidates = ASCommonDAL.GetApplicantForTheJob(jobModel.JobId);
             @ViewBag.Controller = "Interviewer";
             return PartialView("_PartialReleaseResults", model);
         }
@@ -63,13 +63,13 @@ namespace IntellectTechCareers.Controllers
         [AllowAnonymous]
         public ActionResult ReleaseResults(ResultModel resultModel)
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "interviewer"))
+            else if (!Navigator.UserRoleValidation(Session, "interviewer"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");

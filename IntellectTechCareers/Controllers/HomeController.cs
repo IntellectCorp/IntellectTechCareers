@@ -13,7 +13,7 @@ namespace IntellectTechCareers.Controllers
     {
         public ActionResult Index()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
                 return RedirectToAction("Login", "Account");
 
             if (Session["user"] != null)
@@ -25,7 +25,7 @@ namespace IntellectTechCareers.Controllers
                 else if (role.Equals("manager"))
                     return View("ManagerHome", AdminDAL.getManagerHome());
                 else if (role.Equals("staff"))
-                    return View("StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
+                    return View("StaffHome", StaffDAL.GetStaffHome((User)Session["user"]));
                 else if (role.Equals("interviewer"))
                     return RedirectToAction("ReleaseResults","Interviewer");
                 else

@@ -16,13 +16,13 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Index()
         {
-           if (!Navigator.isUserLoggedIn(Session))
+           if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -35,13 +35,13 @@ namespace IntellectTechCareers.Controllers
         [HttpGet]
         public ActionResult UpdateProfile()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -51,10 +51,10 @@ namespace IntellectTechCareers.Controllers
             CandidateModel candidate = new CandidateModel();
 
             int user_id = ((User)Session["user"]).user_id;
-            candidate = CandidateDAL.getCandidateDetails(user_id);
-            candidate.experienceDetails = CandidateDAL.getCandidateExperienceDetails(user_id);
+            candidate = CandidateDAL.GetCandidateDetails(user_id);
+            candidate.experienceDetails = CandidateDAL.GetCandidateExperienceDetails(user_id);
 
-            List<QualificationModel> qualifications = CandidateDAL.getQualificationDetails();
+            List<QualificationModel> qualifications = CandidateDAL.GetQualificationDetails();
             List<SelectListItem> ugQualifications = new List<SelectListItem>();
             List<SelectListItem> pgQualifications = new List<SelectListItem>();
 
@@ -82,25 +82,25 @@ namespace IntellectTechCareers.Controllers
 
         public string UpdatePersonalInfo(CandidateModel candidate)
         {
-            CandidateDAL.updatePersonalInfo(candidate);
+            CandidateDAL.UpdatePersonalInfo(candidate);
             return "";
         }
 
         public string UpdateQualificationDetails(CandidateModel candidate)
         {
-            CandidateDAL.addEducationDetails(candidate);
+            CandidateDAL.AddEducationDetails(candidate);
             return "";
         }
 
         public ActionResult ViewJobDetails()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -110,8 +110,8 @@ namespace IntellectTechCareers.Controllers
             User user = (User)Session["user"];
 
             CandidateModel candidate = new CandidateModel();
-            candidate = CandidateDAL.getCandidateDetails(user.user_id);
-            candidate.experienceDetails = CandidateDAL.getCandidateExperienceDetails(user.user_id);
+            candidate = CandidateDAL.GetCandidateDetails(user.user_id);
+            candidate.experienceDetails = CandidateDAL.GetCandidateExperienceDetails(user.user_id);
 
             int totalExperience = 0;
             foreach (var item in candidate.experienceDetails)
@@ -120,13 +120,13 @@ namespace IntellectTechCareers.Controllers
             }
 
             JobViewModel jobViewModel = new JobViewModel();
-            jobViewModel.jobs = CandidateDAL.getApplicableJobs(user.user_id);;
-            jobViewModel.qualifications = CandidateDAL.getQualificationsIdToName();
+            jobViewModel.jobs = CandidateDAL.GetApplicableJobs(user.user_id);;
+            jobViewModel.qualifications = CandidateDAL.GetQualificationsIdToName();
             jobViewModel.candidateUgQualification = candidate.ugQualifications;
             jobViewModel.candidatePgQualification = candidate.pgQualifications;
             jobViewModel.totalExperience = totalExperience;
-            jobViewModel.jobsAlreadyApplied = CandidateDAL.getNumJobsAppliedFor(user.user_id);
-            jobViewModel.appliedJobs = CandidateDAL.getAppliedJobs(user.user_id);
+            jobViewModel.jobsAlreadyApplied = CandidateDAL.GetNumJobsAppliedFor(user.user_id);
+            jobViewModel.appliedJobs = CandidateDAL.GetAppliedJobs(user.user_id);
 
             return View(jobViewModel);
         }
@@ -134,13 +134,13 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult ApplyForJob(JobViewModel model)
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -155,13 +155,13 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult JobApplicationSuccess()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -174,19 +174,19 @@ namespace IntellectTechCareers.Controllers
 
         public string UpdateExperienceInfo(ExperienceModel expModel)
         {
-            CandidateDAL.addExperienceDetails(expModel);
+            CandidateDAL.AddExperienceDetails(expModel);
             return "";
         }
 
         public ActionResult ViewJobStatus()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -194,19 +194,19 @@ namespace IntellectTechCareers.Controllers
             }
 
             int user_id = ((User)Session["user"]).user_id;
-            List<ApplicationModel> model = CandidateDAL.getApplicationDetails(user_id);
+            List<ApplicationModel> model = CandidateDAL.GetApplicationDetails(user_id);
             return View(model);
         }
 
         public ActionResult GetCandidateEducationDetails()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -216,20 +216,20 @@ namespace IntellectTechCareers.Controllers
             int user_id = ((User)Session["user"]).user_id;
 
             QualificationViewModel viewModel = new QualificationViewModel();
-            viewModel.qualifications = CandidateDAL.getCandidateEducationDetails(user_id);
+            viewModel.qualifications = CandidateDAL.GetCandidateEducationDetails(user_id);
 
             return Json(viewModel);
         }
 
         public ActionResult GetCandidateExperienceDetails()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -239,7 +239,7 @@ namespace IntellectTechCareers.Controllers
             int user_id = ((User)Session["user"]).user_id;
 
             ExperienceViewModel viewModel = new ExperienceViewModel();
-            viewModel.experience = CandidateDAL.getCandidateExperienceDetails(user_id);
+            viewModel.experience = CandidateDAL.GetCandidateExperienceDetails(user_id);
 
             return Json(viewModel);
         }

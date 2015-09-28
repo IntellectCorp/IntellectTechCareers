@@ -9,7 +9,7 @@ namespace IntellectTechCareers.Utils
 {
     public class Navigator
     {
-        public static bool isUserLoggedIn(HttpSessionStateBase session)
+        public static bool IsUserLoggedIn(HttpSessionStateBase session)
         {
             var user = session["User"];
             if (user == null)
@@ -18,7 +18,7 @@ namespace IntellectTechCareers.Utils
                 return true;
         }
 
-        public static bool userRoleValidation(HttpSessionStateBase session, string role)
+        public static bool UserRoleValidation(HttpSessionStateBase session, string role)
         {
             User user = (User)session["User"];
             if (user.role == role)
@@ -27,7 +27,7 @@ namespace IntellectTechCareers.Utils
                 return false;
         }
 
-        public static bool isStaffAllowed(HttpSessionStateBase session, string responsibility)
+        public static bool IsStaffAllowed(HttpSessionStateBase session, string responsibility)
         {
             User user = (User)session["User"];
             if (user.role == "staff")
