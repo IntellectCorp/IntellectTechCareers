@@ -5,7 +5,7 @@
 }
 
 
-@*<section id="LoginFeaturedContent">
+<section id="LoginFeaturedContent">
 <h2>Join us and make amazing things happen</h2>
 <ol class="round">
     <li class="one">
@@ -21,13 +21,25 @@
     </li>
 
 </ol>
-    </section>*@
-    <!-- jQuery library (served from Google) -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<!-- bxSlider Javascript file -->
-<script src="/js/jquery.bxslider.min.js"></script>
-<!-- bxSlider CSS file -->
-<link href="/lib/jquery.bxslider.css" rel="stylesheet" />
+    </section>
+@*<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<script src="~/Scripts/jquery.bxslider.min.js"></script>
+<link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
+
+<script>
+    $(document).ready(function () {
+        $('.bxslider').bxSlider();
+    });
+</script>
+
+<section id="LoginFeaturedContent">
+<div style="width:300px"></div>
+<ul class="bxslider" >
+  <li><img src="/images/pics/pic1.jpg" /></li>
+  <li><img src="/images/pics/pic2.jpg" /></li>
+  <li><img src="/images/pics/pic3.jpg" /></li>
+</ul>
+</section>*@
 
 <section id="LoginFormRight">
 <h2>Log In. Get Hired.</h2>

@@ -217,7 +217,14 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data Access Layer\AccountDAL.cs" />
+    <Content Include="Content\images\bx_loader.gif" />
+    <Content Include="Content\images\controls.png" />
+    <Content Include="Content\jquery.bxslider.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\pics\pic1.jpg" />
+    <Content Include="Images\pics\pic2.jpg" />
+    <Content Include="Images\pics\pic3.jpg" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
     <Content Include="Utils\DBQueries.txt" />
     <Content Include="Views\Account\RegistrationSuccess.cshtml" />
     <Content Include="Views\Home\CandidateHome.cshtml" />
