@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#releaseResult").click(function () {
+        $(".releaseResult").click(function () {
             //alert("Hi");
             var rowValue = [];
             $(this).closest('tr').find('td').not(':last').each(function () {
@@ -92,7 +92,7 @@
             </td>
 
             <td>
-               <button type="button" class="table-button" id="releaseResult" value="Release Result" >Release Result</button>
+               <button type="button" class="releaseResult" value="Release Result" >Release Result</button>
             </td>
         </tr>
     }

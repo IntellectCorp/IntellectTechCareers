@@ -101,7 +101,7 @@
 </script>
 
 <h2>Manage Interviewer</h2>
-
+<br />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -125,11 +125,11 @@
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.UserName)
-                <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
-                <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
+                <img id="yes" src="~/Images/yes.png" height="25" width="25" style="margin-bottom: -10px; padding-top: 10px; display: none;" />
+                <img id="no" src="~/Images/no.gif" height="25" width="25" style="margin-bottom: -10px; padding-top: 10px; display: none;" />
 
                 &nbsp;
-            <input type="button" onclick="check_user_name_avail()" value="Check availability" />
+            <input type="button" id="check-username-button" onclick="check_user_name_avail()" value="Check availability" />
 
                 @Html.ValidationMessageFor(model => model.UserName)
 

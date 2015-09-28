@@ -26,28 +26,34 @@
 
     function check_user_name_avail() {
         var user_name = document.getElementById('StaffUserName').value;
+        if (user_name != "") {
+            var model = { "UserName": user_name };
+            var url = '@Url.Action("CheckUserNameAvailibility", "Account")'
 
-        var model = { "UserName": user_name };
-        var url = '@Url.Action("CheckUserNameAvailibility", "Account")'
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: model,
+                success: function (obj) {
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: model,
-            success: function (obj) {
-
-                if (obj == 'true') {
-                    document.getElementById('yes').style.display = "inline";
-                    document.getElementById('no').style.display = "none";
-                    user_name_valid = "true";
+                    if (obj == 'true') {
+                        document.getElementById('yes').style.display = "inline";
+                        document.getElementById('no').style.display = "none";
+                        user_name_valid = "true";
+                    }
+                    else {
+                        document.getElementById('yes').style.display = "none";
+                        document.getElementById('no').style.display = "inline";
+                        user_name_valid = "false";
+                    }
                 }
-                else {
-                    document.getElementById('yes').style.display = "none";
-                    document.getElementById('no').style.display = "inline";
-                    user_name_valid = "false";
-                }
-            }
-        });
+            });
+        }
+        else {
+            document.getElementById('yes').style.display = "none";
+            document.getElementById('no').style.display = "inline";
+            user_name_valid = "false";
+        }
     }
 
 </script>
@@ -67,10 +73,11 @@
 
         <div class="editor-field">
             @Html.EditorFor(model => model.StaffUserName)
+            <img id="yes" src="~/Images/yes.png" height="25" width="25" style="margin-bottom: -10px; padding-top: 10px; display: none;" />
+            <img id="no" src="~/Images/no.gif" height="25" width="25" style="margin-bottom: -10px; padding-top: 10px; display: none;" />
+            &nbsp;
+            <input type="button" id="check-username-button"  onclick="check_user_name_avail()" value="Check availability" />
             @Html.ValidationMessageFor(model => model.StaffUserName)
-            <input type="button" onclick="check_user_name_avail()" value="Check availability" />
-            <img id="yes" src="~/Images/yes.png" height="25" width="25" style="padding-top: 10px; display: none;" />
-            <img id="no" src="~/Images/no.gif" height="25" width="25" style="padding-top: 10px; display: none;" />
         </div>
 
         <div class="editor-label">
