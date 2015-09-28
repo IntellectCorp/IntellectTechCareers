@@ -5,16 +5,16 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
     $(function () {
-        $(".candidate-list").attr("bgcolor", "#ED5142");
+        $(".candidate-list").attr("bgcolor", "#FFA0A0");
         $('.checkbox').on('change', function () {
             if (this.checked) {
                 $(this).closest('tr').find('td').each(function () {
-                    $(this).attr("bgcolor", "#37B70A");
+                    $(this).attr("bgcolor", "#9FE287");
                 });
             }
             else {
                 $(this).closest('tr').find('td').each(function () {
-                    $(this).attr("bgcolor", "#ED5142");
+                    $(this).attr("bgcolor", "#FFA0A0");
                 });
             }
         })
@@ -112,13 +112,13 @@
     <div>
         <b>Color Legends : </b>
         <span class="input-color">
-            <input style="font-size: 1em; padding: 0px 0px 0px 20px; width: 60px; margin: 0px 0px 0px 0px;" type="text" value="Selected" />
-            <div class="color-box" style="background-color: #37B70A;"></div>
+            <input readonly="readonly" style="font-size: 1em; padding: 0px 0px 0px 20px; width: 60px; margin: 0px 0px 0px 0px;" type="text" value="Selected" />
+            <div class="color-box" style="background-color: #9FE287;"></div>
             <!-- Replace "#FF850A" to change the color -->
         </span>
         <span class="input-color">
-            <input style="font-size: 1em; padding: 0px 0px 0px 20px; width: 60px; margin: 0px 0px 0px 0px;" type="text" value="Rejected" />
-            <div class="color-box" style="background-color: #D80909;"></div>
+            <input readonly="readonly" style="font-size: 1em; padding: 0px 0px 0px 20px; width: 60px; margin: 0px 0px 0px 0px;" type="text" value="Rejected" />
+            <div class="color-box" style="background-color: #FFA0A0;"></div>
             <!-- Replace "navy" to change the color -->
         </span>
     </div>

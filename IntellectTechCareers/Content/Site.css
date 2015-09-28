@@ -140,7 +140,7 @@ footer {
 /* site title
 ----------------------------------------------------------*/
 .site-title {
-    color: #c8c8c8;
+    color: #120094;
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
     font-size: 2.3em;
     margin: 0;
@@ -148,7 +148,7 @@ footer {
 
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
-    color: #c8c8c8;
+    color: #120094;
     outline: none;
     text-decoration: none;
 }
@@ -343,7 +343,7 @@ aside {
 
 /* login page */
 #loginForm {
-    border-right: solid 2px #c8c8c8;
+    border-right: solid 2px #120094;
     float: left;
     width: 55%;
 }
@@ -418,7 +418,7 @@ select {
 
  #LoginFormRight {
     margin-right: 10px;
-    border-left: solid 2px #c8c8c8;
+    border-left: solid 2px #120094;
     padding-left:20px;
     float: right;
     width: 400px;

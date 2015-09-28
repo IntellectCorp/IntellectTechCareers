@@ -11,7 +11,11 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
-
+@{
+    string postController = ViewBag.Controller;
+    string actionName = "ScheduleInterviewDialog";
+    string url = Url.Action(actionName, postController);
+}
 
 <script type="text/javascript">
     //$('#jobTable').find('tr').click(function () {
@@ -36,7 +40,10 @@
                 ScheduleInterviewDialogDiv.html("<h3>Sorry, No applicants for this Job !</h3>");
             }
             else {
-                var url = '@Url.Action("ScheduleInterviewDialog", "Staff")'
+                //alert("yo");
+                @*var url1 = @Url.Action(actionName , postController);*@
+                var url = '@Url.Action("ScheduleInterviewDialog")';
+                //alert(url);
                 $.ajax({
                     type: "POST",
                     cache: false,
