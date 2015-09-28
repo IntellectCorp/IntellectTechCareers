@@ -30,19 +30,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CandidateId)
+            @Html.Label(item.CandidateId.ToString())
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.Label(item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JobId)
+            @Html.Label(item.JobId.ToString())
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JobDesc)
+            @Html.Label(item.JobDesc)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @Html.Label(item.Date.ToShortDateString())
         </td>
     </tr>
 }

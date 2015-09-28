@@ -410,7 +410,7 @@ namespace IntellectTechCareers.Controllers
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("A");
+            List<ShowApplicantModel> candidates = CandidateDAL.getCandidates("S");
             return View(candidates);
         }
 
