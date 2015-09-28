@@ -112,7 +112,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             String query = "";
 
             string graduation ="";
-            string post_graduation = "";
+            string postGraduation = "";
             SqlCommand command = new SqlCommand("select graduation, post_graduation from dbo.Applicant where candidate_id = " + candidate.user_id + ";" , con);
             SqlDataReader reader = command.ExecuteReader();
 
@@ -129,11 +129,11 @@ namespace IntellectTechCareers.Data_Access_Layer
 
                 try
                 {
-                    post_graduation = reader.GetString(1);
+                    postGraduation = reader.GetString(1);
                 }
                 catch (Exception)
                 {
-                    post_graduation = "";
+                    postGraduation = "";
                 }
             }
                 
@@ -148,17 +148,17 @@ namespace IntellectTechCareers.Data_Access_Layer
                 graduation += "," + candidate.newUgQualification;
             }
    
-            if (post_graduation.Equals("") && !candidate.newPgQualification.Equals("0"))
+            if (postGraduation.Equals("") && !candidate.newPgQualification.Equals("0"))
             {
-                post_graduation = candidate.newPgQualification;
+                postGraduation = candidate.newPgQualification;
             }
-            else if (!post_graduation.Equals("") && !candidate.newPgQualification.Equals("0"))
+            else if (!postGraduation.Equals("") && !candidate.newPgQualification.Equals("0"))
             {
-                post_graduation += "," + candidate.newPgQualification;
+                postGraduation += "," + candidate.newPgQualification;
             }
 
             query = "update dbo.Applicant set " + "graduation = '" + graduation + "'" +
-                ", " + "post_graduation = '" + post_graduation + "'" + " where candidate_id = " + candidate.user_id;
+                ", " + "post_graduation = '" + postGraduation + "'" + " where candidate_id = " + candidate.user_id;
 
             command = new SqlCommand(query, con);
             command.ExecuteNonQuery();

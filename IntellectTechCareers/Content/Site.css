@@ -417,11 +417,11 @@ select {
 
 
  #LoginFormRight {
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     border-left: solid 2px #120094;
     padding-left:20px;
     float: right;
-    width: 400px;
+    width: 35%;
 }
 
 #LoginFormRight h2 {

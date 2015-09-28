@@ -13,19 +13,16 @@
             if ($("#IsNewNo").attr("checked")) {
                 $("#registrationSection").hide();
                 $("#oldAccounts").show();
-                $("#UserName").val("");
-                $("#Password").val("");
-                $("#ConfirmPassword").val("");
-                @{
-                    Model.NewInterviewer = false;
-                 }
+                //$("#UserName").val("");
+                //$("#Password").val("");
+                //$("#ConfirmPassword").val("");
+                document.getElementById('NewInterviewer').value = false;
+  
 
             } else {
                 $("#registrationSection").show();
                 $("#oldAccounts").hide();
-                @{
-                    Model.NewInterviewer = true;
-                 }
+                document.getElementById('NewInterviewer').value = true;
             }
         });
     });
@@ -119,6 +116,7 @@
             @Html.RadioButton("AgeLimitNo", "No");*@
             <input class="IsNew" id="IsNewYes" type="radio" name="IsNew" value="IsNewYes">Yes
             <input class="IsNew" id="IsNewNo" type="radio" name="IsNew" value="IsNewNo" checked>No
+            @Html.HiddenFor(model => model.NewInterviewer)
         </div>
         <br />
         <div id="registrationSection">
@@ -182,6 +180,7 @@
             }
             @Html.ValidationMessageFor(model => model.Jobs)
         </div>
+        <div id="notification"></div>
         <p>
             <input type="submit" onclick="return validate_user_name()" value="Create" />
         </p>

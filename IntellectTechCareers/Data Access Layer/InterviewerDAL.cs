@@ -112,10 +112,10 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static List<JobSelectModel> GetSelectJobsToBeInterviewed()
+        public static List<JobSelectModel> GetSelectJobsForReleasingResult()
         {
             List<JobSelectModel> jobsToBeSelect = new List<JobSelectModel>();
-            List<JobModel> jobs = ASCommonDAL.GetJobsToBeInterviewed();
+            List<JobModel> jobs = ASCommonDAL.GetJobsForReleasingResult();
             foreach (var item in jobs)
             {
                 JobSelectModel jobToBeSelected = new JobSelectModel(item);
