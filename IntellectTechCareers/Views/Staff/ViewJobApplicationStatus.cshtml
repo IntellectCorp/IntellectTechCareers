@@ -19,7 +19,7 @@
         var JobApplicationStatusDiv = $("#JobApplicationStatus");
         var id = $("#CandidateId").val();
         var model = { "CandidateId": id };
-        var url = '@Url.Action("ViewJobApplicationStatus", "Staff")'
+        var url = '@Url.Action("ViewJobApplicationStatus")'
         $.ajax({
             type: "POST",
             cache: false,
@@ -37,7 +37,7 @@
             var JobApplicationStatusDiv = $("#JobApplicationStatus");
             var id = $("#CandidateId").val();
             var model = { "CandidateId": id };
-            var url = '@Url.Action("ViewJobApplicationStatus", "Staff")'
+            var url = '@Url.Action("ViewJobApplicationStatus")'
             $.ajax({
                 type: "POST",
                 cache: false,

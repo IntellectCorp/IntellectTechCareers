@@ -5,7 +5,7 @@
 }
 
 
-<section id="LoginFeaturedContent">
+@*<section id="LoginFeaturedContent">
 <h2>Join us and make amazing things happen</h2>
 <ol class="round">
     <li class="one">
@@ -21,7 +21,14 @@
     </li>
 
 </ol>
-    </section>
+    </section>*@
+    <!-- jQuery library (served from Google) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- bxSlider Javascript file -->
+<script src="/js/jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="/lib/jquery.bxslider.css" rel="stylesheet" />
+
 <section id="LoginFormRight">
 <h2>Log In. Get Hired.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {

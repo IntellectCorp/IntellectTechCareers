@@ -196,17 +196,19 @@ namespace IntellectTechCareers.Controllers
             if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.UserRoleValidation(Session, "manager"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             IEnumerable<ApplicationModel> data = CandidateDAL.GetApplicationDetails(model.CandidateId);
-            return PartialView("_PartialJobApplicationStatus", data);
+            @ViewBag.Controller = "Admin";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return PartialView("../Staff/_PartialJobApplicationStatus", data);
         }
 
         public ActionResult ViewJobApplicationByJobId()
@@ -237,17 +239,19 @@ namespace IntellectTechCareers.Controllers
             if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.UserRoleValidation(Session, "manager"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             IEnumerable<ApplicationModel> data = CandidateDAL.GetApplicationDetailsByJobId(model.JobId);
-            return PartialView("_PartialJobApplicationStatus", data);
+            @ViewBag.Controller = "Admin";
+            @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
+            return PartialView("../Staff/_PartialJobApplicationStatus", data);
         }
 
         public ActionResult ChangeOthersPassword()
