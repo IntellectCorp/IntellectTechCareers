@@ -26,17 +26,23 @@
             var ReleaseResultDialogDiv = $("#ReleaseResultDialog");
             // var id = $("#CandidateId").val();
             var model = { "JobId": $.trim(rowValue[0]), "JobDesc": $.trim(rowValue[1]), "Vacancies": $.trim(rowValue[3]) };
-            var url = '@Url.Action("ReleaseResultsDialog", "Staff")'
-            $.ajax({
-                type: "POST",
-                cache: false,
-                url: url,
-                data: model,
-                success: function (retValue) {
-                    //alert("uuu");
-                    ReleaseResultDialogDiv.html(retValue);
-                }
-            });
+            var applicantCount = $.trim(rowValue[4]);
+            if (applicantCount == 0) {
+                ReleaseResultDialogDiv.html("<h3>Sorry, No applicants for this Job !</h3>");
+            }
+            else {
+                var url = '@Url.Action("ReleaseResultsDialog", "Staff")'
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: url,
+                    data: model,
+                    success: function (retValue) {
+                        //alert("uuu");
+                        ReleaseResultDialogDiv.html(retValue);
+                    }
+                });
+            }
         });
     });
 </script>

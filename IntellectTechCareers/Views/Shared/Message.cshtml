@@ -1,4 +1,9 @@
 ﻿@{
+    if (ViewBag.Title == null)
+    {
+        ViewBag.Title = "Message";
+    }
+
     if (ViewBag.Layout != null)
     {
         Layout = ViewBag.Layout;//"~/Views/Shared/_LayoutPageManager.cshtml";
@@ -11,5 +16,5 @@
 
 <h2>@ViewBag.Message</h2>
 <br />
-<a href="/Home/Index" class="Button">Home</a>
+<button onclick="window.location.href='/Home/Index'">Go Home</button>
 

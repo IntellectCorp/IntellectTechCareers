@@ -9,8 +9,7 @@
 
 <script type="text/javascript">
 
-    function apply_for_jobs()
-    {
+    function apply_for_jobs() {
         var num_applied_jobs = 0;
         var jobs = '';
 
@@ -25,8 +24,7 @@
                 jobs = this.id;
         });
 
-        if (num_applied_jobs === 0)
-        {
+        if (num_applied_jobs === 0) {
             var notification_div = document.getElementById('notification');
             notification_div.style.display = "block";
             notification_div.innerHTML = "<h3><font color='red'>Please select atleast one job to apply !</font></h3>";
@@ -35,13 +33,11 @@
 
         var jobs_already_applied = document.getElementById('already_applied_jobs');
 
-        if (parseInt(num_applied_jobs) + parseInt(jobs_already_applied.value) > 3)
-        {
+        if (parseInt(num_applied_jobs) + parseInt(jobs_already_applied.value) > 3) {
             document.getElementById('notification').style.display = "block";
             return false;
         }
-        else
-        {
+        else {
             var model = { "selectedJobs": jobs };
             var url = '@Url.Action("ApplyForJob", "Candidate")';
             $.ajax({
@@ -77,53 +73,54 @@
         </thead>
 
         @{
-            foreach(var item in Model.jobs)
+    foreach (var item in Model.jobs)
+    {
+        List<string> allowedQualifications = item.Skills;
+        List<string> candidateUg = Model.candidateUgQualification;
+        List<string> candidatePg = Model.candidatePgQualification;
+
+
+        if ((item.MinExperience != 0 && Model.totalExperience < item.MinExperience) || (item.MaxExperience != 0 && Model.totalExperience > item.MaxExperience))
+        {
+            continue;
+        }
+
+        IEnumerable<string> ugMatch = (IEnumerable<string>)allowedQualifications.Intersect(candidateUg);
+        IEnumerable<string> pgMatch = (IEnumerable<string>)allowedQualifications.Intersect(candidatePg);
+
+        if (ugMatch.Count() == 0 && pgMatch.Count() == 0)
+        {
+            continue;
+        }
+
+        if (Model.appliedJobs.Contains(item.JobId))
+        {
+            continue;
+        }
+            
+            <tr>
+                <td>
+                    <input type="checkbox" id='@item.JobId'/></td>
+                <td>@item.JobId</td>
+                <td>@item.JobDesc</td>
+                <td>
+                    @{
+        string[] skills = item.Skills.ToArray();
+        for (int i = 0; i < skills.Length; i++)
+        {
+                        @Model.qualifications[skills[i]] 
+            if (i != skills.Length - 1)
             {
-                List<string> allowedQualifications = item.Skills;
-                List<string> candidateUg = Model.candidateUgQualification;
-                List<string> candidatePg = Model.candidatePgQualification;
-            
-                        
-                if((item.MinExperience != 0 && Model.totalExperience < item.MinExperience) || (item.MaxExperience != 0 && Model.totalExperience > item.MaxExperience ))
-                {
-                    continue;                
-                }
-
-                IEnumerable<string> ugMatch = (IEnumerable<string>)allowedQualifications.Intersect(candidateUg);
-                IEnumerable<string> pgMatch = (IEnumerable<string>)allowedQualifications.Intersect(candidatePg);
-
-                if (ugMatch.Count() == 0 && pgMatch.Count() == 0)
-                {
-                    continue;
-                }
-
-                if (Model.appliedJobs.Contains(item.JobId))
-                {
-                    continue;
-                }
-            
-                <tr>
-                    <td><input type="checkbox" id='@item.JobId'/></td>
-                    <td>@item.JobId</td>
-                    <td>@item.JobDesc</td>
-                    <td>
-                        @{
-                            string[] skills = item.Skills.ToArray();
-                            for (int i = 0; i < skills.Length; i++)
-                            {
-                                @Model.qualifications[skills[i]] 
-                                if (i != skills.Length - 1)
-                                {
-                                    <font> , </font>
-                                }
-                            }
-                         }
-                    </td>
-                    <td>@item.Vacancies</td>
-                    <td>@item.MinExperience</td>
-                    <td>@item.MaxExperience</td>
-                </tr>
+                        <font> , </font>
             }
+        }
+                    }
+                </td>
+                <td>@item.Vacancies</td>
+                <td>@item.MinExperience</td>
+                <td>@item.MaxExperience</td>
+            </tr>
+    }
         }
 
     </table>
@@ -131,16 +128,17 @@
     
     if (user.state.Equals("Active"))
     {
-        <input type="submit" id="apply" onclick="return apply_for_jobs()" value="Apply" />
+    <input type="submit" id="apply" onclick="return apply_for_jobs()" value="Apply" />
+    <a href="/Home/Index">Back</a>
     }
     else
     {
-        <h3><font color="red">You cannot apply for jobs as your account is not active</font></h3>
+    <h3><font color="red">You cannot apply for jobs as your account is not active</font></h3>
     }
-    
+
 }
-    <div id="notification" style="display:none">
-        <h3><font color="red">
+<div id="notification" style="display: none">
+    <h3><font color="red">
              You can apply for a maximum of 3 jobs !
         </font></h3>
-    </div>
+</div>

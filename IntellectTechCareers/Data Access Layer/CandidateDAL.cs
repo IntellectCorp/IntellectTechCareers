@@ -349,6 +349,39 @@ namespace IntellectTechCareers.Data_Access_Layer
             return data;
         }
 
+        public static List<ApplicationModel> getApplicationDetailsByJobId(int job_id)
+        {
+            List<ApplicationModel> data = new List<ApplicationModel>();
+
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand(
+                " SELECT a.app_id, a.candidate_id, a.job_id, a.status_code, a.status, a.app_date, j.job_description " +
+                " FROM dbo.Application a inner join dbo.Job j on a.job_id = j.job_id" +
+                " WHERE a.job_id=" + job_id + ";", con);
+            command.ExecuteNonQuery();
+
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ApplicationModel model = new ApplicationModel();
+                model.AppId = reader.GetInt32(0);
+                model.CandidateId = reader.GetInt32(1);
+                model.JobId = reader.GetInt32(2);
+                model.StatusCode = reader.GetString(3);
+                model.Status = reader.GetString(4);
+                model.Date = reader.GetDateTime(5);
+                model.JobName = reader.GetString(6);
+
+                data.Add(model);
+            }
+            reader.Close();
+            con.Close();
+
+            return data;
+        }
+
         public static List<QualificationModel> getCandidateEducationDetails(int user_id)
         {
             SqlConnection con = DBUtils.getDBConnection();

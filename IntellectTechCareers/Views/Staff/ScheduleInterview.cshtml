@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IntellectTechCareers.Models.JobModel>
+﻿@model IEnumerable<IntellectTechCareers.Models.JobWithApplicantsModel>
 
 @{
     ViewBag.Title = "Schedule Interview";
@@ -31,17 +31,23 @@
             var ScheduleInterviewDialogDiv = $("#ScheduleInterviewDialog");
             // var id = $("#CandidateId").val();
             var model = { "JobId": $.trim(rowValue[0]), "JobDesc": $.trim(rowValue[1]) };
-            var url = '@Url.Action("ScheduleInterviewDialog", "Staff")'
-            $.ajax({
-                type: "POST",
-                cache: false,
-                url: url,
-                data: model,
-                success: function (retValue) {
-                    //alert("uuu");
-                    ScheduleInterviewDialogDiv.html(retValue);
-                }
-            });
+            var applicantCount = $.trim(rowValue[4]);
+            if (applicantCount == 0) {
+                ScheduleInterviewDialogDiv.html("<h3>Sorry, No applicants for this Job !</h3>");
+            }
+            else {
+                var url = '@Url.Action("ScheduleInterviewDialog", "Staff")'
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: url,
+                    data: model,
+                    success: function (retValue) {
+                        //alert("uuu");
+                        ScheduleInterviewDialogDiv.html(retValue);
+                    }
+                });
+            }
         });
     });
 </script>
@@ -61,6 +67,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Vacancies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicantCount)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PostedOn)
@@ -83,6 +92,9 @@
             </td>
             <td>
                 @Html.Label(item.Vacancies.ToString())
+            </td>
+            <td>
+                @Html.Label(item.ApplicantCount.ToString())
             </td>
             <td>
                 @Html.Label(item.PostedOn.ToShortDateString())

@@ -129,6 +129,33 @@ namespace IntellectTechCareers.Data_Access_Layer
             return model;
         }
 
+        public static JobListModel getJobList()
+        {
+            SqlConnection con = DBUtils.getDBConnection();
+            con.Open();
+
+            SqlCommand command = new SqlCommand("select job_id from dbo.Job;", con);
+            SqlDataReader reader = command.ExecuteReader();
+                
+            if (reader == null || !reader.Read())
+            {
+                return null;
+            }
+
+            //Creating a JobRole List
+            List<int> listItems = new List<int>();
+            do
+            {
+                listItems.Add(Convert.ToInt32(reader[0]));
+            }
+            while (reader.Read());
+
+            con.Close();
+            JobListModel model = new JobListModel();
+            model.JobIdList = listItems;
+            return model;
+        }
+
         private static List<JobModel> getJobs()
         {
             SqlConnection con = DBUtils.getDBConnection();
@@ -247,7 +274,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Open();
             SqlCommand command;
 
-            command = new SqlCommand("insert into Interview (job_id, date, time, venue, scheduled_by) values (" + interviewModel.JobId + ", '" + interviewModel.Date.ToShortDateString() + "', '" + interviewModel.Time.ToString() + "', '" + interviewModel.Venue + "', " + user.user_id + ");", con);
+            command = new SqlCommand("insert into Interview (job_id, date, time, venue, scheduled_by) values (" + interviewModel.JobId + ", '" + interviewModel.Date.ToString() + "', '" + interviewModel.Time.ToString() + "', '" + interviewModel.Venue + "', " + user.user_id + ");", con);
             command.ExecuteNonQuery();
 
             command = new SqlCommand("UPDATE Job SET status='S' WHERE job_id=" + interviewModel.JobId + " ;", con);

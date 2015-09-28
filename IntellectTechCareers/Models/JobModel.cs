@@ -78,7 +78,32 @@ namespace IntellectTechCareers.Models
             this.AgeLimit = job.AgeLimit;
         }
 
-        [Display(Name = "Number of Application")]
+        [Display(Name = "No. of Application")]
         public int ApplicantCount { get; set; }
+    }
+
+    public class JobSelectModel : JobModel
+    {
+        public JobSelectModel()
+        {
+        }
+
+        public JobSelectModel(JobModel job)
+        {
+            this.JobId = job.JobId;
+            this.JobDesc = job.JobDesc;
+            this.JobRole = job.JobRole;
+            this.MinExperience = job.MinExperience;
+            this.MaxExperience = job.MaxExperience;
+            this.PostedBy = job.PostedBy;
+            this.PostedOn = job.PostedOn;
+            this.Skills = job.Skills;
+            this.Status = job.Status;
+            this.Vacancies = job.Vacancies;
+            this.AgeLimit = job.AgeLimit;
+        }
+
+        [Display(Name = "Checked")]
+        public bool Checked { get; set; }
     }
 }

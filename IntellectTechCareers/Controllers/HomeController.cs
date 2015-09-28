@@ -26,6 +26,8 @@ namespace IntellectTechCareers.Controllers
                     return View("ManagerHome", AdminDAL.getManagerHome());
                 else if (role.Equals("staff"))
                     return View("StaffHome", StaffDAL.getStaffHome((User)Session["user"]));
+                else if (role.Equals("interviewer"))
+                    return RedirectToAction("ReleaseResults","Interviewer");
                 else
                     return View();
             }
@@ -47,7 +49,7 @@ namespace IntellectTechCareers.Controllers
                     ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             }
 
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "ABOUT US.";
 
             return View();
         }
@@ -66,8 +68,13 @@ namespace IntellectTechCareers.Controllers
                     ViewBag.Layout = "~/Views/Shared/_LayoutPageStaff.cshtml";
             }
 
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "CONTACT US";
 
+            return View();
+        }
+
+        public ActionResult Error()
+        {
             return View();
         }
 
