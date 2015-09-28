@@ -217,7 +217,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data Access Layer\AccountDAL.cs" />
+    <Content Include="Content\coin-slider-styles.css" />
     <Content Include="Images\ITC Logo.png" />
+    <Content Include="Scripts\coin-slider.min.js" />
     <Content Include="Utils\DBQueries.txt" />
     <Content Include="Views\Account\RegistrationSuccess.cshtml" />
     <Content Include="Views\Home\CandidateHome.cshtml" />
@@ -381,7 +383,9 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\pics\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

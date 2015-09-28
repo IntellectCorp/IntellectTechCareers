@@ -55,7 +55,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <a href="@Url.Action("Index", "Home")">
-                    <img src="/Images/ITC Logo.png" alt="" />
+                    <img src="/Images/ITC Logo.png" alt="Intellect Tech Carrers" style="height: 90px;"/>
                 </a>
                 @*<p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>*@
 
@@ -79,7 +79,17 @@
         <section class="featured">
             <div class="content-wrapper">
                 <hgroup class="title">
-                    <h1>@ViewBag.Title</h1>
+                    @{
+                        if (ViewBag.MainTitle == null)
+                        {
+                            <h1>@ViewBag.Title</h1>
+                        }
+                        else{
+                            <marquee behavior="alternate"><h1>@ViewBag.MainTitle</h1></marquee>
+                        }
+                     }
+                    @*<h1>@ViewBag.MainTitle</h1>*@
+
                     @*<h2>@ViewBag.Message</h2>*@
                 </hgroup>
             </div>

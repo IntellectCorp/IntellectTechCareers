@@ -1,12 +1,18 @@
 ﻿@model IntellectTechCareers.Models.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.MainTitle = "Join us and make amazing things happen...";
 }
-
+<script src="~/Scripts/coin-slider.min.js"></script>
+<link href="~/Content/coin-slider-styles.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#coin-slider').coinslider({ width: 666, height: 300, navigation: true, links: false, hoverPause: false});
+    });
+</script>
 
 <section id="LoginFeaturedContent">
-<h2>Join us and make amazing things happen</h2>
+    @*<h2>Join us and make amazing things happen</h2>
 <ol class="round">
     <li class="one">
         I am proud of the great quality serices we provide and the cutting edge innovations we are making. 
@@ -20,8 +26,27 @@
         <h5 style="text-align:right">— Ashish Kankaria</h5>
     </li>
 
-</ol>
-    </section>
+</ol>*@
+    <div id='coin-slider' style="border:1px solid #2b1069;">
+        <a href="img01_url" target="_blank">
+            <img src='/images/pics/1.jpg'>
+            <span><p>Sparking a customer-obsessed innovation culture. — Employeers Choice</p></span>
+        </a>
+        <a href="imgN_url">
+            <img src='/images/pics/3.jpg'>
+            <span><p>I am proud of the great quality serices we provide and the cutting edge innovations we are making. 
+        It is amazing to see the products you worked on in the hands of millions of people. 
+        — Kaushik Mahato</p></span>
+        </a>
+        <a href="imgN_url">
+            <img src='/images/pics/2.jpg'>
+            <span><p>I have both the possibility to work closely with a team, as well as the opportunity to work on, 
+        and have an input into the formulation of new policy.
+        — Ashish Kankaria</p></span>
+        </a>
+    </div>
+
+</section>
 @*<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
 <script src="~/Scripts/jquery.bxslider.min.js"></script>
 <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
@@ -42,32 +67,33 @@
 </section>*@
 
 <section id="LoginFormRight">
-<h2>Log In. Get Hired.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    <h2>Log In. Get Hired.</h2>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-        </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
-}
-    </section>
+        <fieldset>
+            <legend>Log in Form</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+            </ol>
+            <input type="submit" value="Log in" />
+        </fieldset>
+        <p>
+            @Html.ActionLink("Register", "Register") if you don't have an account.
+        </p>
+    }
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
