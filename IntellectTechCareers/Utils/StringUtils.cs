@@ -17,7 +17,7 @@ namespace IntellectTechCareers.Utils
             return new string(charArray);
         }
 
-        public static string getMD5Hash(string input)
+        public static string GetMD5Hash(string input)
         {
             // given a string, byte array representation of that string
             byte[] encodedPassword = new UTF8Encoding().GetBytes(input);
@@ -35,7 +35,7 @@ namespace IntellectTechCareers.Utils
             return encoded;
         }
 
-        public static string convertQualificationListToString(List<string> list)
+        public static string ConvertQualificationListToString(List<string> list)
         {
             string convString = "";
 

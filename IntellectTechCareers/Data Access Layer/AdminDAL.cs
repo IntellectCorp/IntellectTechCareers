@@ -72,7 +72,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return model;
         }
 
-        public static void addNewJobRole(JobRole jobRole)
+        public static void AddNewJobRole(JobRole jobRole)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -83,7 +83,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static void addNewQualification(Qualification model)
+        public static void AddNewQualification(Qualification model)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -115,7 +115,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
 
-            string passwdHash = StringUtils.getMD5Hash(StringUtils.Reverse(staff.Password));
+            string passwdHash = StringUtils.GetMD5Hash(StringUtils.Reverse(staff.Password));
             SqlCommand command = new SqlCommand("insert into Users (username, password, role, account_act_date, name, state) values ('"
                 + staff.StaffUserName + "', '" + passwdHash + "', 'staff','" +
                 DateTime.Today + "', '" + staff.StaffName + "', 'Active');", con);

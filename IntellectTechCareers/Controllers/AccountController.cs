@@ -55,8 +55,6 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult Logout()
         {
-            
-
             Session.Remove("user");
             return RedirectToAction("Login", "Account");
         }
@@ -70,13 +68,13 @@ namespace IntellectTechCareers.Controllers
         [HttpGet]
         public ActionResult DeleteCandidate()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            else if (!Navigator.userRoleValidation(Session, "candidate"))
+            else if (!Navigator.UserRoleValidation(Session, "candidate"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
                 return View("Message");
@@ -91,7 +89,7 @@ namespace IntellectTechCareers.Controllers
 
         public ActionResult ChangePassword()
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
@@ -111,7 +109,7 @@ namespace IntellectTechCareers.Controllers
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
-            if (!Navigator.isUserLoggedIn(Session))
+            if (!Navigator.IsUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
                 return View("Message");
@@ -119,20 +117,20 @@ namespace IntellectTechCareers.Controllers
             }
 
             User user = (User)Session["user"];
-            String currentPasswordHash = StringUtils.getMD5Hash(StringUtils.Reverse(model.currentPassword));
+            String currentPasswordHash = StringUtils.GetMD5Hash(StringUtils.Reverse(model.currentPassword));
             if (!currentPasswordHash.Equals(user.password))
             {
                 ViewBag.ErrorMessage = "Current password is incorrect !";
                 return View(model);
             }
 
-            if (user.password.Equals(StringUtils.getMD5Hash(StringUtils.Reverse(model.newPassword))))
+            if (user.password.Equals(StringUtils.GetMD5Hash(StringUtils.Reverse(model.newPassword))))
             {
                 ViewBag.ErrorMessage = " New Password cannot be same as current Password !";
                 return View(model);
             }
 
-            bool isSuccess = AccountDAL.ChangePassword(user.user_id, StringUtils.getMD5Hash(StringUtils.Reverse(model.newPassword)));
+            bool isSuccess = AccountDAL.ChangePassword(user.user_id, StringUtils.GetMD5Hash(StringUtils.Reverse(model.newPassword)));
 
             if (isSuccess)
             {

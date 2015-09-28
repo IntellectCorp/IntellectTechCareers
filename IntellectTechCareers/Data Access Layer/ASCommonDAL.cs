@@ -10,7 +10,7 @@ namespace IntellectTechCareers.Data_Access_Layer
 {
     public class ASCommonDAL
     {
-        public static List<JobRole> getJobRoles()
+        public static List<JobRole> GetJobRoles()
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -39,7 +39,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return listJobRole;
         }
 
-        public static List<Skill> getListOfSkills()
+        public static List<Skill> GetListOfSkills()
         {
             List<Skill> skills = new List<Skill>();
             List<Qualification> qualifications = ASCommonDAL.getQualifications();
@@ -83,7 +83,7 @@ namespace IntellectTechCareers.Data_Access_Layer
         }
 
 
-        public static void postJobinDB(Job model, User poster)
+        public static void PostJobInDB(Job model, User poster)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -129,7 +129,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return model;
         }
 
-        public static JobListModel getJobList()
+        public static JobListModel GetJobList()
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -189,7 +189,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return jobs;
         }
 
-        public static int getApplicantCount(int jobID)
+        public static int GetApplicantCount(int jobID)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -207,7 +207,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return applicantCount;
         }
 
-        public static List<CandidateResult> getApplicantForTheJob(int jobID)
+        public static List<CandidateResult> GetApplicantForTheJob(int jobID)
         {
             List<CandidateResult> candidates = new List<CandidateResult>();
 
@@ -240,7 +240,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return candidates;
         }
 
-        public static List<JobModel> getJobsToBeInterviewed()
+        public static List<JobModel> GetJobsToBeInterviewed()
         {
             List<JobModel> toBeInterviewedModel = new List<JobModel>();
             List<JobModel> allJobs = getJobs();
@@ -254,7 +254,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return toBeInterviewedModel;
         }
 
-        public static List<JobModel> getJobsForReleasingResult()
+        public static List<JobModel> GetJobsForReleasingResult()
         {
             List<JobModel> newModel = new List<JobModel>();
             List<JobModel> allJobs = getJobs();
@@ -268,7 +268,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return newModel;
         }
 
-        public static void scheduleInterviewToDB(InterviewModel interviewModel, User user)
+        public static void ScheduleInterviewToDB(InterviewModel interviewModel, User user)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -286,7 +286,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static List<User> getUsers()
+        public static List<User> GetUsers()
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -312,7 +312,7 @@ namespace IntellectTechCareers.Data_Access_Layer
         }
 
 
-        public static void releaseResultToDB(ResultModel resultModel, User user)
+        public static void ReleaseResultToDB(ResultModel resultModel, User user)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();

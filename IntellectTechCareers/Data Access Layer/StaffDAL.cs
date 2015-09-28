@@ -10,7 +10,7 @@ namespace IntellectTechCareers.Data_Access_Layer
 {
     public class StaffDAL
     {
-        public static StaffDashBoardModel getStaffHome(User user)
+        public static StaffDashBoardModel GetStaffHome(User user)
         {
             StaffDashBoardModel model = new StaffDashBoardModel();
             SqlConnection con = DBUtils.getDBConnection();

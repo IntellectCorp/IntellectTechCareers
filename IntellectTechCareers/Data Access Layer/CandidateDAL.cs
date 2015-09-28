@@ -13,7 +13,7 @@ namespace IntellectTechCareers.Data_Access_Layer
         private static Dictionary<string, string> qualificationIdToName = null;
         private static Dictionary<string, string> qualificationNameToId = null;
 
-        public static CandidateModel getCandidateDetails(int userId)
+        public static CandidateModel GetCandidateDetails(int userId)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -55,7 +55,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return can;
         }
 
-        public static List<ExperienceModel> getCandidateExperienceDetails(int userId)
+        public static List<ExperienceModel> GetCandidateExperienceDetails(int userId)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -78,7 +78,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return experienceList;
         }
 
-        public static List<QualificationModel> getQualificationDetails()
+        public static List<QualificationModel> GetQualificationDetails()
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -101,7 +101,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return qualificationList;
         }
 
-        public static void addEducationDetails(CandidateModel candidate)
+        public static void AddEducationDetails(CandidateModel candidate)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -165,7 +165,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static void addExperienceDetails(ExperienceModel exp)
+        public static void AddExperienceDetails(ExperienceModel exp)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -176,7 +176,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static void updatePersonalInfo(CandidateModel can)
+        public static void UpdatePersonalInfo(CandidateModel can)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -188,7 +188,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static List<JobModel> getApplicableJobs(int userId)
+        public static List<JobModel> GetApplicableJobs(int userId)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -224,7 +224,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return jobs;
         }
 
-        public static Dictionary<string, string> getQualificationsIdToName()
+        public static Dictionary<string, string> GetQualificationsIdToName()
         {
             if (qualificationIdToName == null)
                 getQualificationsFromDB();
@@ -263,7 +263,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static int getNumJobsAppliedFor(int candidate_id)
+        public static int GetNumJobsAppliedFor(int candidate_id)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -282,7 +282,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return numJobsAppliedFor;
         }
 
-        public static List<int> getAppliedJobs(int candidate_id)
+        public static List<int> GetAppliedJobs(int candidate_id)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -316,7 +316,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             con.Close();
         }
 
-        public static List<ApplicationModel> getApplicationDetails(int user_id)
+        public static List<ApplicationModel> GetApplicationDetails(int user_id)
         {
             List<ApplicationModel> data = new List<ApplicationModel>();
 
@@ -349,7 +349,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return data;
         }
 
-        public static List<ApplicationModel> getApplicationDetailsByJobId(int job_id)
+        public static List<ApplicationModel> GetApplicationDetailsByJobId(int job_id)
         {
             List<ApplicationModel> data = new List<ApplicationModel>();
 
@@ -382,7 +382,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return data;
         }
 
-        public static List<QualificationModel> getCandidateEducationDetails(int user_id)
+        public static List<QualificationModel> GetCandidateEducationDetails(int user_id)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
@@ -390,7 +390,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             SqlCommand command = new SqlCommand(" select graduation, post_graduation from dbo.Applicant where candidate_id=" + user_id + ";", con);
             command.ExecuteNonQuery();
 
-            Dictionary<string, string> idToName = getQualificationsIdToName();
+            Dictionary<string, string> idToName = GetQualificationsIdToName();
 
             List<QualificationModel> qualifications = new List<QualificationModel>();
             SqlDataReader reader = command.ExecuteReader();
@@ -453,7 +453,7 @@ namespace IntellectTechCareers.Data_Access_Layer
             return job;
         }
 
-        public static List<ShowApplicantModel> getCandidates(string Status)
+        public static List<ShowApplicantModel> GetCandidates(string Status)
         {
             SqlConnection con = DBUtils.getDBConnection();
             con.Open();
