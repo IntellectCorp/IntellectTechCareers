@@ -401,6 +401,9 @@ namespace IntellectTechCareers.Data_Access_Layer
 
                 foreach (var item in ug.Split(','))
                 {
+                    if (item.Length == 0)
+                        continue;
+
                     QualificationModel model = new QualificationModel();
                     model.qualification_id = Convert.ToInt32(item);
                     model.qualification = idToName[item];
@@ -411,6 +414,9 @@ namespace IntellectTechCareers.Data_Access_Layer
 
                 foreach (var item in pg.Split(','))
                 {
+                    if(item.Length == 0)
+                        continue;
+
                     QualificationModel model = new QualificationModel();
                     model.qualification_id = Convert.ToInt32(item);
                     model.qualification = idToName[item];
