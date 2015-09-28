@@ -457,6 +457,7 @@ namespace IntellectTechCareers.Controllers
                 jobWithAppl.ApplicantCount = ASCommonDAL.getApplicantCount(item.JobId);
                 model.Add(jobWithAppl);
             }
+            @ViewBag.Controller = "Admin";
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             return View("../Staff/ScheduleInterview", model);
         }
@@ -468,13 +469,13 @@ namespace IntellectTechCareers.Controllers
             if (!Navigator.isUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "manager"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             InterviewModel model = new InterviewModel();
@@ -482,7 +483,7 @@ namespace IntellectTechCareers.Controllers
             model.JobDesc = jobModel.JobDesc.Replace(Environment.NewLine, "");
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             @ViewBag.Controller = "Admin";
-            return PartialView("_PartialScheduleInterview", model);
+            return PartialView("../Staff/_PartialScheduleInterview", model);
         }
 
         [HttpPost]
@@ -557,7 +558,7 @@ namespace IntellectTechCareers.Controllers
             model.Candidates = ASCommonDAL.getApplicantForTheJob(jobModel.JobId);
             @ViewBag.Layout = "~/Views/Shared/_LayoutPageManager.cshtml";
             @ViewBag.Controller = "Admin";
-            return PartialView("_PartialReleaseResults", model);
+            return PartialView("../Staff/_PartialReleaseResults", model);
         }
 
         [HttpPost]

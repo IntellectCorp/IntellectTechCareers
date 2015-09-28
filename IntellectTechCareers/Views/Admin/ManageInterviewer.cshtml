@@ -16,10 +16,16 @@
                 $("#UserName").val("");
                 $("#Password").val("");
                 $("#ConfirmPassword").val("");
+                @{
+                    Model.NewInterviewer = false;
+                 }
 
             } else {
                 $("#registrationSection").show();
                 $("#oldAccounts").hide();
+                @{
+                    Model.NewInterviewer = true;
+                 }
             }
         });
     });

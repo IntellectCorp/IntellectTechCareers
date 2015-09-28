@@ -31,7 +31,8 @@
                 ReleaseResultDialogDiv.html("<h3>Sorry, No applicants for this Job !</h3>");
             }
             else {
-                var url = '@Url.Action("ReleaseResultsDialog", "Staff")'
+                @*var url = '@Url.Action("ReleaseResultsDialog", "Staff")'*@
+                var url = '@Url.Action("ReleaseResultsDialog")'
                 $.ajax({
                     type: "POST",
                     cache: false,
