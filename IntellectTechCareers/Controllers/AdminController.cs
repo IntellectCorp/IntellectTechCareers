@@ -468,13 +468,13 @@ namespace IntellectTechCareers.Controllers
         {
             if (!Navigator.isUserLoggedIn(Session))
             {
-                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                @ViewBag.Message = "Sorry! You need to login to continue.";
                 return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "manager"))
             {
-                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                @ViewBag.Message = "Access Denied !   You are not allowed to continue.";
                 return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
@@ -513,13 +513,13 @@ namespace IntellectTechCareers.Controllers
         {
             if (!Navigator.isUserLoggedIn(Session))
             {
-                @ViewBag.Message = "Sorry! You need to login to view this page.";
+                @ViewBag.Message = "Sorry! You need to login to continue.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "manager"))
             {
-                @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
+                @ViewBag.Message = "Access Denied !   You are not allowed to continue.";
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
@@ -542,13 +542,13 @@ namespace IntellectTechCareers.Controllers
             if (!Navigator.isUserLoggedIn(Session))
             {
                 @ViewBag.Message = "Sorry! You need to login to view this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             else if (!Navigator.userRoleValidation(Session, "manager"))
             {
                 @ViewBag.Message = "Access Denied !   You are not allowed to visit this page.";
-                return View("Message");
+                return PartialView("_PartialMessage");
                 //return RedirectToAction("Login", "Account");
             }
             ResultModel model = new ResultModel();
