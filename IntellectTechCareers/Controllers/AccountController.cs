@@ -133,7 +133,10 @@ namespace IntellectTechCareers.Controllers
             bool isSuccess = AccountDAL.ChangePassword(user.user_id, StringUtils.GetMD5Hash(StringUtils.Reverse(model.newPassword)));
 
             if (isSuccess)
-                return RedirectToAction("Logout", "Account");
+            {
+                @ViewBag.Message = "Password Changed Successfully.";
+                return View("Message");
+            }
             else
             {
                 ViewBag.ErrorMessage = "Failed to change the password";

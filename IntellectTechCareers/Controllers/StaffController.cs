@@ -410,7 +410,7 @@ namespace IntellectTechCareers.Controllers
                 return View("Message");
                 //return RedirectToAction("Login", "Account");
             }
-            List<ShowApplicantModel> candidates = CandidateDAL.GetCandidates("A");
+            List<ShowApplicantModel> candidates = CandidateDAL.GetCandidates("S");
             return View(candidates);
         }
 
