@@ -28,3 +28,6 @@ bin
 #DB Address
 LocalDBConfig.cs
 /IntellectTechCareers/Utils/LocalDBConfig.cs
+/IntellectTechCareers/web.config
+/IntellectTechCareers/web.config
+/IntellectTechWS/web.config
